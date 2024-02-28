@@ -33,6 +33,9 @@ No modules.
 | [github_issue_labels.drift_labels](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/issue_labels) | resource |
 | [github_repository.bootstrap_repo](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository) | resource |
 | [github_repository.organizations_repo](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository) | resource |
+| [github_repository_collaborators.bootstrap_repo_collaborators](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository_collaborators) | resource |
+| [github_repository_collaborators.organization_repo_collaborators](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository_collaborators) | resource |
+| [github_team.foundation_devs](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/team) | resource |
 
 ## Inputs
 
@@ -52,4 +55,6 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_foundation_dev_team_id"></a> [foundation\_dev\_team\_id](#output\_foundation\_dev\_team\_id) | n/a |
