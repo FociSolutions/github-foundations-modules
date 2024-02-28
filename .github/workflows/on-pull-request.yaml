@@ -26,24 +26,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-
-      # - name: Set up Python 3.8
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: 3.8
           
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.tf_version }}
-
-      # - name: Test with Checkov
-      #   id: checkov
-      #   uses: bridgecrewio/checkov-action@master
-      #   with:
-      #     directory: modules
-      #     framework: terraform 
 
       - name: Check Terraform Format
         id: fmt
