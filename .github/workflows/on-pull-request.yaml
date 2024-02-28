@@ -1,0 +1,47 @@
+name: "Pull Request Jobs"
+
+on:
+  pull_request:
+    
+
+env:
+  tf_version: 1.7.1
+  working_dir: .
+
+jobs:
+  terraform-doc-generation:
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+      pull-requests: 'write'
+      issues: 'write'
+    name: "Terraform Documentation Generation"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.working_dir }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.tf_version }}
+
+      - name: Check Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Generate TF docs
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          find-dir: modules/
+          recursive: true
+          recursive-path: .
+          git-push: true
+          output-method: replace
+          template: "{{ .Content }}"
