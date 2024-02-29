@@ -24,9 +24,8 @@ No modules.
 | [github_actions_organization_variable.tf_state_bucket_location](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/actions_organization_variable) | resource |
 | [github_actions_organization_variable.tf_state_bucket_name](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/actions_organization_variable) | resource |
 | [github_actions_organization_variable.tf_state_bucket_project_id](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/actions_organization_variable) | resource |
-| [github_actions_secret.bootstrap_workload_identity_sa](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/actions_secret) | resource |
+| [github_actions_secret.organization_workload_identity_sa](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/actions_secret) | resource |
 | [github_actions_variable.gcp_secret_manager_project_id](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/actions_variable) | resource |
-| [github_actions_variable.organization_workload_identity_sa](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/actions_variable) | resource |
 | [github_branch_protection.protect_bootstrap_main](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/branch_protection) | resource |
 | [github_branch_protection.protect_organization_main](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/branch_protection) | resource |
 | [github_enterprise_organization.github-foundations](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/enterprise_organization) | resource |
