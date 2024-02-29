@@ -22,8 +22,8 @@ variable "repository_team_permissions" {
 
 variable "protected_branches" {
   type        = list(string)
-  description = "A list of ref names or patterns that should be protected. Defaults `[\"main\"]`"
-  default     = ["main"]
+  description = "A list of ref names or patterns that should be protected. Setting to `[]` means no protection. Defaults `[\"~DEFAULT_BRANCH\"]`"
+  default     = ["~DEFAULT_BRANCH"]
 }
 
 variable "has_downloads" {
