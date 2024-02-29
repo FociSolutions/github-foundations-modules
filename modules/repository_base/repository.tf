@@ -74,7 +74,7 @@ resource "github_repository_ruleset" "protected_branch_base_rules" {
   conditions {
     ref_name {
       exclude = []
-      include = toset(concat(["~DEFAULT_BRANCH"], local.protected_branches_refs))
+      include = toset(local.protected_branches_refs)
     }
   }
 }
