@@ -27,6 +27,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_parent_id"></a> [parent\_id](#input\_parent\_id) | The ID of the parent team if it exists (optional). | `string` | `""` | no |
 | <a name="input_privacy"></a> [privacy](#input\_privacy) | The privacy setting for the github team. Must be one of `closed` or `secret`. | `string` | `"closed"` | no |
 | <a name="input_team_description"></a> [team\_description](#input\_team\_description) | Description of the github team to be created. | `string` | `""` | no |
 | <a name="input_team_id"></a> [team\_id](#input\_team\_id) | The ID of the team if it exists (optional). | `string` | `""` | no |
