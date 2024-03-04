@@ -35,3 +35,9 @@ variable "team_id" {
   description = "The ID of the team if it exists (optional)."
   default     = ""
 }
+
+variable "parent_id" {
+  type        = string
+  description = "The ID of the parent team if it exists (optional)."
+  default     = ""
+}

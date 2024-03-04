@@ -7,6 +7,7 @@ module "team" {
   team_members     = each.value.members
   team_description = each.value.description
   privacy          = each.value.privacy
+  parent_id        = each.value.parent_id
   team_name        = each.key
 }
 
@@ -18,5 +19,6 @@ module "prexisting_team" {
 
   team_maintainers = each.value.maintainers
   team_members     = each.value.members
+  parent_id        = data.terraform_remote_state.state[local.team_to_state_index_map[each.key]].outputs["parent_team_id"]
   team_name        = each.key
 }

@@ -3,8 +3,9 @@ locals {
 }
 
 resource "github_team" "team" {
-  count       = local.create_team ? 1 : 0
-  name        = var.team_name
-  description = var.team_description
-  privacy     = var.privacy
+  count          = local.create_team ? 1 : 0
+  name           = var.team_name
+  description    = var.team_description
+  privacy        = var.privacy
+  parent_team_id = var.parent_id
 }
