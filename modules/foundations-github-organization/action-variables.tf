@@ -9,9 +9,9 @@ resource "github_actions_secret" "organization_workload_identity_sa" {
 resource "github_actions_variable" "gcp_secret_manager_project_id" {
   provider = github.foundation_org_scoped
 
-  repository    = github_repository.organizations_repo.name
-  variable_name = "GCP_SECRET_MANAGER_PROJECT"
-  value         = var.gcp_project_id
+  repository      = github_repository.organizations_repo.name
+  variable_name   = "GCP_SECRET_MANAGER_PROJECT"
+  plaintext_value = var.gcp_project_id
 }
 
 resource "github_actions_organization_secret" "workload_identity_provider" {
