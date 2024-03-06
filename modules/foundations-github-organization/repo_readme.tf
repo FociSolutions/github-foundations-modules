@@ -1,4 +1,4 @@
-data "file" "main_readme" {
+data "local_file" "main_readme" {
   filename = var.readme_path
 }
 

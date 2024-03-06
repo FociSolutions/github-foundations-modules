@@ -9,10 +9,10 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_file"></a> [file](#provider\_file) | n/a |
 | <a name="provider_github"></a> [github](#provider\_github) | 5.44.0 |
 | <a name="provider_github.enterprise_scoped"></a> [github.enterprise\_scoped](#provider\_github.enterprise\_scoped) | 5.44.0 |
 | <a name="provider_github.foundation_org_scoped"></a> [github.foundation\_org\_scoped](#provider\_github.foundation\_org\_scoped) | 5.44.0 |
+| <a name="provider_local"></a> [local](#provider\_local) | n/a |
 
 ## Modules
 
@@ -38,7 +38,7 @@ No modules.
 | [github_repository_collaborators.organization_repo_collaborators](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository_collaborators) | resource |
 | [github_repository_file.main_readme](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository_file) | resource |
 | [github_team.foundation_devs](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/team) | resource |
-| [file_file.main_readme](https://registry.terraform.io/providers/hashicorp/file/latest/docs/data-sources/file) | data source |
+| [local_file.main_readme](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
