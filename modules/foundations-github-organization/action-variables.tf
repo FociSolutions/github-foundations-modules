@@ -1,9 +1,9 @@
 resource "github_actions_secret" "organization_workload_identity_sa" {
   provider = github.foundation_org_scoped
 
-  repository    = github_repository.organizations_repo.name
-  secret_name = "GCP_SERVICE_ACCOUNT"
-  value         = var.organization_workload_identity_sa
+  repository        = github_repository.organizations_repo.name
+  secret_name       = "GCP_SERVICE_ACCOUNT"
+  plaintext_value   = var.organization_workload_identity_sa
 }
 
 resource "github_actions_variable" "gcp_secret_manager_project_id" {
@@ -17,9 +17,9 @@ resource "github_actions_variable" "gcp_secret_manager_project_id" {
 resource "github_actions_organization_secret" "workload_identity_provider" {
   provider = github.foundation_org_scoped
 
-  secret_name = "WORKLOAD_IDENTITY_PROVIDER"
-  value         = var.workload_identity_provider_name
-  visibility    = "selected"
+  secret_name     = "WORKLOAD_IDENTITY_PROVIDER"
+  plaintext_value = var.workload_identity_provider_name
+  visibility      = "selected"
   selected_repository_ids = [
     github_repository.bootstrap_repo.repo_id,
     github_repository.organizations_repo.repo_id
