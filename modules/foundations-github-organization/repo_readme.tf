@@ -7,6 +7,6 @@ resource "github_repository_file" "main_readme" {
   count      = var.readme_path != "" ? 1 : 0
   repository = github_repository.organizations_repo.name
   file       = "README.md"
-  content    = data.file.main_readme.content
+  content    = data.local_file.main_readme.content
   depends_on = [github_repository.organizations_repo]
 }
