@@ -17,7 +17,7 @@ variable "default_branch" {
 
 variable "repository_team_permissions" {
   type        = map(string)
-  description = "A map where the keys are github team ids and the value is the permissions the team should have in the repository"
+  description = "A map where the keys are github team slugs and the value is the permissions the team should have in the repository"
 }
 
 variable "protected_branches" {
