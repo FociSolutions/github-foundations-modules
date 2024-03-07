@@ -19,6 +19,7 @@ module "public_repositories" {
   dependabot_secrets          = each.value.dependabot_secrets
   environments                = each.value.environments
   template_repository         = each.value.template_repository
+  license_template            = each.value.license_template
 }
 
 module "private_repositories" {
@@ -42,4 +43,5 @@ module "private_repositories" {
   dependabot_secrets          = each.value.dependabot_secrets
   environments                = each.value.environments
   template_repository         = each.value.template_repository
+  license_template            = each.value.license_template
 }

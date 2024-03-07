@@ -97,3 +97,9 @@ variable "template_repository" {
   })
   default = null
 }
+
+variable "license_template" {
+  description = "The (Optional) license template to apply to the repository"
+  type        = string
+  default     = null
+}

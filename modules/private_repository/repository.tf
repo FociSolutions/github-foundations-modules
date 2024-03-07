@@ -32,4 +32,5 @@ module "repository_base" {
   environments = var.environments
 
   template_repository = var.template_repository
+  license_template    = var.license_template
 }
