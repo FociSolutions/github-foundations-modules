@@ -3,7 +3,7 @@ variable "private_repositories" {
     description                          = string
     default_branch                       = string
     repository_team_permissions_override = map(string)
-    protected_branches                   = optional(list(string))
+    protected_branches                   = list(string)
     advance_security                     = bool
     has_vulnerability_alerts             = bool
     topics                               = list(string)
@@ -31,7 +31,7 @@ variable "public_repositories" {
     description                          = string
     default_branch                       = string
     repository_team_permissions_override = map(string)
-    protected_branches                   = optional(list(string))
+    protected_branches                   = list(string)
     advance_security                     = bool
     topics                               = list(string)
     homepage                             = string
