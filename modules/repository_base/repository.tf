@@ -41,6 +41,16 @@ resource "github_repository" "repository" {
       }
     }
   }
+
+  # Use a template repo if one is specified
+  dynamic "template" {
+    for_each = var.template_repository == null ? [] : [1]
+    content {
+      owner                = var.template_repository.owner
+      repository           = var.template_repository.name
+      include_all_branches = var.template_repository.include_all_branches
+    }
+
 }
 
 resource "github_repository_dependabot_security_updates" "automated_security_fixes" {

@@ -141,3 +141,13 @@ variable "environments" {
   }))
   default = {}
 }
+
+variable "template_repository" {
+  description = "A list of template repositories to use for the repository"
+  type        = object({
+    owner                = string
+    repo                 = string
+    include_all_branches = bool
+  })
+  default = null
+}
