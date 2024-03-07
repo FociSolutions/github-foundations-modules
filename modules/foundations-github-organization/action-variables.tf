@@ -60,4 +60,3 @@ resource "github_actions_organization_variable" "tf_state_bucket_location" {
     github_repository.bootstrap_repo.repo_id,
     github_repository.organizations_repo.repo_id
   ]
-}
