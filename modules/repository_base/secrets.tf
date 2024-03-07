@@ -4,7 +4,7 @@ locals {
       name            = secret_name
       encrypted_value = secret
       environment     = env_name
-    }] if env.action_secrets != null
+    }] if env.action_secrets != null && var.environments != null
   }))
 }
 
