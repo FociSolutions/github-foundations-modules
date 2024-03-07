@@ -33,7 +33,7 @@ locals {
 
 
   all_selected_repositories = concat(
-    flatten([for secret in values(var.var.actions_secrets) : secret.selected_repositories if secret.visibility == "selected" && secret.selected_repositories != null]),
+    flatten([for secret in values(var.actions_secrets) : secret.selected_repositories if secret.visibility == "selected" && secret.selected_repositories != null]),
     flatten([for secret in values(var.codespaces_secrets) : secret.selected_repositories if secret.visibility == "selected" && secret.selected_repositories != null]),
     flatten([for secret in values(var.dependabot_secrets) : secret.selected_repositories if secret.visibility == "selected" && secret.selected_repositories != null])
   )
