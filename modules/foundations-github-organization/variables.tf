@@ -53,9 +53,3 @@ variable "bucket_location" {
   type        = string
   description = "The location of the tf state bucket."
 }
-
-variable "readme_path" {
-  type        = string
-  description = "Local Path to the README file in your current codebase. Pushed to the github foundation repository."
-  default     = ""
-}
