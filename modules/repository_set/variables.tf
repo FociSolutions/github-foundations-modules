@@ -14,9 +14,14 @@ variable "private_repositories" {
     action_secrets                       = optional(map(string))
     codespace_secrets                    = optional(map(string))
     dependabot_secrets                   = optional(map(string))
-    environemnts = optional(map(object({
+    environemnts                         = optional(map(object({
       action_secrets = optional(map(string))
     })))
+    template_repository                  = optional(object({
+      owner                = string
+      repository           = string
+      include_all_branches = bool
+    }))
   }))
   description = "A map of private repositories where the key is the repository name and the value is the configuration"
 }
@@ -36,9 +41,14 @@ variable "public_repositories" {
     action_secrets                       = optional(map(string))
     codespace_secrets                    = optional(map(string))
     dependabot_secrets                   = optional(map(string))
-    environemnts = optional(map(object({
+    environemnts                         = optional(map(object({
       action_secrets = optional(map(string))
     })))
+    template_repository                  = optional(object({
+      owner                = string
+      repository           = string
+      include_all_branches = bool
+    }))
   }))
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
