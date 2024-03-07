@@ -18,6 +18,7 @@ module "public_repositories" {
   codespace_secrets           = each.value.codespace_secrets
   dependabot_secrets          = each.value.dependabot_secrets
   environments                = each.value.environments
+  template_repository         = each.value.template_repository
 }
 
 module "private_repositories" {
@@ -40,4 +41,5 @@ module "private_repositories" {
   codespace_secrets           = each.value.codespace_secrets
   dependabot_secrets          = each.value.dependabot_secrets
   environments                = each.value.environments
+  template_repository         = each.value.template_repository
 }
