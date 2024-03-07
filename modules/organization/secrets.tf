@@ -42,8 +42,8 @@ locals {
 }
 
 data "github_repository" "selected_repositories" {
-  for_each  = local.all_selected_repositories
-  full_name = "${github_organization_settings.organization_settings.name}/${each.value}"
+  for_each = local.all_selected_repositories
+  name     = each.value
 }
 
 resource "github_actions_organization_secret" "action_secret" {
@@ -52,7 +52,7 @@ resource "github_actions_organization_secret" "action_secret" {
   secret_name             = each.key
   encrypted_value         = each.value.encrypted_value
   visibility              = each.value.visibility
-  selected_repository_ids = [for repo in toset(each.value.selected_repositories) : data.github_repository.selected_repositories["${repo}"].repo_id]
+  selected_repository_ids = [for repo in toset(each.value.selected_repositories) : data.github_repository.selected_repositories["${repo}"].node_id]
 }
 
 resource "github_codespaces_organization_secret" "codespace_secret" {
@@ -61,7 +61,7 @@ resource "github_codespaces_organization_secret" "codespace_secret" {
   secret_name             = each.key
   encrypted_value         = each.value.encrypted_value
   visibility              = each.value.visibility
-  selected_repository_ids = [for repo in toset(each.value.selected_repositories) : data.github_repository.selected_repositories["${repo}"].repo_id]
+  selected_repository_ids = [for repo in toset(each.value.selected_repositories) : data.github_repository.selected_repositories["${repo}"].node_id]
 }
 
 resource "github_dependabot_organization_secret" "dependabot_secret" {
@@ -69,6 +69,6 @@ resource "github_dependabot_organization_secret" "dependabot_secret" {
   secret_name             = each.key
   encrypted_value         = each.value.encrypted_value
   visibility              = each.value.visibility
-  selected_repository_ids = [for repo in toset(each.value.selected_repositories) : data.github_repository.selected_repositories["${repo}"].repo_id]
+  selected_repository_ids = [for repo in toset(each.value.selected_repositories) : data.github_repository.selected_repositories["${repo}"].node_id]
 }
 
