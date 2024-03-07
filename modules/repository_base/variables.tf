@@ -136,8 +136,8 @@ variable "dependabot_secrets" {
 
 variable "environments" {
   description = "An optional map of environments to create for the repository. The key is the name of the environment and the value is the environment configuration."
-  type = optional(map(object({
+  type = map(object({
     action_secrets = optional(map(string))
-  })))
+  }))
   default = {}
 }
