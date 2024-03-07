@@ -37,7 +37,7 @@ No resources.
 | <a name="input_name"></a> [name](#input\_name) | The name of the repository to create/import. | `string` | n/a | yes |
 | <a name="input_protected_branches"></a> [protected\_branches](#input\_protected\_branches) | A list of ref names or patterns that should be protected. Defaults `["main"]` | `list(string)` | <pre>[<br>  "main"<br>]</pre> | no |
 | <a name="input_repository_team_permissions"></a> [repository\_team\_permissions](#input\_repository\_team\_permissions) | A map where the keys are github team slugs and the value is the permissions the team should have in the repository | `map(string)` | n/a | yes |
-| <a name="input_template_repository"></a> [template\_repository](#input\_template\_repository) | A list of template repositories to use for the repository | <pre>object({<br>    owner                = string<br>    repo                 = string<br>    include_all_branches = bool<br>  })</pre> | `null` | no |
+| <a name="input_template_repository"></a> [template\_repository](#input\_template\_repository) | A list of template repositories to use for the repository | <pre>object({<br>    owner                = string<br>    repository           = string<br>    include_all_branches = bool<br>  })</pre> | `null` | no |
 | <a name="input_topics"></a> [topics](#input\_topics) | The topics to apply to the repository | `list(string)` | `[]` | no |
 
 ## Outputs
