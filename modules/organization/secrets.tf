@@ -42,7 +42,7 @@ locals {
 }
 
 data "github_repository" "selected_repositories" {
-  for_each  = toset(local.all_selected_repositories)
+  for_each  = local.all_selected_repositories
   full_name = "${github_organization_settings.organization_settings.name}/${each.value}"
 }
 
