@@ -13,15 +13,14 @@
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_organization_secrets"></a> [organization\_secrets](#module\_organization\_secrets) | ../organization_secrets | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [github_actions_organization_secret.action_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/actions_organization_secret) | resource |
-| [github_codespaces_organization_secret.codespace_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/codespaces_organization_secret) | resource |
-| [github_dependabot_organization_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/dependabot_organization_secret) | resource |
 | [github_membership.membership_for_user](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/membership) | resource |
 | [github_organization_block.blocked_user](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/organization_block) | resource |
 | [github_organization_custom_role.community_manager_role](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/organization_custom_role) | resource |
@@ -29,7 +28,6 @@ No modules.
 | [github_organization_custom_role.custom_repository_role](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/organization_custom_role) | resource |
 | [github_organization_custom_role.security_engineer_role](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/organization_custom_role) | resource |
 | [github_organization_settings.organization_settings](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/organization_settings) | resource |
-| [github_repository.selected_repositories](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/data-sources/repository) | data source |
 
 ## Inputs
 
