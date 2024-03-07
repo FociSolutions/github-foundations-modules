@@ -43,7 +43,7 @@ No modules.
 | <a name="input_dependabot_secrets"></a> [dependabot\_secrets](#input\_dependabot\_secrets) | An optional map of dependabot secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `map(string)` | `{}` | no |
 | <a name="input_dependabot_security_updates"></a> [dependabot\_security\_updates](#input\_dependabot\_security\_updates) | Enables dependabot security updates. Only works when `has_vulnerability_alerts` is set because that is required to enable dependabot for the repository. | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | The description to give to the repository. Defaults to `""` | `string` | `""` | no |
-| <a name="input_environments"></a> [environments](#input\_environments) | An optional map of environments to create for the repository. The key is the name of the environment and the value is the environment configuration. | <pre>optional(map(object({<br>    action_secrets = optional(map(string))<br>  })))</pre> | `{}` | no |
+| <a name="input_environments"></a> [environments](#input\_environments) | An optional map of environments to create for the repository. The key is the name of the environment and the value is the environment configuration. | <pre>map(object({<br>    action_secrets = optional(map(string))<br>  }))</pre> | `{}` | no |
 | <a name="input_has_discussions"></a> [has\_discussions](#input\_has\_discussions) | Enables Github Discussions. | `bool` | `true` | no |
 | <a name="input_has_downloads"></a> [has\_downloads](#input\_has\_downloads) | Enables downloads for the repository | `bool` | `false` | no |
 | <a name="input_has_issues"></a> [has\_issues](#input\_has\_issues) | Enables Github Issues for the repository | `bool` | `true` | no |
@@ -61,6 +61,4 @@ No modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | Id of the github repository |
+No outputs.
