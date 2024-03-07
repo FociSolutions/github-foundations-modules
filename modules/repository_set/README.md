@@ -30,4 +30,6 @@ No resources.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_repository_ids"></a> [repository\_ids](#output\_repository\_ids) | A map of github repository names to ids |
