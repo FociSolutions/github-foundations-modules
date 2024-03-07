@@ -1,10 +1,10 @@
 locals {
   environment_actions_secrets = flatten([
-    for env_name, env in coalesce(var.environments, {}) : tolist([for secret_name, secret in env.action_secrets : {
+    for env_name, env in coalesce(var.environments, {}) : [for secret_name, secret in env.action_secrets : {
       name            = secret_name
       encrypted_value = secret
       environment     = env_name
-    }]) if env.action_secrets != null
+    }] if env.action_secrets != null
   ])
 }
 
