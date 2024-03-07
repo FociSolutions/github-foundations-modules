@@ -19,22 +19,31 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [github_actions_environment_secret.environment_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/actions_environment_secret) | resource |
+| [github_actions_secret.actions_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/actions_secret) | resource |
 | [github_branch_default.default_branch](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/branch_default) | resource |
+| [github_codespaces_secret.codespaces_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/codespaces_secret) | resource |
+| [github_dependabot_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/dependabot_secret) | resource |
 | [github_repository.repository](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository) | resource |
 | [github_repository_collaborators.collaborators](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_collaborators) | resource |
 | [github_repository_dependabot_security_updates.automated_security_fixes](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_dependabot_security_updates) | resource |
+| [github_repository_environment.environemnt](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_environment) | resource |
 | [github_repository_ruleset.protected_branch_base_rules](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_ruleset) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_action_secrets"></a> [action\_secrets](#input\_action\_secrets) | An optional map of action secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `optional(map(string))` | `{}` | no |
 | <a name="input_advance_security"></a> [advance\_security](#input\_advance\_security) | Enables advance security for the repository. If repository is public `advance_security` is enabled by default and cannot be changed. | `bool` | `true` | no |
 | <a name="input_allow_auto_merge"></a> [allow\_auto\_merge](#input\_allow\_auto\_merge) | Allow auto-merging pull requests on the repository | `bool` | `true` | no |
+| <a name="input_codespace_secrets"></a> [codespace\_secrets](#input\_codespace\_secrets) | An optional map of codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `optional(map(string))` | `{}` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | The branch to set as the default branch for this repository. Defaults to "main" | `string` | `"main"` | no |
 | <a name="input_delete_head_on_merge"></a> [delete\_head\_on\_merge](#input\_delete\_head\_on\_merge) | Sets the delete head on merge option for the repository. If true it will delete pull request branches automatically on merge. Defaults to true | `bool` | `true` | no |
+| <a name="input_dependabot_secrets"></a> [dependabot\_secrets](#input\_dependabot\_secrets) | An optional map of dependabot secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `optional(map(string))` | `{}` | no |
 | <a name="input_dependabot_security_updates"></a> [dependabot\_security\_updates](#input\_dependabot\_security\_updates) | Enables dependabot security updates. Only works when `has_vulnerability_alerts` is set because that is required to enable dependabot for the repository. | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | The description to give to the repository. Defaults to `""` | `string` | `""` | no |
+| <a name="input_environments"></a> [environments](#input\_environments) | An optional map of environments to create for the repository. The key is the name of the environment and the value is the environment configuration. | <pre>optional(map(object({<br>    action_secrets = optional(map(string))<br>  })))</pre> | `{}` | no |
 | <a name="input_has_discussions"></a> [has\_discussions](#input\_has\_discussions) | Enables Github Discussions. | `bool` | `true` | no |
 | <a name="input_has_downloads"></a> [has\_downloads](#input\_has\_downloads) | Enables downloads for the repository | `bool` | `false` | no |
 | <a name="input_has_issues"></a> [has\_issues](#input\_has\_issues) | Enables Github Issues for the repository | `bool` | `true` | no |
@@ -52,4 +61,6 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_id"></a> [id](#output\_id) | Id of the github repository |
