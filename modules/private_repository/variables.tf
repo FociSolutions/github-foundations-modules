@@ -61,3 +61,26 @@ variable "advance_security" {
   type        = bool
   default     = true
 }
+
+variable "action_secrets" {
+  description = "An optional map of action secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = optional(map(string))
+}
+
+variable "codespace_secrets" {
+  description = "An optional map of codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = optional(map(string))
+}
+
+variable "dependabot_secrets" {
+  description = "An optional map of dependabot secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = optional(map(string))
+}
+
+variable "environments" {
+  description = "Environments to create for the repository."
+  type = map(object({
+    action_secrets = optional(map(string))
+  }))
+  default = {}
+}

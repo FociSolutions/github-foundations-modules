@@ -11,6 +11,12 @@ variable "private_repositories" {
     delete_head_on_merge                 = bool
     allow_auto_merge                     = bool
     dependabot_security_updates          = bool
+    action_secrets                       = optional(map(string))
+    codespace_secrets                    = optional(map(string))
+    dependabot_secrets                   = optional(map(string))
+    environemnts = optional(map(object({
+      action_secrets = optional(map(string))
+    })))
   }))
   description = "A map of private repositories where the key is the repository name and the value is the configuration"
 }
@@ -27,6 +33,12 @@ variable "public_repositories" {
     delete_head_on_merge                 = bool
     allow_auto_merge                     = bool
     dependabot_security_updates          = bool
+    action_secrets                       = optional(map(string))
+    codespace_secrets                    = optional(map(string))
+    dependabot_secrets                   = optional(map(string))
+    environemnts = optional(map(object({
+      action_secrets = optional(map(string))
+    })))
   }))
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
@@ -34,5 +46,4 @@ variable "public_repositories" {
 variable "default_repository_team_permissions" {
   type        = map(string)
   description = "A map where the keys are github team slugs and the value is the permissions the team should have by default for every repository. If an entry exists in `repository_team_permissions_override` for a repository then that will take precedence over this default."
-
 }

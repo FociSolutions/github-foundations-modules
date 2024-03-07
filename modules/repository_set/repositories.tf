@@ -14,6 +14,10 @@ module "public_repositories" {
   delete_head_on_merge        = each.value.delete_head_on_merge
   allow_auto_merge            = each.value.allow_auto_merge
   dependabot_security_updates = each.value.dependabot_security_updates
+  action_secrets              = each.value.action_secrets
+  codespace_secrets           = each.value.codespace_secrets
+  dependabot_secrets          = each.value.dependabot_secrets
+  environments                = each.value.environments
 }
 
 module "private_repositories" {
@@ -32,4 +36,8 @@ module "private_repositories" {
   delete_head_on_merge        = each.value.delete_head_on_merge
   allow_auto_merge            = each.value.allow_auto_merge
   dependabot_security_updates = each.value.dependabot_security_updates
+  action_secrets              = each.value.action_secrets
+  codespace_secrets           = each.value.codespace_secrets
+  dependabot_secrets          = each.value.dependabot_secrets
+  environments                = each.value.environments
 }

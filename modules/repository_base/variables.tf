@@ -115,3 +115,29 @@ variable "dependabot_security_updates" {
   type        = bool
   default     = true
 }
+
+variable "action_secrets" {
+  description = "An optional map of action secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = optional(map(string))
+  default     = {}
+}
+
+variable "codespace_secrets" {
+  description = "An optional map of codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = optional(map(string))
+  default     = {}
+}
+
+variable "dependabot_secrets" {
+  description = "An optional map of dependabot secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = optional(map(string))
+  default     = {}
+}
+
+variable "environments" {
+  description = "An optional map of environments to create for the repository. The key is the name of the environment and the value is the environment configuration."
+  type = optional(map(object({
+    action_secrets = optional(map(string))
+  })))
+  default = {}
+}
