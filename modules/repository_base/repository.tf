@@ -50,6 +50,7 @@ resource "github_repository" "repository" {
       repository           = var.template_repository.name
       include_all_branches = var.template_repository.include_all_branches
     }
+  }
 
 }
 
