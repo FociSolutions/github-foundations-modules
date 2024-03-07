@@ -33,7 +33,7 @@ resource "github_dependabot_secret" "dependabot_secret" {
 }
 
 resource "github_actions_environment_secret" "environment_secret" {
-  for_each        = local.environment_actions_secrets
+  for_each        = toset(local.environment_actions_secrets)
   repository      = var.name
   environment     = each.value.environment
   encrypted_value = each.value.encrypted_value
