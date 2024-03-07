@@ -43,7 +43,7 @@ resource "github_repository" "repository" {
   }
 
   # Use a template repo if one is specified
-  dynamic "template" {
+  dynamic "template_repository" {
     for_each = var.template_repository == null ? [] : [1]
     content {
       owner                = var.template_repository.owner
