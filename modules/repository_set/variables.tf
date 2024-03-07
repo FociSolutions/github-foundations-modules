@@ -50,6 +50,7 @@ variable "public_repositories" {
       repository           = string
       include_all_branches = bool
     }))
+    license_template                     = optional(string)
   }))
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
