@@ -14,7 +14,7 @@ variable "private_repositories" {
     action_secrets                       = optional(map(string))
     codespace_secrets                    = optional(map(string))
     dependabot_secrets                   = optional(map(string))
-    environemnts                         = optional(map(object({
+    environments                         = optional(map(object({
       action_secrets = optional(map(string))
     })))
     template_repository                  = optional(object({
@@ -41,7 +41,7 @@ variable "public_repositories" {
     action_secrets                       = optional(map(string))
     codespace_secrets                    = optional(map(string))
     dependabot_secrets                   = optional(map(string))
-    environemnts                         = optional(map(object({
+    environments                         = optional(map(object({
       action_secrets = optional(map(string))
     })))
     template_repository                  = optional(object({
