@@ -115,3 +115,29 @@ variable "dependabot_security_updates" {
   type        = bool
   default     = true
 }
+
+variable "action_secrets" {
+  description = "An (Optional) map of GitHub Actions secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = map(string)
+  default     = {}
+}
+
+variable "codespace_secrets" {
+  description = "An (Optional) map of Github Codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = map(string)
+  default     = {}
+}
+
+variable "dependabot_secrets" {
+  description = "An (Optional) map of Dependabot secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
+  type        = map(string)
+  default     = {}
+}
+
+variable "environments" {
+  description = "An (Optional) map of environments to create for the repository. The key is the name of the environment and the value is the environment configuration."
+  type = map(object({
+    action_secrets = optional(map(string))
+  }))
+  default = {}
+}

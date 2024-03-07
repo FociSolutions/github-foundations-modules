@@ -23,12 +23,16 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_action_secrets"></a> [action\_secrets](#input\_action\_secrets) | An (Optional) map of GitHub Actions secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `map(string)` | `{}` | no |
 | <a name="input_advance_security"></a> [advance\_security](#input\_advance\_security) | Enables advance security for the repository. If repository is public `advance_security` is enabled by default and cannot be changed. | `bool` | `true` | no |
 | <a name="input_allow_auto_merge"></a> [allow\_auto\_merge](#input\_allow\_auto\_merge) | Allow auto-merging pull requests on the repository | `bool` | `true` | no |
+| <a name="input_codespace_secrets"></a> [codespace\_secrets](#input\_codespace\_secrets) | An (Optional) map of Github Codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `map(string)` | `{}` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | The branch to set as the default branch for this repository. Defaults to "main" | `string` | `"main"` | no |
 | <a name="input_delete_head_on_merge"></a> [delete\_head\_on\_merge](#input\_delete\_head\_on\_merge) | Sets the delete head on merge option for the repository. If true it will delete pull request branches automatically on merge. Defaults to true | `bool` | `true` | no |
+| <a name="input_dependabot_secrets"></a> [dependabot\_secrets](#input\_dependabot\_secrets) | An (Optional) map of Dependabot secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `map(string)` | `{}` | no |
 | <a name="input_dependabot_security_updates"></a> [dependabot\_security\_updates](#input\_dependabot\_security\_updates) | Enables dependabot security updates. Only works when `has_vulnerability_alerts` is set because that is required to enable dependabot for the repository. | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | The description to give to the repository. Defaults to `""` | `string` | `""` | no |
+| <a name="input_environments"></a> [environments](#input\_environments) | Environments to create for the repository. | <pre>map(object({<br>    action_secrets = optional(map(string))<br>  }))</pre> | `{}` | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | The homepage for the repository | `string` | `""` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the repository to create/import. | `string` | n/a | yes |
 | <a name="input_protected_branches"></a> [protected\_branches](#input\_protected\_branches) | A list of ref names or patterns that should be protected. Defaults `["main"]` | `list(string)` | <pre>[<br>  "main"<br>]</pre> | no |
