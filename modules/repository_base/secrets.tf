@@ -1,11 +1,11 @@
 locals {
-  environment_actions_secrets = concat(values({
-    for env_name, env in coalesce(var.environments, {}) : env_name => [for secret_name, secret in env.action_secrets : {
+  environment_actions_secrets = flatten([
+    for env_name, env in coalesce(var.environments, {}) : [for secret_name, secret in env.action_secrets : {
       name            = secret_name
       encrypted_value = secret
       environment     = env_name
     }] if env.action_secrets != null 
-  }))
+  ])
 }
 
 resource "github_actions_secret" "actions_secret" {
