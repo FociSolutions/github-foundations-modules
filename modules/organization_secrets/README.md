@@ -22,6 +22,7 @@ No modules.
 | [github_actions_organization_secret.action_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/actions_organization_secret) | resource |
 | [github_codespaces_organization_secret.codespace_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/codespaces_organization_secret) | resource |
 | [github_dependabot_organization_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/dependabot_organization_secret) | resource |
+| [github_repository.selected_repositories](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/data-sources/repository) | data source |
 
 ## Inputs
 
