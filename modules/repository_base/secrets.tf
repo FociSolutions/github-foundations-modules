@@ -1,11 +1,15 @@
 locals {
-  environment_actions_secrets = flatten([
-    for env_name, env in coalesce(var.environments, {}) : [for secret_name, secret in env.action_secrets : {
-      name            = secret_name
-      encrypted_value = secret
+  action_secrets_per_environment = {
+    for env_name, env in coalesce(var.environments, {}): env_name => [ for secret_name, secret_value in env.var.action_secrets : { name = secret_name, encrypted_value = secret_value}] if env.action_secrets != null
+  }
+  
+  environment_action_secrets = {
+    for env_name, secrets in local.action_secrets_per_environment: "${env_name}:${secrets[*].name}" => {
       environment     = env_name
-    }] if env.action_secrets != null
-  ])
+      name            = secrets[*].name
+      value          = secrets[*].encrypted_value
+    }
+  }
 }
 
 resource "github_actions_secret" "actions_secret" {
@@ -33,7 +37,7 @@ resource "github_dependabot_secret" "dependabot_secret" {
 }
 
 resource "github_actions_environment_secret" "environment_secret" {
-  for_each        = toset(local.environment_actions_secrets)
+  for_each        = local.environment_action_secrets
   repository      = var.name
   environment     = each.value.environment
   encrypted_value = each.value.encrypted_value
