@@ -9,10 +9,8 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 5.44.0 |
 | <a name="provider_github.enterprise_scoped"></a> [github.enterprise\_scoped](#provider\_github.enterprise\_scoped) | 5.44.0 |
 | <a name="provider_github.foundation_org_scoped"></a> [github.foundation\_org\_scoped](#provider\_github.foundation\_org\_scoped) | 5.44.0 |
-| <a name="provider_local"></a> [local](#provider\_local) | n/a |
 
 ## Modules
 
@@ -36,9 +34,7 @@ No modules.
 | [github_repository.organizations_repo](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository) | resource |
 | [github_repository_collaborators.bootstrap_repo_collaborators](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository_collaborators) | resource |
 | [github_repository_collaborators.organization_repo_collaborators](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository_collaborators) | resource |
-| [github_repository_file.main_readme](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/repository_file) | resource |
 | [github_team.foundation_devs](https://registry.terraform.io/providers/hashicorp/github/5.44.0/docs/resources/team) | resource |
-| [local_file.main_readme](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
@@ -54,7 +50,6 @@ No modules.
 | <a name="input_gcp_tf_state_bucket_project_id"></a> [gcp\_tf\_state\_bucket\_project\_id](#input\_gcp\_tf\_state\_bucket\_project\_id) | The id of the gcp project where the tf state bucket was setup. | `string` | n/a | yes |
 | <a name="input_github_foundations_organization_name"></a> [github\_foundations\_organization\_name](#input\_github\_foundations\_organization\_name) | The name of the organization to create. | `string` | n/a | yes |
 | <a name="input_organization_workload_identity_sa"></a> [organization\_workload\_identity\_sa](#input\_organization\_workload\_identity\_sa) | The service account to use for the organization repository oidc. | `string` | n/a | yes |
-| <a name="input_readme_path"></a> [readme\_path](#input\_readme\_path) | Local Path to the README file in your current codebase. Pushed to the github foundation repository. | `string` | `""` | no |
 | <a name="input_workload_identity_provider_name"></a> [workload\_identity\_provider\_name](#input\_workload\_identity\_provider\_name) | The name of the workload identity provider to use for the oidc of the github foundation repositories. | `string` | n/a | yes |
 
 ## Outputs
