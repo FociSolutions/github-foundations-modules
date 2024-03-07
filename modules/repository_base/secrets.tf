@@ -1,15 +1,15 @@
 locals {
-  environment_actions_secrets = try(concat(values({
-    for env_name, env in var.environments : env_name => [for secret_name, secret in env.action_secrets : {
+  environment_actions_secrets = concat(values({
+    for env_name, env in coalesce(var.environments, {}) : env_name => [for secret_name, secret in env.action_secrets : {
       name            = secret_name
       encrypted_value = secret
       environment     = env_name
     }] if env.action_secrets != null 
-  })), [])
+  }))
 }
 
 resource "github_actions_secret" "actions_secret" {
-  for_each = var.action_secrets
+  for_each = coalesce(var.action_secrets, {})
 
   repository      = github_repository.repository.name
   secret_name     = each.key
@@ -17,7 +17,7 @@ resource "github_actions_secret" "actions_secret" {
 }
 
 resource "github_codespaces_secret" "codespaces_secret" {
-  for_each = var.codespace_secrets
+  for_each = coalesce(var.codespace_secrets, {})
 
   repository      = github_repository.repository.name
   secret_name     = each.key
@@ -25,7 +25,7 @@ resource "github_codespaces_secret" "codespaces_secret" {
 }
 
 resource "github_dependabot_secret" "dependabot_secret" {
-  for_each = var.dependabot_secrets
+  for_each = coalesce(var.dependabot_secrets, {})
 
   repository      = github_repository.repository.name
   secret_name     = each.key
