@@ -19,7 +19,7 @@ resource "github_repository" "bootstrap_repo" {
 }
 
 resource "github_repository_collaborators" "bootstrap_repo_collaborators" {
-  provider = github.foundation_org_scoped
+  provider   = github.foundation_org_scoped
   repository = github_repository.bootstrap_repo.name
 
   team {
@@ -67,9 +67,9 @@ resource "github_repository" "organizations_repo" {
 }
 
 resource "github_repository_collaborators" "organization_repo_collaborators" {
-  provider = github.foundation_org_scoped
+  provider   = github.foundation_org_scoped
   repository = github_repository.organizations_repo.name
-  
+
   team {
     permission = "push"
     team_id    = github_team.foundation_devs.id
