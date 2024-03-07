@@ -1,6 +1,6 @@
 locals {
   action_secrets_per_environment = {
-    for env_name, env in coalesce(var.environments, {}): env_name => [ for secret_name, secret_value in env.var.action_secrets : { name = secret_name, encrypted_value = secret_value}] if env.action_secrets != null
+    for env_name, env in coalesce(var.environments, {}): env_name => [ for secret_name, secret_value in env.action_secrets : { name = secret_name, encrypted_value = secret_value}] if env.action_secrets != null
   }
   
   environment_action_secrets = {
