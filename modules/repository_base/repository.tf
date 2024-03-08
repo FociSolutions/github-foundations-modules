@@ -25,6 +25,8 @@ resource "github_repository" "repository" {
   homepage_url           = var.homepage
   delete_branch_on_merge = var.delete_head_on_merge
   allow_auto_merge       = var.allow_auto_merge
+  license_template       = var.license_template
+
 
   # A hacky way of getting around the 422 errors received from github api
   dynamic "security_and_analysis" {

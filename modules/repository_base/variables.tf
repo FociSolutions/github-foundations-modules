@@ -143,11 +143,17 @@ variable "environments" {
 }
 
 variable "template_repository" {
-  description = "A list of template repositories to use for the repository"
+  description = "A (Optional) list of template repositories to use for the repository"
   type        = object({
     owner                = string
     repository           = string
     include_all_branches = bool
   })
   default = null
+}
+
+variable "license_template" {
+  description = "The (Optional) license template to use for the repository"
+  type        = string
+  default     = null
 }

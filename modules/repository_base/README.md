@@ -51,12 +51,13 @@ No modules.
 | <a name="input_has_vulnerability_alerts"></a> [has\_vulnerability\_alerts](#input\_has\_vulnerability\_alerts) | Enables security alerts for vulnerable dependencies for the repository | `bool` | `true` | no |
 | <a name="input_has_wiki"></a> [has\_wiki](#input\_has\_wiki) | Enables Github Wiki for the repository | `bool` | `true` | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | The homepage for the repository | `string` | `""` | no |
+| <a name="input_license_template"></a> [license\_template](#input\_license\_template) | The (Optional) license template to use for the repository | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the repository to create/import. | `string` | n/a | yes |
 | <a name="input_protected_branches"></a> [protected\_branches](#input\_protected\_branches) | A list of ref names or patterns that should be protected. Setting to `[]` means no protection. Defaults `["~DEFAULT_BRANCH"]` | `list(string)` | <pre>[<br>  "~DEFAULT_BRANCH"<br>]</pre> | no |
 | <a name="input_repository_team_permissions"></a> [repository\_team\_permissions](#input\_repository\_team\_permissions) | A map where the keys are github team slugs and the value is the permissions the team should have in the repository | `map(string)` | n/a | yes |
 | <a name="input_secret_scanning"></a> [secret\_scanning](#input\_secret\_scanning) | Enables secret scanning for the repository. If repository is private `advance_security` must also be enabled. | `bool` | `true` | no |
 | <a name="input_secret_scanning_on_push"></a> [secret\_scanning\_on\_push](#input\_secret\_scanning\_on\_push) | Enables secret scanning push protection for the repository. If repository is private `advance_security` must also be enabled. | `bool` | `true` | no |
-| <a name="input_template_repository"></a> [template\_repository](#input\_template\_repository) | A list of template repositories to use for the repository | <pre>object({<br>    owner                = string<br>    repository           = string<br>    include_all_branches = bool<br>  })</pre> | `null` | no |
+| <a name="input_template_repository"></a> [template\_repository](#input\_template\_repository) | A (Optional) list of template repositories to use for the repository | <pre>object({<br>    owner                = string<br>    repository           = string<br>    include_all_branches = bool<br>  })</pre> | `null` | no |
 | <a name="input_topics"></a> [topics](#input\_topics) | The topics to apply to the repository | `list(string)` | `[]` | no |
 | <a name="input_visibility"></a> [visibility](#input\_visibility) | Sets the visibility property of a repository. Defaults to "private" | `string` | `"private"` | no |
 
