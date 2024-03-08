@@ -15,26 +15,26 @@ locals {
   }
 
   codespace_secrets = distinct(flatten(concat(
-    [for _, repo in local.coalesced_public_repositories : repo.codespace_secrets if repo.codespace_secrets != null],
-    [for _, repo in local.coalesced_private_repositories : repo.codespace_secrets if repo.codespace_secrets != null]
+    [for _, repo in local.coalesced_public_repositories : repo.organization_codespace_secrets if repo.organization_codespace_secrets != null],
+    [for _, repo in local.coalesced_private_repositories : repo.organization_codespace_secrets if repo.organization_codespace_secrets != null]
   )))
 
   codespace_secrets_repository_id_list = {
     for secret in local.codespace_secrets : secret => toset(distinct(concat(
-      [for repo_name, repo in local.coalesced_public_repositories : module.public_repositories["${repo_name}"].id if contains(repo.codespace_secrets, secret)],
-      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories["${repo_name}"].id if contains(repo.codespace_secrets, secret)]
+      [for repo_name, repo in local.coalesced_public_repositories : module.public_repositories["${repo_name}"].id if contains(repo.organization_codespace_secrets, secret)],
+      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories["${repo_name}"].id if contains(repo.organization_codespace_secrets, secret)]
     )))
   }
 
   dependabot_secrets = distinct(flatten(concat(
-    [for _, repo in local.coalesced_public_repositories : repo.dependabot_secrets if repo.dependabot_secrets != null],
-    [for _, repo in local.coalesced_private_repositories : repo.dependabot_secrets if repo.dependabot_secrets != null]
+    [for _, repo in local.coalesced_public_repositories : repo.organization_dependabot_secrets if repo.organization_dependabot_secrets != null],
+    [for _, repo in local.coalesced_private_repositories : repo.organization_dependabot_secrets if repo.organization_dependabot_secrets != null]
   )))
 
   dependabot_secrets_id_list = {
     for secret in local.dependabot_secrets : secret => toset(distinct(concat(
-      [for repo_name, repo in local.coalesced_public_repositories : module.public_repositories["${repo_name}"].id if contains(repo.dependabot_secrets, secret)],
-      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories["${repo_name}"].id if contains(repo.dependabot_secrets, secret)]
+      [for repo_name, repo in local.coalesced_public_repositories : module.public_repositories["${repo_name}"].id if contains(repo.organization_dependabot_secrets, secret)],
+      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories["${repo_name}"].id if contains(repo.organization_dependabot_secrets, secret)]
     )))
   }
 }
