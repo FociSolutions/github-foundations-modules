@@ -1,7 +1,7 @@
 locals {
   organization_action_secrets = distinct(flatten(concat(
-    [for _, repo in var.var.public_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null],
-    [for _, repo in var.var.private_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null]
+    [for _, repo in var.public_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null],
+    [for _, repo in var.private_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null]
   )))
 
   organization_action_secrets_repository_id_list = {
