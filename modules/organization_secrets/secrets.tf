@@ -3,7 +3,7 @@ locals {
   sanitized_action_secrets = merge(
     var.organization_action_secrets,
     {
-      for k, v in var.var.organization_action_secrets : k => {
+      for k, v in var.organization_action_secrets : k => {
         encrypted_value       = v.encrypted_value
         visibility            = v.visibility
         selected_repositories = coalesce(v.selected_repositories, [])
