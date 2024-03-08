@@ -89,7 +89,7 @@ variable "environments" {
 }
 
 variable "template_repository" {
-  description = "A list of template repositories to use for the repository"
+  description = "A (Optional) list of template repositories to use for the repository"
   type        = object({
     owner                = string
     repository           = string
