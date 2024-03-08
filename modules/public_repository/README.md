@@ -34,6 +34,7 @@ No resources.
 | <a name="input_description"></a> [description](#input\_description) | The description to give to the repository. Defaults to `""` | `string` | `""` | no |
 | <a name="input_environments"></a> [environments](#input\_environments) | Environments to create for the repository. | <pre>map(object({<br>    action_secrets = optional(map(string))<br>  }))</pre> | `{}` | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | The homepage for the repository | `string` | `""` | no |
+| <a name="input_license_template"></a> [license\_template](#input\_license\_template) | The (Optional) license template to apply to the repository | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the repository to create/import. | `string` | n/a | yes |
 | <a name="input_protected_branches"></a> [protected\_branches](#input\_protected\_branches) | A list of ref names or patterns that should be protected. Defaults `["main"]` | `list(string)` | <pre>[<br>  "main"<br>]</pre> | no |
 | <a name="input_repository_team_permissions"></a> [repository\_team\_permissions](#input\_repository\_team\_permissions) | A map where the keys are github team slugs and the value is the permissions the team should have in the repository | `map(string)` | n/a | yes |
