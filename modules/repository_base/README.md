@@ -27,7 +27,7 @@ No modules.
 | [github_repository.repository](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository) | resource |
 | [github_repository_collaborators.collaborators](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_collaborators) | resource |
 | [github_repository_dependabot_security_updates.automated_security_fixes](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_dependabot_security_updates) | resource |
-| [github_repository_environment.environemnt](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_environment) | resource |
+| [github_repository_environment.environment](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_environment) | resource |
 | [github_repository_ruleset.protected_branch_base_rules](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_ruleset) | resource |
 
 ## Inputs
