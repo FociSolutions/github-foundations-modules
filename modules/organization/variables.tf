@@ -137,9 +137,8 @@ variable "actions_secrets" {
   type = map(object({
     encrypted_value       = string
     visibility            = string
-    selected_repositories = optional(list(string))
   }))
-  description = "A map of organization-level GitHub Actions secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. If visibility is set to `selected` then `selected_repositories` must be set to a list of repository names to make the secret available."
+  description = "A map of organization-level GitHub Actions secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
 }
 
@@ -147,9 +146,8 @@ variable "codespaces_secrets" {
   type = map(object({
     encrypted_value       = string
     visibility            = string
-    selected_repositories = optional(list(string))
   }))
-  description = "A map of organization-level GitHub Codespaces secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. If visibility is set to `selected` then `selected_repositories` must be set to a list of repository names to make the secret available."
+  description = "A map of organization-level GitHub Codespaces secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
 }
 
@@ -157,9 +155,8 @@ variable "dependabot_secrets" {
   type = map(object({
     encrypted_value       = string
     visibility            = string
-    selected_repositories = optional(list(string))
   }))
-  description = "A map of organization-level Dependabot secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. If visibility is set to `selected` then `selected_repositories` must be set to a list of repository names to make the secret available."
+  description = "A map of organization-level Dependabot secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
 }
 

@@ -13,14 +13,15 @@
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_organization_secrets"></a> [organization\_secrets](#module\_organization\_secrets) | ../organization_secrets | n/a |
+No modules.
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [github_actions_organization_secret.action_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/actions_organization_secret) | resource |
+| [github_codespaces_organization_secret.codespace_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/codespaces_organization_secret) | resource |
+| [github_dependabot_organization_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/dependabot_organization_secret) | resource |
 | [github_membership.membership_for_user](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/membership) | resource |
 | [github_organization_block.blocked_user](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/organization_block) | resource |
 | [github_organization_custom_role.community_manager_role](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/organization_custom_role) | resource |
@@ -33,10 +34,10 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_actions_secrets"></a> [actions\_secrets](#input\_actions\_secrets) | A map of organization-level GitHub Actions secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. If visibility is set to `selected` then `selected_repositories` must be set to a list of repository names to make the secret available. | <pre>map(object({<br>    encrypted_value       = string<br>    visibility            = string<br>    selected_repositories = optional(list(string))<br>  }))</pre> | `{}` | no |
-| <a name="input_codespaces_secrets"></a> [codespaces\_secrets](#input\_codespaces\_secrets) | A map of organization-level GitHub Codespaces secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. If visibility is set to `selected` then `selected_repositories` must be set to a list of repository names to make the secret available. | <pre>map(object({<br>    encrypted_value       = string<br>    visibility            = string<br>    selected_repositories = optional(list(string))<br>  }))</pre> | `{}` | no |
+| <a name="input_actions_secrets"></a> [actions\_secrets](#input\_actions\_secrets) | A map of organization-level GitHub Actions secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. | <pre>map(object({<br>    encrypted_value       = string<br>    visibility            = string<br>  }))</pre> | `{}` | no |
+| <a name="input_codespaces_secrets"></a> [codespaces\_secrets](#input\_codespaces\_secrets) | A map of organization-level GitHub Codespaces secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. | <pre>map(object({<br>    encrypted_value       = string<br>    visibility            = string<br>  }))</pre> | `{}` | no |
 | <a name="input_custom_repository_roles"></a> [custom\_repository\_roles](#input\_custom\_repository\_roles) | A map of custom repository roles to create. The key is the name of the role and the value is the role configurations. | <pre>map(object({<br>    description = string<br>    base_role   = string<br>    permissions = list(string)<br>  }))</pre> | n/a | yes |
-| <a name="input_dependabot_secrets"></a> [dependabot\_secrets](#input\_dependabot\_secrets) | A map of organization-level Dependabot secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. If visibility is set to `selected` then `selected_repositories` must be set to a list of repository names to make the secret available. | <pre>map(object({<br>    encrypted_value       = string<br>    visibility            = string<br>    selected_repositories = optional(list(string))<br>  }))</pre> | `{}` | no |
+| <a name="input_dependabot_secrets"></a> [dependabot\_secrets](#input\_dependabot\_secrets) | A map of organization-level Dependabot secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. | <pre>map(object({<br>    encrypted_value       = string<br>    visibility            = string<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_community_manager_role"></a> [enable\_community\_manager\_role](#input\_enable\_community\_manager\_role) | If `true` will create a custom repository role for community managers. Defaults to `false`. If `true` the maximum number of `custom_repository_roles` that can be defined will be reduced by one. | `bool` | `false` | no |
 | <a name="input_enable_contractor_role"></a> [enable\_contractor\_role](#input\_enable\_contractor\_role) | If `true` will create a custom repository role for contractors. Defaults to `false`. If `true` the maximum number of `custom_repository_roles` that can be defined will be reduced by one. | `bool` | `false` | no |
 | <a name="input_enable_security_engineer_role"></a> [enable\_security\_engineer\_role](#input\_enable\_security\_engineer\_role) | If `true` will create a custom repository role for security engineers. Defaults to `false`. If `true` the maximum number of `custom_repository_roles` that can be defined will be reduced by one. | `bool` | `false` | no |
