@@ -7,7 +7,7 @@ locals {
   organization_action_secrets_repository_id_list = {
     for secret in local.organization_action_secrets : secret => toset(distinct(concat(
       [for repo_name, repo in var.public_repositories : module.public_repositories["${repo_name}"].id if contains(repo.organization_action_secrets, secret)],
-      [for repo_name, repo in var.private_repositories : module.module.private_repositories["${repo_name}"].id if contains(repo.organization_action_secrets, secret)]
+      [for repo_name, repo in var.private_repositories : module.private_repositories["${repo_name}"].id if contains(repo.organization_action_secrets, secret)]
     )))
   }
 }
