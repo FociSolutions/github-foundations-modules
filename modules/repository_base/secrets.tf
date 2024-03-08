@@ -1,13 +1,14 @@
 locals {
-  action_secrets_per_environment = {
-    for env_name, env in coalesce(var.environments, {}): env_name => [ for secret_name, secret_value in env.action_secrets : { name = secret_name, encrypted_value = secret_value}] if env.action_secrets != null
-  }
-  
-  environment_action_secrets = {
-    for env_name, secrets in local.action_secrets_per_environment: "${env_name}:${secrets[*].name}" => {
-      environment     = env_name
-      name            = secrets[*].name
-      value          = secrets[*].encrypted_value
+  environment_action_secrets_list = flatten([
+    for env_name, env in coalesce(var.environments, {}) : [for secret_name, secret_value in env.action_secrets : { name = secret_name, encrypted_value = secret_value, environment = env_name }] if env.action_secrets != null
+  ])
+
+  # Terraform can't loop over a list of objects so we convert it into a map
+  environment_action_secrets_map = {
+    for environment_secret in local.environment_action_secrets_list : "${env_name}:${environment_secret.name}" => {
+      environment = environment_secret.environment
+      name        = environment_secret.name
+      value       = environment_secret.encrypted_value
     }
   }
 }
@@ -37,7 +38,7 @@ resource "github_dependabot_secret" "dependabot_secret" {
 }
 
 resource "github_actions_environment_secret" "environment_secret" {
-  for_each        = local.environment_action_secrets
+  for_each        = local.environment_action_secrets_map
   repository      = var.name
   environment     = each.value.environment
   encrypted_value = each.value.encrypted_value
