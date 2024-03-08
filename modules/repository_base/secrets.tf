@@ -6,9 +6,9 @@ locals {
   # Terraform can't loop over a list of objects so we convert it into a map
   environment_action_secrets_map = {
     for environment_secret in local.environment_action_secrets_list : "${environment_secret.environment}:${environment_secret.name}" => {
-      environment = environment_secret.environment
-      name        = environment_secret.name
-      value       = environment_secret.encrypted_value
+      environment     = environment_secret.environment
+      name            = environment_secret.name
+      encrypted_value = environment_secret.encrypted_value
     }
   }
 }
