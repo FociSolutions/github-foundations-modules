@@ -57,7 +57,7 @@ No modules.
 | <a name="input_repository_team_permissions"></a> [repository\_team\_permissions](#input\_repository\_team\_permissions) | A map where the keys are github team slugs and the value is the permissions the team should have in the repository | `map(string)` | n/a | yes |
 | <a name="input_secret_scanning"></a> [secret\_scanning](#input\_secret\_scanning) | Enables secret scanning for the repository. If repository is private `advance_security` must also be enabled. | `bool` | `true` | no |
 | <a name="input_secret_scanning_on_push"></a> [secret\_scanning\_on\_push](#input\_secret\_scanning\_on\_push) | Enables secret scanning push protection for the repository. If repository is private `advance_security` must also be enabled. | `bool` | `true` | no |
-| <a name="input_template_repository"></a> [template\_repository](#input\_template\_repository) | A list of template repositories to use for the repository | <pre>object({<br>    owner                = string<br>    repository           = string<br>    include_all_branches = bool<br>  })</pre> | `null` | no |
+| <a name="input_template_repository"></a> [template\_repository](#input\_template\_repository) | A (Optional) list of template repositories to use for the repository | <pre>object({<br>    owner                = string<br>    repository           = string<br>    include_all_branches = bool<br>  })</pre> | `null` | no |
 | <a name="input_topics"></a> [topics](#input\_topics) | The topics to apply to the repository | `list(string)` | `[]` | no |
 | <a name="input_visibility"></a> [visibility](#input\_visibility) | Sets the visibility property of a repository. Defaults to "private" | `string` | `"private"` | no |
 
