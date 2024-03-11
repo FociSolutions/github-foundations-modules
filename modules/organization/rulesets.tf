@@ -38,7 +38,7 @@ data "github_user" "branch_ruleset_bypasser" {
   username = each.value
 }
 
-resource "organization_ruleset" "branch_ruleset" {
+resource "github_organization_ruleset" "branch_ruleset" {
   for_each = var.branch_ruleset
 
   name        = each.key
