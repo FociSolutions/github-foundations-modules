@@ -1,21 +1,21 @@
 locals {
-  branch_ruleset_team_bypassers = [
+  branch_ruleset_team_bypassers = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
       for team_slug in ruleset_config.bypass_actors.teams : "${ruleset}:${team_slug}" => team_slug
     } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.teams != null
-  ]
+  ]...)
 
-  branch_ruleset_app_bypassers = [
+  branch_ruleset_app_bypassers = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
       for app_slug in ruleset_config.bypass_actors.integrations : "${ruleset}:${app_slug}" => app_slug
     } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.integrations != null
-  ]
+  ]...)
 
-  branch_ruleset_admin_bypassers = [
+  branch_ruleset_admin_bypassers = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
       for user in ruleset_config.bypass_actors.organization_admins : "${ruleset}:${user}" => user
     } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.organization_admins != null
-  ]
+  ]...)
 }
 
 
