@@ -43,7 +43,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
 
   name        = each.key
   target      = "branch"
-  enforcement = each.value.disable != null && each.value.disable ? "disabled" : "active" #Might want this to just be a string so it can also be set to evaluate
+  enforcement = coalesce(each.value.disable, false) ? "disabled" : "active" #Might want this to just be a string so it can also be set to evaluate
 
   dynamic "bypass_actors" {
     for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.repository_roles, [])) : []
