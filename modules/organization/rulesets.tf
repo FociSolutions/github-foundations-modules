@@ -13,8 +13,8 @@ locals {
 
   branch_ruleset_custom_repository_roles = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
-      for role in ruleset_config.bypass_actors.repository_roles : "${ruleset}:${role}" => role
-    } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.repository_roles != null && !contains(keys(local.github_base_role_ids), role)
+      for role in ruleset_config.bypass_actors.repository_roles : "${ruleset}:${role}" => role if !contains(keys(local.github_base_role_ids))
+    } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.repository_roles != null
   ]...)
 
   github_base_role_ids = {
