@@ -64,13 +64,13 @@ resource "github_organization_ruleset" "branch_ruleset" {
 
   rules {
     dynamic "branch_name_pattern" {
-      for_each = try([each.value.rules.branch_name_pattern], null)
+      for_each = each.value.rules.branch_name_pattern != null ? [each.value.rules.branch_name_pattern] : []
 
       content {
-        operator = try(branch_name_pattern.value.operator, "")
-        pattern  = try(branch_name_pattern.value.pattern, "")
-        name     = try(branch_name_pattern.value.name, "")
-        negate   = try(branch_name_pattern.value.negate, false)
+        operator = branch_name_pattern.value.operator
+        pattern  = branch_name_pattern.value.pattern
+        name     = branch_name_pattern.value.name
+        negate   = coalesce(branch_name_pattern.value.negate, false)
       }
     }
 
