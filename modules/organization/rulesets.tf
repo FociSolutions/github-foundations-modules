@@ -64,7 +64,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
 
   rules {
     dynamic "branch_name_pattern" {
-      for_each = try(toset([each.value.rules.branch_name_pattern]), [])
+      for_each = try([each.value.rules.branch_name_pattern], null)
 
       content {
         operator = try(branch_name_pattern.value.operator, "")
