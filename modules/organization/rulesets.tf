@@ -14,7 +14,7 @@ locals {
   branch_ruleset_custom_repository_roles = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
       for role in ruleset_config.bypass_actors.repository_roles : "${ruleset}:${role}" => role
-    } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.repository_roles != null && !contains(keys(github_base_role_ids), role)
+    } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.repository_roles != null && !contains(keys(local.github_base_role_ids), role)
   ]...)
 
   github_base_role_ids = {
@@ -56,7 +56,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.repository_roles, [])) : []
 
     content {
-      actor_id    = lookup(github_base_role_ids, bypass_actors.value, data.github_organization_custom_role.branch_ruleset_bypasser["${each.key}:${bypass_actors.value}"])
+      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value, data.github_organization_custom_role.branch_ruleset_bypasser["${each.key}:${bypass_actors.value}"])
       actor_type  = "RepositoryRole"
       bypass_mode = "always"
     }
