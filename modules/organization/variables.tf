@@ -165,7 +165,7 @@ variable "branch_rulesets" {
     bypass_actors = optional(object({
       repository_roles    = list(string)
       teams               = list(string)
-      integrations        = list(string)
+      integrations        = list(number)
       organization_admins = list(string)
     }))
     disable = optional(bool)
