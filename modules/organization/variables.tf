@@ -168,14 +168,14 @@ variable "branch_rulesets" {
       integrations        = list(string)
       organization_admins = list(string)
     }))
-    disable = optional(boolean)
+    disable = optional(bool)
   }))
   default = {}
 }
 
 variable "tag_rulesets" {
   type = map(object({
-    disable = optional(boolean)
+    disable = optional(bool)
   }))
   default = {}
 }

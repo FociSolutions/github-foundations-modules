@@ -56,7 +56,7 @@ resource "organization_ruleset" "branch_ruleset" {
   }
 
   rules {
-    
+
   }
 
   dynamic "bypass_actors" {
