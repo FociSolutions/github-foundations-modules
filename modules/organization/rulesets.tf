@@ -56,7 +56,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.repository_roles, [])) : []
 
     content {
-      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value, data.github_organization_custom_role.branch_ruleset_bypasser["${each.key}:${bypass_actors.value}"])
+      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value, data.github_organization_custom_role.branch_ruleset_bypasser["${each.key}:${bypass_actors.value}"].id)
       actor_type  = "RepositoryRole"
       bypass_mode = "always"
     }
