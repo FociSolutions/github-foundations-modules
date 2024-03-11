@@ -1,19 +1,19 @@
 locals {
   branch_ruleset_team_bypassers = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
-      for bypasser in ruleset_config.bypass_actors.teams : "${ruleset}:${bypasser}" => bypasser.team
+      for bypasser in ruleset_config.bypass_actors.teams : "${ruleset}:${bypasser.team}" => bypasser.team
     } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.teams != null
   ]...)
 
   branch_ruleset_admin_bypassers = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
-      for bypasser in ruleset_config.bypass_actors.organization_admins : "${ruleset}:${bypasser}" => bypasser.user
+      for bypasser in ruleset_config.bypass_actors.organization_admins : "${ruleset}:${bypasser.user}" => bypasser.user
     } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.organization_admins != null
   ]...)
 
   branch_ruleset_custom_repository_roles = merge([
     for ruleset, ruleset_config in var.branch_rulesets : {
-      for bypasser in ruleset_config.bypass_actors.repository_roles : "${ruleset}:${bypasser}" => bypasser.role if !contains(keys(local.github_base_role_ids), bypasser.role)
+      for bypasser in ruleset_config.bypass_actors.repository_roles : "${ruleset}:${bypasser.role}" => bypasser.role if !contains(keys(local.github_base_role_ids), bypasser.role)
     } if ruleset_config.bypass_actors != null && ruleset_config.bypass_actors.repository_roles != null
   ]...)
 
