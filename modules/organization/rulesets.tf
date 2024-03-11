@@ -64,7 +64,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
 
   rules {
     dynamic "branch_name_pattern" {
-      for_each = toset(compact([each.value.rules.branch_name_pattern]))
+      for_each = try(toset([each.value.rules.branch_name_pattern]), [])
 
       content {
         operator = branch_name_pattern.value.operator
@@ -75,7 +75,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     }
 
     dynamic "commit_author_email_pattern" {
-      for_each = toset(compact([each.value.rules.commit_author_email_pattern]))
+      for_each = try(toset([each.value.rules.commit_author_email_pattern]), [])
 
       content {
         operator = commit_author_email_pattern.value.operator
@@ -86,7 +86,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     }
 
     dynamic "commit_message_pattern" {
-      for_each = toset(compact([each.value.rules.commit_message_pattern]))
+      for_each = try(toset([each.value.rules.commit_message_pattern]), [])
 
       content {
         operator = commit_message_pattern.value.operator
@@ -97,7 +97,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     }
 
     dynamic "committer_email_pattern" {
-      for_each = toset(compact([each.value.rules.committer_email_pattern]))
+      for_each = try(toset([each.value.rules.committer_email_pattern]), [])
 
       content {
         operator = committer_email_pattern.value.operator
@@ -108,7 +108,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     }
 
     dynamic "pull_request" {
-      for_each = toset(compact([each.value.rules.pull_request]))
+      for_each = try(toset([each.value.rules.pull_request]), [])
 
       content {
         dismiss_stale_reviews_on_push     = coalesce(pull_request.value.dismiss_stale_reviews_on_push, false)
