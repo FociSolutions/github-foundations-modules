@@ -120,7 +120,9 @@ resource "github_organization_ruleset" "branch_ruleset" {
     }
 
     dynamic "required_status_checks" {
-      for_each = each.value.rules.required_status_checks ? [each.value.rules.required_status_checks] : []
+      for_each = each.value.rules.required_status_checks ? [each.value.rules.required_status_checks] : [{
+        context = "Context Name Missing"
+      }]
 
       content {
         strict_required_status_checks_policy = required_status_checks.strict_required_status_check_policy
