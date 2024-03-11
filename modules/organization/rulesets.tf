@@ -58,7 +58,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     content {
       actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${each.key}:${bypass_actors.value.role}"].id)
       actor_type  = "RepositoryRole"
-      bypass_mode = bypass_actors.value.always_bypass ? "always" : "pull_request"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
   }
 
@@ -72,7 +72,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     content {
       actor_id    = data.github_team.branch_ruleset_bypasser["${each.key}:${bypass_actors.value.team}"].id
       actor_type  = "Team"
-      bypass_mode =bypass_actors.value.always_bypass ? "always" : "pull_request"
+      bypass_mode =coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
   }
 
@@ -82,7 +82,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     content {
       actor_id    = bypass_actors.value.installation_id
       actor_type  = "Integration"
-      bypass_mode = bypass_actors.value.always_bypass ? "always" : "pull_request"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
   }
 
@@ -92,7 +92,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     content {
       actor_id    = data.github_user.branch_ruleset_bypasser["${each.key}:${bypass_actors.value.user}"].id
       actor_type  = "OrganizationAdmin"
-      bypass_mode = bypass_actors.value.always_bypass ? "always" : "pull_request"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
   }
 }
