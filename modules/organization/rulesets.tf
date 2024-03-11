@@ -74,50 +74,50 @@ resource "github_organization_ruleset" "branch_ruleset" {
       }
     }
 
-    # dynamic "commit_author_email_pattern" {
-    #   for_each = try(toset([each.value.rules.commit_author_email_pattern]), [])
+    dynamic "commit_author_email_pattern" {
+      for_each = each.value.rules.commit_author_email_pattern != null ? [each.value.rules.commit_author_email_pattern] : []
 
-    #   content {
-    #     operator = commit_author_email_pattern.value.operator
-    #     pattern  = commit_author_email_pattern.value.pattern
-    #     name     = commit_author_email_pattern.value.name
-    #     negate   = coalesce(commit_author_email_pattern.value.negate, false)
-    #   }
-    # }
+      content {
+        operator = commit_author_email_pattern.value.operator
+        pattern  = commit_author_email_pattern.value.pattern
+        name     = commit_author_email_pattern.value.name
+        negate   = coalesce(commit_author_email_pattern.value.negate, false)
+      }
+    }
 
-    # dynamic "commit_message_pattern" {
-    #   for_each = try(toset([each.value.rules.commit_message_pattern]), [])
+    dynamic "commit_message_pattern" {
+      for_each = each.value.rules.commit_message_pattern != null ? [each.value.rules.commit_message_pattern] : []
 
-    #   content {
-    #     operator = commit_message_pattern.value.operator
-    #     pattern  = commit_message_pattern.value.pattern
-    #     name     = commit_message_pattern.value.name
-    #     negate   = coalesce(commit_message_pattern.value.negate, false)
-    #   }
-    # }
+      content {
+        operator = commit_message_pattern.value.operator
+        pattern  = commit_message_pattern.value.pattern
+        name     = commit_message_pattern.value.name
+        negate   = coalesce(commit_message_pattern.value.negate, false)
+      }
+    }
 
-    # dynamic "committer_email_pattern" {
-    #   for_each = try(toset([each.value.rules.committer_email_pattern]), [])
+    dynamic "committer_email_pattern" {
+      for_each = each.value.rules.committer_email_pattern != null ? [each.value.rules.committer_email_pattern] : []
 
-    #   content {
-    #     operator = committer_email_pattern.value.operator
-    #     pattern  = committer_email_pattern.value.pattern
-    #     name     = committer_email_pattern.value.name
-    #     negate   = coalesce(committer_email_pattern.value.negate, false)
-    #   }
-    # }
+      content {
+        operator = committer_email_pattern.value.operator
+        pattern  = committer_email_pattern.value.pattern
+        name     = committer_email_pattern.value.name
+        negate   = coalesce(committer_email_pattern.value.negate, false)
+      }
+    }
 
-    # dynamic "pull_request" {
-    #   for_each = try(toset([each.value.rules.pull_request]), [])
+    dynamic "pull_request" {
+      for_each = each.value.rules.pull_request != null ? [each.value.rules.pull_request] : []
 
-    #   content {
-    #     dismiss_stale_reviews_on_push     = coalesce(pull_request.value.dismiss_stale_reviews_on_push, false)
-    #     require_code_owner_review         = coalesce(pull_request.value.require_code_owner_review, false)
-    #     require_last_push_approval        = coalesce(pull_request.value.require_last_push_approval, false)
-    #     required_approving_review_count   = coalesce(pull_request.value.required_approving_review_count, 0)
-    #     required_review_thread_resolution = coalesce(pull_request.value.required_review_thread_resolution, false)
-    #   }
-    # }
+      content {
+        dismiss_stale_reviews_on_push     = coalesce(pull_request.value.dismiss_stale_reviews_on_push, false)
+        require_code_owner_review         = coalesce(pull_request.value.require_code_owner_review, false)
+        require_last_push_approval        = coalesce(pull_request.value.require_last_push_approval, false)
+        required_approving_review_count   = coalesce(pull_request.value.required_approving_review_count, 0)
+        required_review_thread_resolution = coalesce(pull_request.value.required_review_thread_resolution, false)
+      }
+    }
 
     # dynamic "required_status_checks" {
     #   for_each = toset(compact([each.value.rules.required_status_checks]))
