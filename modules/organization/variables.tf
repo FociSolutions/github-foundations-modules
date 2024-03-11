@@ -199,7 +199,7 @@ variable "branch_rulesets" {
         name     = optional(string)
         negate   = optional(bool)
       }))
-      comitter_email_pattern = optional(object({
+      committer_email_pattern = optional(object({
         operator = string
         pattern  = string
         name     = optional(string)
