@@ -70,7 +70,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
         operator = try(branch_name_pattern.value.operator, "")
         pattern  = try(branch_name_pattern.value.pattern, "")
         name     = try(branch_name_pattern.value.name, "")
-        negate   = coalesce(branch_name_pattern.value.negate, false)
+        negate   = try(branch_name_pattern.value.negate, false)
       }
     }
 
