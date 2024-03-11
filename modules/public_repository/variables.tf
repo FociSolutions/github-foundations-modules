@@ -65,19 +65,19 @@ variable "advance_security" {
 variable "action_secrets" {
   description = "An (Optional) map of GitHub Actions secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
   type        = map(string)
-  default = {}
+  default     = {}
 }
 
 variable "codespace_secrets" {
   description = "An (Optional) map of GitHub Codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
   type        = map(string)
-  default = {}
+  default     = {}
 }
 
 variable "dependabot_secrets" {
   description = "An (Optional) map of Dependabot secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
   type        = map(string)
-  default = {}
+  default     = {}
 }
 
 variable "environments" {
@@ -90,7 +90,7 @@ variable "environments" {
 
 variable "template_repository" {
   description = "A (Optional) list of template repositories to use for the repository"
-  type        = object({
+  type = object({
     owner                = string
     repository           = string
     include_all_branches = bool

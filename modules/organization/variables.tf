@@ -135,8 +135,8 @@ variable "custom_repository_roles" {
 
 variable "actions_secrets" {
   type = map(object({
-    encrypted_value       = string
-    visibility            = string
+    encrypted_value = string
+    visibility      = string
   }))
   description = "A map of organization-level GitHub Actions secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
@@ -144,8 +144,8 @@ variable "actions_secrets" {
 
 variable "codespaces_secrets" {
   type = map(object({
-    encrypted_value       = string
-    visibility            = string
+    encrypted_value = string
+    visibility      = string
   }))
   description = "A map of organization-level GitHub Codespaces secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
@@ -153,10 +153,29 @@ variable "codespaces_secrets" {
 
 variable "dependabot_secrets" {
   type = map(object({
-    encrypted_value       = string
-    visibility            = string
+    encrypted_value = string
+    visibility      = string
   }))
   description = "A map of organization-level Dependabot secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
 }
 
+variable "branch_rulesets" {
+  type = map(object({
+    bypass_actors = optional(object({
+      repository_roles    = list(string)
+      teams               = list(string)
+      integrations        = list(string)
+      organization_admins = list(string)
+    }))
+    disable = optional(boolean)
+  }))
+  default = {}
+}
+
+variable "tag_rulesets" {
+  type = map(object({
+    disable = optional(boolean)
+  }))
+  default = {}
+}

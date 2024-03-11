@@ -144,7 +144,7 @@ variable "environments" {
 
 variable "template_repository" {
   description = "A (Optional) list of template repositories to use for the repository"
-  type        = object({
+  type = object({
     owner                = string
     repository           = string
     include_all_branches = bool
