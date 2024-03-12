@@ -139,7 +139,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
           }
         }
 
-        strict_required_status_checks_policy = required_status_checks.strict_required_status_check_policy
+        strict_required_status_checks_policy = required_status_checks.value.strict_required_status_check_policy
       }
     }
 
