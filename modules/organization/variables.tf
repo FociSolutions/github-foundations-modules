@@ -180,6 +180,16 @@ variable "branch_rulesets" {
         always_bypass = optional(bool)
       })))
     }))
+    conditions = optional(object({
+      ref_name = object({
+        include = list(string)
+        exclude = list(string)
+      })
+      repository_name = optional(object({
+        include = list(string)
+        exclude = list(string)
+      }))
+    }))
     rules = object({
       branch_name_pattern = optional(object({
         operator = string

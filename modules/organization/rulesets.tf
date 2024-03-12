@@ -190,4 +190,24 @@ resource "github_organization_ruleset" "branch_ruleset" {
       bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
   }
+
+  dynamic "conditions" {
+    for_each = each.value.conditions != null ? [each.value.conditions] : []
+
+    content {
+      ref_name {
+        include = conditions.value.ref_name.include
+        exclude = conditions.value.ref_name.exclude
+      }
+
+      dynamic "repository_name" {
+        for_each = condition.value.repository_name != null ? [condition.value.repository_name] : []
+
+        content {
+          include = repository_name.value.include
+          exclude = repository_name.value.exclude
+        }
+      }
+    }
+  }
 }
