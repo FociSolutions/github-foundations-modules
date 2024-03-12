@@ -249,7 +249,7 @@ variable "rulesets" {
         }))
       }))
     })
-    target  = string
+    target      = string
     enforcement = string
   }))
   default = {}

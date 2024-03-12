@@ -33,4 +33,6 @@ module "repository_base" {
 
   template_repository = var.template_repository
   license_template    = var.license_template
+
+  rulesets = var.rulesets
 }
