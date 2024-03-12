@@ -127,7 +127,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     }
 
     dynamic "required_status_checks" {
-      for_each = compact([each.value.rules.required_status_checks])
+      for_each = each.value.rules.required_status_checks != null ? [each.value.rules.required_status_checks] : []
 
       content {
         dynamic "required_check" {
