@@ -131,7 +131,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
 
       content {
         dynamic "required_check" {
-          for_each = required_status_checks.required_check
+          for_each = required_status_checks.value.required_check
 
           content {
             context        = required_check.value.context
