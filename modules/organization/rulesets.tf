@@ -49,7 +49,7 @@ resource "github_organization_ruleset" "ruleset" {
   for_each = var.rulesets
 
   name        = each.key
-  target      = each.target
+  target      = each.value.target
   enforcement = each.value.enforcement
 
   dynamic "bypass_actors" {
