@@ -119,25 +119,25 @@ resource "github_organization_ruleset" "branch_ruleset" {
       }
     }
 
-    # dynamic "required_status_checks" {
-    #   for_each = each.value.rules.required_status_checks ? [] : []
+    dynamic "required_status_checks" {
+      for_each = each.value.rules.required_status_checks != null ? [] : []
 
-    #   content {
-    #     dynamic "required_check" {
-    #       for_each = required_status_checks.required_check
+      content {
+        dynamic "required_check" {
+          for_each = required_status_checks.required_check
 
-    #       content {
-    #         context        = required_check.value.context
-    #         integration_id = required_check.value.integration_id
-    #       }
-    #     }
+          content {
+            context        = required_check.value.context
+            integration_id = required_check.value.integration_id
+          }
+        }
 
-    #     strict_required_status_checks_policy = required_status_checks.strict_required_status_check_policy
-    #   }
-    # }
+        strict_required_status_checks_policy = required_status_checks.strict_required_status_check_policy
+      }
+    }
 
     dynamic "required_workflows" {
-      for_each = each.value.rules.required_workflows ? [each.value.rules.required_workflows] : []
+      for_each = each.value.rules.required_workflows != null ? [each.value.rules.required_workflows] : []
 
       content {
 
