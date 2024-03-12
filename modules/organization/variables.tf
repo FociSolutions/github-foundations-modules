@@ -250,7 +250,7 @@ variable "rulesets" {
       }))
     })
     target  = string
-    disable = optional(bool)
+    enforcement = string
   }))
   default = {}
 }

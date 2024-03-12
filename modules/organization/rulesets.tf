@@ -50,7 +50,7 @@ resource "github_organization_ruleset" "ruleset" {
 
   name        = each.key
   target      = each.target
-  enforcement = coalesce(each.value.disable, false) ? "disabled" : "active"
+  enforcement = each.value.enforcement
 
   dynamic "bypass_actors" {
     for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.repository_roles, [])) : []
