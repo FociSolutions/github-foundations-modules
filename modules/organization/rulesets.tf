@@ -63,6 +63,13 @@ resource "github_organization_ruleset" "branch_ruleset" {
   }
 
   rules {
+    creation                = each.value.rules.creation
+    update                  = each.value.rules.update
+    deletion                = each.value.rules.deletion
+    non_fast_forward        = each.value.rules.non_fast_forward
+    required_linear_history = each.value.rules.required_linear_history
+    required_signatures     = each.value.rules.required_signatures
+
     dynamic "branch_name_pattern" {
       for_each = each.value.rules.branch_name_pattern != null ? [each.value.rules.branch_name_pattern] : []
 
@@ -120,7 +127,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
     }
 
     dynamic "required_status_checks" {
-      for_each = each.value.rules.required_status_checks == null ? [] : []
+      for_each = compact([each.value.rules.required_status_checks])
 
       content {
         dynamic "required_check" {
