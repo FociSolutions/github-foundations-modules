@@ -160,7 +160,7 @@ variable "dependabot_secrets" {
   default     = {}
 }
 
-variable "branch_rulesets" {
+variable "rulesets" {
   type = map(object({
     bypass_actors = optional(object({
       repository_roles = optional(list(object({
@@ -192,6 +192,12 @@ variable "branch_rulesets" {
     }))
     rules = object({
       branch_name_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      tag_name_pattern = optional(object({
         operator = string
         pattern  = string
         name     = optional(string)
@@ -243,13 +249,7 @@ variable "branch_rulesets" {
         }))
       }))
     })
-    disable = optional(bool)
-  }))
-  default = {}
-}
-
-variable "tag_rulesets" {
-  type = map(object({
+    target  = string
     disable = optional(bool)
   }))
   default = {}
