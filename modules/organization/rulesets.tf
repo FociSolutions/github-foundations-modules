@@ -125,8 +125,6 @@ resource "github_organization_ruleset" "branch_ruleset" {
       }]
 
       content {
-        strict_required_status_checks_policy = required_status_checks.strict_required_status_check_policy
-
         dynamic "required_check" {
           for_each = required_status_checks.required_check
 
@@ -135,6 +133,8 @@ resource "github_organization_ruleset" "branch_ruleset" {
             integration_id = required_check.value.integration_id
           }
         }
+
+        strict_required_status_checks_policy = required_status_checks.strict_required_status_check_policy
       }
     }
 
