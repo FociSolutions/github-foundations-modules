@@ -201,7 +201,7 @@ resource "github_organization_ruleset" "branch_ruleset" {
       }
 
       dynamic "repository_name" {
-        for_each = condition.value.repository_name != null ? [condition.value.repository_name] : []
+        for_each = conditions.value.repository_name != null ? [conditions.value.repository_name] : []
 
         content {
           include = repository_name.value.include
