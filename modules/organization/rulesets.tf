@@ -233,7 +233,7 @@ resource "github_organization_ruleset" "ruleset" {
 }
 
 resource "github_organization_ruleset" "base_default_branch_protection" {
-  count       = var.default_branch_protection_rulesets.base_protection ? 1 : 0
+  count       = var.default_branch_protection_rulesets.base_protection != null ? 1 : 0
   name        = "base_default_branch_protection"
   target      = "branch"
   enforcement = var.default_branch_protection_rulesets.base_protection.enforcement
@@ -300,7 +300,7 @@ resource "github_organization_ruleset" "base_default_branch_protection" {
 }
 
 resource "github_organization_ruleset" "minimum_approvals" {
-  count       = var.default_branch_protection_rulesets.minimum_approvals ? 1 : 0
+  count       = var.default_branch_protection_rulesets.minimum_approvals != null ? 1 : 0
   name        = "minimum_approvals"
   target      = "branch"
   enforcement = var.default_branch_protection_rulesets.minimum_approvals.enforcement
@@ -365,7 +365,7 @@ resource "github_organization_ruleset" "minimum_approvals" {
 }
 
 resource "github_organization_ruleset" "dismiss_stale_reviews" {
-  count       = var.default_branch_protection_rulesets.dismiss_stale_reviews ? 1 : 0
+  count       = var.default_branch_protection_rulesets.dismiss_stale_reviews != null ? 1 : 0
   name        = "dismiss_stale_reviews"
   target      = "branch"
   enforcement = var.default_branch_protection_rulesets.dismiss_stale_reviews.enforcement
@@ -430,7 +430,7 @@ resource "github_organization_ruleset" "dismiss_stale_reviews" {
 }
 
 resource "github_organization_ruleset" "require_signatures" {
-  count       = var.default_branch_protection_rulesets.require_signatures ? 1 : 0
+  count       = var.default_branch_protection_rulesets.require_signatures != null ? 1 : 0
   name        = "require_signatures"
   target      = "branch"
   enforcement = var.default_branch_protection_rulesets.require_signatures.enforcement
