@@ -1,21 +1,24 @@
 locals {
-  ruleset_team_bypassers = merge([
-    for ruleset, ruleset_config in var.rulesets : {
-      for bypasser in coalesce(ruleset_config.bypass_actors.teams, []) : "${ruleset}:${bypasser.team}" => bypasser.team
-    } if ruleset_config.bypass_actors != null
-  ]...)
+  all_team_bypassers = toset(concat(
+    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, var.default_branch_protection_rulesets.bypass_actors), []),
+    [
+      for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.teams, ruleset_config.bypass_actors), [])
+    ]...
+  ))
 
-  ruleset_admin_bypassers = merge([
-    for ruleset, ruleset_config in var.rulesets : {
-      for bypasser in coalesce(ruleset_config.bypass_actors.organization_admins, []) : "${ruleset}:${bypasser.user}" => bypasser.user
-    } if ruleset_config.bypass_actors != null
-  ]...)
+  all_admin_bypassers = toset(concat(
+    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, var.default_branch_protection_rulesets.bypass_actors), []),
+    [
+      for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.organization_admins, ruleset_config.bypass_actors), [])
+    ]...
+  ))
 
-  ruleset_custom_repository_roles = merge([
-    for ruleset, ruleset_config in var.rulesets : {
-      for bypasser in coalesce(ruleset_config.bypass_actors.repository_roles, []) : "${ruleset}:${bypasser.role}" => bypasser.role if !contains(keys(local.github_base_role_ids), bypasser.role)
-    } if ruleset_config.bypass_actors != null
-  ]...)
+  all_repository_roles_bypassers = toset(concat(
+    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, var.default_branch_protection_rulesets.bypass_actors), []),
+    [
+      for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.repository_roles, ruleset_config.bypass_actors), [])
+    ]...
+  ))
 
   github_base_role_ids = {
     "maintain" = 2
@@ -26,21 +29,27 @@ locals {
 
 
 data "github_team" "branch_ruleset_bypasser" {
-  for_each = local.ruleset_team_bypassers
+  for_each = {
+    for team in local.all_team_bypassers : team => team
+  }
 
   slug         = each.value
   summary_only = true
 }
 
 data "github_user" "branch_ruleset_bypasser" {
-  for_each = local.ruleset_admin_bypassers
+  for_each = {
+    for user in local.all_admin_bypassers: user => user
+  }
 
   username = each.value
 }
 
 #github_organization_custom_role is actualy repository custom roles. The provider doesn't seem to support custom github organization roles
 data "github_organization_custom_role" "branch_ruleset_bypasser" {
-  for_each = local.ruleset_custom_repository_roles
+  for_each = {
+    for role in local.all_repository_roles_bypassers : role => role if !contains(keys(local.github_base_role_ids), role)
+  }
 
   name = each.value
 }
@@ -51,16 +60,6 @@ resource "github_organization_ruleset" "ruleset" {
   name        = each.key
   target      = each.value.target
   enforcement = each.value.enforcement
-
-  dynamic "bypass_actors" {
-    for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.repository_roles, [])) : []
-
-    content {
-      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${each.key}:${bypass_actors.value.role}"].id)
-      actor_type  = "RepositoryRole"
-      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
-    }
-  }
 
   rules {
     creation                = each.value.rules.creation
@@ -173,10 +172,20 @@ resource "github_organization_ruleset" "ruleset" {
   }
 
   dynamic "bypass_actors" {
+    for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.repository_roles, [])) : []
+
+    content {
+      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
+      actor_type  = "RepositoryRole"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
     for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.teams, [])) : []
 
     content {
-      actor_id    = data.github_team.branch_ruleset_bypasser["${each.key}:${bypass_actors.value.team}"].id
+      actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
       actor_type  = "Team"
       bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
@@ -196,7 +205,7 @@ resource "github_organization_ruleset" "ruleset" {
     for_each = each.value.bypass_actors != null ? toset(coalesce(each.value.bypass_actors.organization_admins, [])) : []
 
     content {
-      actor_id    = data.github_user.branch_ruleset_bypasser["${each.key}:${bypass_actors.value.user}"].id
+      actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
       actor_type  = "OrganizationAdmin"
       bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
@@ -219,6 +228,246 @@ resource "github_organization_ruleset" "ruleset" {
           exclude = repository_name.value.exclude
         }
       }
+    }
+  }
+}
+
+resource "github_organization_ruleset" "base_default_branch_protection" {
+  count       = var.default_branch_protection_rulesets.base_protection ? 1 : 0
+  name        = "base_default_branch_protection"
+  target      = "branch"
+  enforcement = var.default_branch_protection_rulesets.base_protection.enforcement
+
+  conditions {
+    ref_name {
+      include = ["~DEFAULT_BRANCH"]
+      exclude = []
+    }
+  }
+
+  rules {
+    deletion         = true
+    non_fast_forward = true
+    pull_request {
+      require_last_push_approval = true
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
+      actor_type  = "Team"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = bypass_actors.value.installation_id
+      actor_type  = "Integration"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
+      actor_type  = "OrganizationAdmin"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
+      actor_type  = "RepositoryRole"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+}
+
+resource "github_organization_ruleset" "minimum_approvals" {
+  count       = var.default_branch_protection_rulesets.minimum_approvals ? 1 : 0
+  name        = "minimum_approvals"
+  target      = "branch"
+  enforcement = var.default_branch_protection_rulesets.minimum_approvals.enforcement
+
+  conditions {
+    ref_name {
+      include = ["~DEFAULT_BRANCH"]
+      exclude = []
+    }
+  }
+
+  rules {
+    pull_request {
+      required_approving_review_count = var.default_branch_protection_rulesets.minimum_approvals.approvals_required
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
+      actor_type  = "Team"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = bypass_actors.value.installation_id
+      actor_type  = "Integration"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
+      actor_type  = "OrganizationAdmin"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
+      actor_type  = "RepositoryRole"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+}
+
+resource "github_organization_ruleset" "dismiss_stale_reviews" {
+  count       = var.default_branch_protection_rulesets.dismiss_stale_reviews ? 1 : 0
+  name        = "dismiss_stale_reviews"
+  target      = "branch"
+  enforcement = var.default_branch_protection_rulesets.dismiss_stale_reviews.enforcement
+
+  conditions {
+    ref_name {
+      include = ["~DEFAULT_BRANCH"]
+      exclude = []
+    }
+  }
+
+  rules {
+    pull_request {
+      dismiss_stale_reviews_on_push = true
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
+      actor_type  = "Team"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = bypass_actors.value.installation_id
+      actor_type  = "Integration"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
+      actor_type  = "OrganizationAdmin"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
+      actor_type  = "RepositoryRole"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+}
+
+resource "github_organization_ruleset" "require_signatures" {
+  count       = var.default_branch_protection_rulesets.require_signatures ? 1 : 0
+  name        = "require_signatures"
+  target      = "branch"
+  enforcement = var.default_branch_protection_rulesets.require_signatures.enforcement
+
+  conditions {
+    ref_name {
+      include = ["~DEFAULT_BRANCH"]
+      exclude = []
+    }
+  }
+
+  rules {
+    required_signatures = true
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
+      actor_type  = "Team"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = bypass_actors.value.installation_id
+      actor_type  = "Integration"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
+      actor_type  = "OrganizationAdmin"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, var.default_branch_protection_rulesets.bypass_actors), [])
+
+    content {
+      actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
+      actor_type  = "RepositoryRole"
+      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
     }
   }
 }

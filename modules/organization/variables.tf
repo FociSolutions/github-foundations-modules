@@ -160,6 +160,43 @@ variable "dependabot_secrets" {
   default     = {}
 }
 
+variable "default_branch_protection_rulesets" {
+  type = object({
+    base_protection = optional(object({
+      enforcement = string
+    }))
+    minimum_approvals = optional(object({
+      enforcement = string
+      approvals_required = number
+    }))
+    dismiss_stale_reviews = optional(object({
+      enforcement = string
+    }))
+    require_signatures = optional(object({
+      enforcement = string
+    }))
+    bypass_actors = optional(object({
+      repository_roles = optional(list(object({
+        role          = string
+        always_bypass = optional(bool)
+      })))
+      teams = optional(list(object({
+        team          = string
+        always_bypass = optional(bool)
+      })))
+      integrations = optional(list(object({
+        installation_id = number
+        always_bypass   = optional(bool)
+      })))
+      organization_admins = optional(list(object({
+        user          = string
+        always_bypass = optional(bool)
+      })))
+    }))
+  })
+  default = {}
+}
+
 variable "rulesets" {
   type = map(object({
     bypass_actors = optional(object({
