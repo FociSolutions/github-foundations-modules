@@ -83,7 +83,7 @@ module "ruleset" {
   bypass_actors = {
     repository_roles = [for bypasser in try(toset(coalesce(each.value.bypass_actors.repository_roles, [])), []) : {
       role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypasser.role}"].id)
-      always_bypass = role.always_bypass
+      always_bypass = bypasser.always_bypass
     }]
     teams = [for bypasser in try(toset(coalesce(each.value.bypass_actors.teams, [])), []) : {
       team_id       = data.github_team.branch_ruleset_bypasser["${bypasser.team}"].id
