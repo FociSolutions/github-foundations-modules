@@ -45,10 +45,9 @@ data "github_user" "branch_ruleset_bypasser" {
   username = each.value
 }
 
-#github_organization_custom_role is actualy repository custom roles. The provider doesn't seem to support custom github organization roles
 data "github_organization_custom_role" "branch_ruleset_bypasser" {
   for_each = {
-    for bypasser in local.all_repository_roles_bypassers : bypasser.role => bypasser.role if !contains(keys(local.github_base_role_ids), bypasser.role)
+    for bypasser in local.all_repository_roles_bypassers : bypasser.role => bypasser.role
   }
 
   name = each.value
