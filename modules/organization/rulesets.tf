@@ -77,7 +77,7 @@ module "ruleset" {
     commit_author_email_pattern = each.value.rules.commit_author_email_pattern
     commit_message_pattern      = each.value.rules.commit_message_pattern
     committer_email_pattern     = each.value.rules.committer_email_pattern
-    pull_request                = each.value.rules.pull_request != null
+    pull_request                = each.value.rules.pull_request
     required_status_checks      = each.value.rules.required_status_checks
     required_workflows          = each.value.rules.required_workflows
   }
