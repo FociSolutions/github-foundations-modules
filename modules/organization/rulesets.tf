@@ -30,7 +30,7 @@ locals {
 
 data "github_team" "branch_ruleset_bypasser" {
   for_each = {
-    for team in local.all_team_bypassers : team => team
+    for bypasser in local.all_team_bypassers : bypasser.team => bypasser.team
   }
 
   slug         = each.value
@@ -39,7 +39,7 @@ data "github_team" "branch_ruleset_bypasser" {
 
 data "github_user" "branch_ruleset_bypasser" {
   for_each = {
-    for user in local.all_admin_bypassers: user => user
+    for bypasser in local.all_admin_bypassers: bypasser.user => bypasser.user
   }
 
   username = each.value
@@ -48,7 +48,7 @@ data "github_user" "branch_ruleset_bypasser" {
 #github_organization_custom_role is actualy repository custom roles. The provider doesn't seem to support custom github organization roles
 data "github_organization_custom_role" "branch_ruleset_bypasser" {
   for_each = {
-    for role in local.all_repository_roles_bypassers : role => role if !contains(keys(local.github_base_role_ids), role)
+    for bypasser in local.all_repository_roles_bypassers : bypasser.role => bypasser.role if !contains(keys(local.github_base_role_ids), bypasser.role)
   }
 
   name = each.value
