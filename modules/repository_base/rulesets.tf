@@ -1,20 +1,20 @@
 locals {
-  all_team_bypassers = toset(concat(
+  all_team_bypassers = toset(flatten(
     [
       for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.teams, []), [])
-    ]...
+    ]
   ))
 
-  all_admin_bypassers = toset(concat(
+  all_admin_bypassers = toset(flatten(
     [
       for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.organization_admins, []), [])
-    ]...
+    ]
   ))
 
-  all_repository_roles_bypassers = toset(concat(
+  all_repository_roles_bypassers = toset(flatten(
     [
       for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.repository_roles, []), [])
-    ]...
+    ]
   ))
 
   github_base_role_ids = {
