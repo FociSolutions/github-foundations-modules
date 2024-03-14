@@ -243,6 +243,11 @@ resource "github_organization_ruleset" "base_default_branch_protection" {
       include = ["~DEFAULT_BRANCH"]
       exclude = []
     }
+
+    repository_name {
+      include = ["~ALL"]
+      exclude = []
+    }
   }
 
   rules {
@@ -305,6 +310,11 @@ resource "github_organization_ruleset" "minimum_approvals" {
       include = ["~DEFAULT_BRANCH"]
       exclude = []
     }
+
+    repository_name {
+      include = ["~ALL"]
+      exclude = []
+    }
   }
 
   rules {
@@ -365,6 +375,11 @@ resource "github_organization_ruleset" "dismiss_stale_reviews" {
       include = ["~DEFAULT_BRANCH"]
       exclude = []
     }
+
+    repository_name {
+      include = ["~ALL"]
+      exclude = []
+    }
   }
 
   rules {
@@ -423,6 +438,11 @@ resource "github_organization_ruleset" "require_signatures" {
   conditions {
     ref_name {
       include = ["~DEFAULT_BRANCH"]
+      exclude = []
+    }
+
+    repository_name {
+      include = ["~ALL"]
       exclude = []
     }
   }
