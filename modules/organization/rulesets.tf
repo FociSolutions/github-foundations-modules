@@ -1,22 +1,22 @@
 locals {
   all_team_bypassers = toset(concat(
-    try(var.default_branch_protection_rulesets.bypass_actors.teams, []),
+    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, []), []),
     [
-      for _, ruleset_config in var.rulesets : try(ruleset_config.bypass_actors.teams, [])
+      for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.teams, []), [])
     ]...
   ))
 
   all_admin_bypassers = toset(concat(
-    try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []),
+    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []), []),
     [
-      for _, ruleset_config in var.rulesets : try(ruleset_config.bypass_actors.organization_admins, [])
+      for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.organization_admins, []), [])
     ]...
   ))
 
   all_repository_roles_bypassers = toset(concat(
-    try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []),
+    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []), []),
     [
-      for _, ruleset_config in var.rulesets : try(ruleset_config.bypass_actors.repository_roles, [])
+      for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.repository_roles, []), [])
     ]...
   ))
 
@@ -259,7 +259,7 @@ resource "github_organization_ruleset" "base_default_branch_protection" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.teams, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, []),[])
 
     content {
       actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
@@ -269,7 +269,7 @@ resource "github_organization_ruleset" "base_default_branch_protection" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, []),[])
 
     content {
       actor_id    = bypass_actors.value.installation_id
@@ -279,7 +279,7 @@ resource "github_organization_ruleset" "base_default_branch_protection" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []),[])
 
     content {
       actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
@@ -289,7 +289,7 @@ resource "github_organization_ruleset" "base_default_branch_protection" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []),[])
 
     content {
       actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
@@ -324,7 +324,7 @@ resource "github_organization_ruleset" "minimum_approvals" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.teams, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, []),[])
 
     content {
       actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
@@ -334,7 +334,7 @@ resource "github_organization_ruleset" "minimum_approvals" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, []),[])
 
     content {
       actor_id    = bypass_actors.value.installation_id
@@ -344,7 +344,7 @@ resource "github_organization_ruleset" "minimum_approvals" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []),[])
 
     content {
       actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
@@ -354,7 +354,7 @@ resource "github_organization_ruleset" "minimum_approvals" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []),[])
 
     content {
       actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
@@ -389,7 +389,7 @@ resource "github_organization_ruleset" "dismiss_stale_reviews" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.teams, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, []),[])
 
     content {
       actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
@@ -399,7 +399,7 @@ resource "github_organization_ruleset" "dismiss_stale_reviews" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, []),[])
 
     content {
       actor_id    = bypass_actors.value.installation_id
@@ -409,7 +409,7 @@ resource "github_organization_ruleset" "dismiss_stale_reviews" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []),[])
 
     content {
       actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
@@ -419,7 +419,7 @@ resource "github_organization_ruleset" "dismiss_stale_reviews" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []),[])
 
     content {
       actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
@@ -452,7 +452,7 @@ resource "github_organization_ruleset" "require_signatures" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.teams, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, []),[])
 
     content {
       actor_id    = data.github_team.branch_ruleset_bypasser["${bypass_actors.value.team}"].id
@@ -462,7 +462,7 @@ resource "github_organization_ruleset" "require_signatures" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.integrations, []),[])
 
     content {
       actor_id    = bypass_actors.value.installation_id
@@ -472,7 +472,7 @@ resource "github_organization_ruleset" "require_signatures" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []),[])
 
     content {
       actor_id    = data.github_user.branch_ruleset_bypasser["${bypass_actors.value.user}"].id
@@ -482,7 +482,7 @@ resource "github_organization_ruleset" "require_signatures" {
   }
 
   dynamic "bypass_actors" {
-    for_each = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    for_each = coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []),[])
 
     content {
       actor_id    = lookup(local.github_base_role_ids, bypass_actors.value.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypass_actors.value.role}"].id)
