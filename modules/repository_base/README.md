@@ -13,7 +13,9 @@
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_ruleset"></a> [ruleset](#module\_ruleset) | ../ruleset | n/a |
 
 ## Resources
 
@@ -29,7 +31,6 @@ No modules.
 | [github_repository_dependabot_security_updates.automated_security_fixes](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_dependabot_security_updates) | resource |
 | [github_repository_environment.environment](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_environment) | resource |
 | [github_repository_ruleset.protected_branch_base_rules](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_ruleset) | resource |
-| [github_repository_ruleset.ruleset](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_ruleset) | resource |
 | [github_organization_custom_role.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/organization_custom_role) | data source |
 | [github_team.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/team) | data source |
 | [github_user.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/user) | data source |
