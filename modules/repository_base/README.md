@@ -3,13 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7.1 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 5.42.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 6.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 5.42.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | 6.1.0 |
 
 ## Modules
 
@@ -19,16 +19,20 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_actions_environment_secret.environment_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/actions_environment_secret) | resource |
-| [github_actions_secret.actions_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/actions_secret) | resource |
-| [github_branch_default.default_branch](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/branch_default) | resource |
-| [github_codespaces_secret.codespaces_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/codespaces_secret) | resource |
-| [github_dependabot_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/dependabot_secret) | resource |
-| [github_repository.repository](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository) | resource |
-| [github_repository_collaborators.collaborators](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_collaborators) | resource |
-| [github_repository_dependabot_security_updates.automated_security_fixes](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_dependabot_security_updates) | resource |
-| [github_repository_environment.environment](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_environment) | resource |
-| [github_repository_ruleset.protected_branch_base_rules](https://registry.terraform.io/providers/integrations/github/5.42.0/docs/resources/repository_ruleset) | resource |
+| [github_actions_environment_secret.environment_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/actions_environment_secret) | resource |
+| [github_actions_secret.actions_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/actions_secret) | resource |
+| [github_branch_default.default_branch](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/branch_default) | resource |
+| [github_codespaces_secret.codespaces_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/codespaces_secret) | resource |
+| [github_dependabot_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/dependabot_secret) | resource |
+| [github_repository.repository](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository) | resource |
+| [github_repository_collaborators.collaborators](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_collaborators) | resource |
+| [github_repository_dependabot_security_updates.automated_security_fixes](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_dependabot_security_updates) | resource |
+| [github_repository_environment.environment](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_environment) | resource |
+| [github_repository_ruleset.protected_branch_base_rules](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_ruleset) | resource |
+| [github_repository_ruleset.ruleset](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_ruleset) | resource |
+| [github_organization_custom_role.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/organization_custom_role) | data source |
+| [github_team.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/team) | data source |
+| [github_user.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/user) | data source |
 
 ## Inputs
 
@@ -55,6 +59,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | The name of the repository to create/import. | `string` | n/a | yes |
 | <a name="input_protected_branches"></a> [protected\_branches](#input\_protected\_branches) | A list of ref names or patterns that should be protected. Setting to `[]` means no protection. Defaults `["~DEFAULT_BRANCH"]` | `list(string)` | <pre>[<br>  "~DEFAULT_BRANCH"<br>]</pre> | no |
 | <a name="input_repository_team_permissions"></a> [repository\_team\_permissions](#input\_repository\_team\_permissions) | A map where the keys are github team slugs and the value is the permissions the team should have in the repository | `map(string)` | n/a | yes |
+| <a name="input_rulesets"></a> [rulesets](#input\_rulesets) | n/a | <pre>map(object({<br>    bypass_actors = optional(object({<br>      repository_roles = optional(list(object({<br>        role          = string<br>        always_bypass = optional(bool)<br>      })))<br>      teams = optional(list(object({<br>        team          = string<br>        always_bypass = optional(bool)<br>      })))<br>      integrations = optional(list(object({<br>        installation_id = number<br>        always_bypass   = optional(bool)<br>      })))<br>      organization_admins = optional(list(object({<br>        user          = string<br>        always_bypass = optional(bool)<br>      })))<br>    }))<br>    conditions = optional(object({<br>      ref_name = object({<br>        include = list(string)<br>        exclude = list(string)<br>      })<br>    }))<br>    rules = object({<br>      branch_name_pattern = optional(object({<br>        operator = string<br>        pattern  = string<br>        name     = optional(string)<br>        negate   = optional(bool)<br>      }))<br>      tag_name_pattern = optional(object({<br>        operator = string<br>        pattern  = string<br>        name     = optional(string)<br>        negate   = optional(bool)<br>      }))<br>      commit_author_email_pattern = optional(object({<br>        operator = string<br>        pattern  = string<br>        name     = optional(string)<br>        negate   = optional(bool)<br>      }))<br>      commit_message_pattern = optional(object({<br>        operator = string<br>        pattern  = string<br>        name     = optional(string)<br>        negate   = optional(bool)<br>      }))<br>      committer_email_pattern = optional(object({<br>        operator = string<br>        pattern  = string<br>        name     = optional(string)<br>        negate   = optional(bool)<br>      }))<br>      creation                      = optional(bool)<br>      deletion                      = optional(bool)<br>      update                        = optional(bool)<br>      non_fast_forward              = optional(bool)<br>      required_linear_history       = optional(bool)<br>      required_signatures           = optional(bool)<br>      update_allows_fetch_and_merge = optional(bool)<br>      pull_request = optional(object({<br>        dismiss_stale_reviews_on_push     = optional(bool)<br>        require_code_owner_review         = optional(bool)<br>        require_last_push_approval        = optional(bool)<br>        required_approving_review_count   = optional(number)<br>        required_review_thread_resolution = optional(bool)<br>      }))<br>      required_status_checks = optional(object({<br>        required_check = list(object({<br>          context        = string<br>          integration_id = optional(number)<br>        }))<br>        strict_required_status_check_policy = optional(bool)<br>      }))<br>      required_deployment_environments = optional(list(string))<br>    })<br>    target      = string<br>    enforcement = string<br>  }))</pre> | `{}` | no |
 | <a name="input_secret_scanning"></a> [secret\_scanning](#input\_secret\_scanning) | Enables secret scanning for the repository. If repository is private `advance_security` must also be enabled. | `bool` | `true` | no |
 | <a name="input_secret_scanning_on_push"></a> [secret\_scanning\_on\_push](#input\_secret\_scanning\_on\_push) | Enables secret scanning push protection for the repository. If repository is private `advance_security` must also be enabled. | `bool` | `true` | no |
 | <a name="input_template_repository"></a> [template\_repository](#input\_template\_repository) | A (Optional) list of template repositories to use for the repository | <pre>object({<br>    owner                = string<br>    repository           = string<br>    include_all_branches = bool<br>  })</pre> | `null` | no |
