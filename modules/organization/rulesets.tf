@@ -95,7 +95,7 @@ module "ruleset" {
       user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
       always_bypass = bypasser.always_bypass
     }]
-    integrations = try(each.value.bypass_actors.repository_roles, [])
+    integrations = try(each.value.bypass_actors.integrations, [])
   }
 
   ref_name_inclusions        = each.value.conditions.ref_name.include
@@ -136,7 +136,7 @@ module "base_default_branch_protection" {
       user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
       always_bypass = bypasser.always_bypass
     }]
-    integrations = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }
 
@@ -173,7 +173,7 @@ module "minimum_approvals" {
       user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
       always_bypass = bypasser.always_bypass
     }]
-    integrations = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }
 
@@ -210,7 +210,7 @@ module "dismiss_stale_reviews" {
       user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
       always_bypass = bypasser.always_bypass
     }]
-    integrations = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }
 
@@ -244,6 +244,6 @@ module "require_signatures" {
       user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
       always_bypass = bypasser.always_bypass
     }]
-    integrations = try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])
+    integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }
