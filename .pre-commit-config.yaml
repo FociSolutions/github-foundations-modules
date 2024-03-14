@@ -12,6 +12,7 @@ repos:
     -   id: end-of-file-fixer
     -   id: check-added-large-files
     -   id: detect-private-key
+    exclude: .*/\.terraform/.*
 -   repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.88.1
     hooks:
@@ -21,8 +22,6 @@ repos:
             - --args=-diff
     -   id: terraform_tflint
     -   id: terraform_validate
-        args:
-            - --hook-config=--retry-once-with-cleanup=true
     -   id: terraform_trivy # static analysis of security settings in your Terraform code
         args:
             - --args=--skip-dirs="**/.terraform"
