@@ -117,7 +117,7 @@ resource "github_repository_ruleset" "ruleset" {
   }
 
   dynamic "bypass_actors" {
-    for_each = var.bypass_actors.repository_roles != null ? [var.bypass_actors.repository_roles] : []
+    for_each = var.bypass_actors.repository_roles != null ? toset(coalesce(var.bypass_actors.repository_roles, [])) : []
 
     content {
       actor_id    = bypass_actors.value.role_id
