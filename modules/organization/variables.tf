@@ -222,10 +222,10 @@ variable "rulesets" {
         include = list(string)
         exclude = list(string)
       })
-      repository_name = optional(object({
+      repository_name = object({
         include = list(string)
         exclude = list(string)
-      }))
+      })
     }))
     rules = object({
       branch_name_pattern = optional(object({
