@@ -253,7 +253,6 @@ resource "github_organization_ruleset" "base_default_branch_protection" {
     deletion         = true
     non_fast_forward = true
     pull_request {
-      require_last_push_approval = true
     }
   }
 
@@ -318,6 +317,7 @@ resource "github_organization_ruleset" "minimum_approvals" {
 
   rules {
     pull_request {
+      require_last_push_approval = true
       required_approving_review_count = var.default_branch_protection_rulesets.minimum_approvals.approvals_required
     }
   }
