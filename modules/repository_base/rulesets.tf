@@ -63,12 +63,13 @@ resource "github_repository_ruleset" "ruleset" {
   }
 
   rules {
-    creation                = each.value.rules.creation
-    update                  = each.value.rules.update
-    deletion                = each.value.rules.deletion
-    non_fast_forward        = each.value.rules.non_fast_forward
-    required_linear_history = each.value.rules.required_linear_history
-    required_signatures     = each.value.rules.required_signatures
+    creation                      = each.value.rules.creation
+    update                        = each.value.rules.update
+    deletion                      = each.value.rules.deletion
+    non_fast_forward              = each.value.rules.non_fast_forward
+    required_linear_history       = each.value.rules.required_linear_history
+    required_signatures           = each.value.rules.required_signatures
+    update_allows_fetch_and_merge = each.value.rules.update_allows_fetch_and_merge
 
     dynamic "branch_name_pattern" {
       for_each = each.value.rules.branch_name_pattern != null ? [each.value.rules.branch_name_pattern] : []
@@ -154,20 +155,11 @@ resource "github_repository_ruleset" "ruleset" {
       }
     }
 
-    dynamic "required_workflows" {
-      for_each = each.value.rules.required_workflows != null ? [each.value.rules.required_workflows] : []
+    dynamic "required_deployments" {
+      for_each = each.value.rules.required_deployment_environments != null ? [each.value.rules.required_deployment_environments] : []
 
       content {
-
-        dynamic "required_workflow" {
-          for_each = required_workflows.value.required_workflows
-
-          content {
-            repository_id = required_workflow.value.repository_id
-            path          = required_workflow.value.path
-            ref           = coalesce(required_workflow.value.ref, "main")
-          }
-        }
+        required_deployment_environments = required_deployments.value
       }
     }
   }

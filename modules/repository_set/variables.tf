@@ -123,12 +123,13 @@ variable "rulesets" {
         name     = optional(string)
         negate   = optional(bool)
       }))
-      creation                = optional(bool)
-      deletion                = optional(bool)
-      update                  = optional(bool)
-      non_fast_forward        = optional(bool)
-      required_linear_history = optional(bool)
-      required_signatures     = optional(bool)
+      creation                      = optional(bool)
+      deletion                      = optional(bool)
+      update                        = optional(bool)
+      non_fast_forward              = optional(bool)
+      required_linear_history       = optional(bool)
+      required_signatures           = optional(bool)
+      update_allows_fetch_and_merge = optional(bool)
       pull_request = optional(object({
         dismiss_stale_reviews_on_push     = optional(bool)
         require_code_owner_review         = optional(bool)
@@ -143,13 +144,7 @@ variable "rulesets" {
         }))
         strict_required_status_check_policy = optional(bool)
       }))
-      required_workflows = optional(object({
-        required_workflows = list(object({
-          repository_id = number
-          path          = string
-          ref           = optional(string)
-        }))
-      }))
+      required_deployment_environments = optional(list(string))
     })
     target       = string
     enforcement  = string
