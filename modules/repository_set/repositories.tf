@@ -1,3 +1,16 @@
+locals {
+  rulesets_by_public_repository = {
+    for repo_name, repo_config in var.public_repositories : repo_name => {
+      for ruleset_name, ruleset_config in var.rulesets : ruleset_name => ruleset_config if contains(ruleset_config.repositories, repo_name)
+    }
+  }
+  rulesets_by_private_repository = {
+    for repo_name, repo_config in var.private_repositories : repo_name => {
+      for ruleset_name, ruleset_config in var.rulesets : ruleset_name => ruleset_config if contains(ruleset_config.repositories, repo_name)
+    }
+  }
+}
+
 module "public_repositories" {
   source = "../public_repository"
 
@@ -20,6 +33,7 @@ module "public_repositories" {
   environments                = each.value.environments
   template_repository         = each.value.template_repository
   license_template            = each.value.license_template
+  rulesets                    = lookup(local.rulesets_by_public_repository, each.key, {})
 }
 
 module "private_repositories" {
@@ -44,4 +58,6 @@ module "private_repositories" {
   environments                = each.value.environments
   template_repository         = each.value.template_repository
   license_template            = each.value.license_template
+  rulesets                    = lookup(local.rulesets_by_private_repository, each.key, {})
+
 }

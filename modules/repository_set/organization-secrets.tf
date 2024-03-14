@@ -1,5 +1,5 @@
 locals {
-  coalesced_public_repositories = coalesce(var.public_repositories, {})
+  coalesced_public_repositories  = coalesce(var.public_repositories, {})
   coalesced_private_repositories = coalesce(var.private_repositories, {})
 
   organization_action_secrets = distinct(flatten(concat(
@@ -42,20 +42,20 @@ locals {
 resource "github_actions_organization_secret_repositories" "org__action_secret_repo_access" {
   for_each = local.organization_action_secrets_repository_id_list
 
-  secret_name = each.key
+  secret_name             = each.key
   selected_repository_ids = each.value
 }
 
 resource "github_codespaces_organization_secret_repositories" "org__codespace_secret_repo_access" {
   for_each = local.codespace_secrets_repository_id_list
 
-  secret_name = each.key
+  secret_name             = each.key
   selected_repository_ids = each.value
 }
 
 resource "github_dependabot_organization_secret_repositories" "org__dependabot_secret_repo_access" {
   for_each = local.dependabot_secrets_id_list
 
-  secret_name = each.key
+  secret_name             = each.key
   selected_repository_ids = each.value
 }

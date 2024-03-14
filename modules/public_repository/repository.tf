@@ -30,7 +30,9 @@ module "repository_base" {
   action_secrets     = var.action_secrets
 
   environments = var.environments
-  
+
   template_repository = var.template_repository
   license_template    = var.license_template
+
+  rulesets = var.rulesets
 }

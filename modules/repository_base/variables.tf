@@ -144,7 +144,7 @@ variable "environments" {
 
 variable "template_repository" {
   description = "A (Optional) list of template repositories to use for the repository"
-  type        = object({
+  type = object({
     owner                = string
     repository           = string
     include_all_branches = bool
@@ -156,4 +156,90 @@ variable "license_template" {
   description = "The (Optional) license template to use for the repository"
   type        = string
   default     = null
+}
+
+variable "rulesets" {
+  type = map(object({
+    bypass_actors = optional(object({
+      repository_roles = optional(list(object({
+        role          = string
+        always_bypass = optional(bool)
+      })))
+      teams = optional(list(object({
+        team          = string
+        always_bypass = optional(bool)
+      })))
+      integrations = optional(list(object({
+        installation_id = number
+        always_bypass   = optional(bool)
+      })))
+      organization_admins = optional(list(object({
+        user          = string
+        always_bypass = optional(bool)
+      })))
+    }))
+    conditions = optional(object({
+      ref_name = object({
+        include = list(string)
+        exclude = list(string)
+      })
+    }))
+    rules = object({
+      branch_name_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      tag_name_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      commit_author_email_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      commit_message_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      committer_email_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      creation                      = optional(bool)
+      deletion                      = optional(bool)
+      update                        = optional(bool)
+      non_fast_forward              = optional(bool)
+      required_linear_history       = optional(bool)
+      required_signatures           = optional(bool)
+      update_allows_fetch_and_merge = optional(bool)
+      pull_request = optional(object({
+        dismiss_stale_reviews_on_push     = optional(bool)
+        require_code_owner_review         = optional(bool)
+        require_last_push_approval        = optional(bool)
+        required_approving_review_count   = optional(number)
+        required_review_thread_resolution = optional(bool)
+      }))
+      required_status_checks = optional(object({
+        required_check = list(object({
+          context        = string
+          integration_id = optional(number)
+        }))
+        strict_required_status_check_policy = optional(bool)
+      }))
+      required_deployment_environments = optional(list(string))
+    })
+    target      = string
+    enforcement = string
+  }))
+  default = {}
 }

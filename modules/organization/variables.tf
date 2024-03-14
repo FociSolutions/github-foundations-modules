@@ -135,8 +135,8 @@ variable "custom_repository_roles" {
 
 variable "actions_secrets" {
   type = map(object({
-    encrypted_value       = string
-    visibility            = string
+    encrypted_value = string
+    visibility      = string
   }))
   description = "A map of organization-level GitHub Actions secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
@@ -144,8 +144,8 @@ variable "actions_secrets" {
 
 variable "codespaces_secrets" {
   type = map(object({
-    encrypted_value       = string
-    visibility            = string
+    encrypted_value = string
+    visibility      = string
   }))
   description = "A map of organization-level GitHub Codespaces secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
@@ -153,10 +153,141 @@ variable "codespaces_secrets" {
 
 variable "dependabot_secrets" {
   type = map(object({
-    encrypted_value       = string
-    visibility            = string
+    encrypted_value = string
+    visibility      = string
   }))
   description = "A map of organization-level Dependabot secrets to create. The key is the name of the secret and the value is an object describing how to create the secret."
   default     = {}
 }
 
+variable "default_branch_protection_rulesets" {
+  type = object({
+    base_protection = optional(object({
+      enforcement = string
+    }))
+    minimum_approvals = optional(object({
+      enforcement = string
+      approvals_required = number
+    }))
+    dismiss_stale_reviews = optional(object({
+      enforcement = string
+    }))
+    require_signatures = optional(object({
+      enforcement = string
+    }))
+    bypass_actors = optional(object({
+      repository_roles = optional(list(object({
+        role          = string
+        always_bypass = optional(bool)
+      })))
+      teams = optional(list(object({
+        team          = string
+        always_bypass = optional(bool)
+      })))
+      integrations = optional(list(object({
+        installation_id = number
+        always_bypass   = optional(bool)
+      })))
+      organization_admins = optional(list(object({
+        user          = string
+        always_bypass = optional(bool)
+      })))
+    }))
+  })
+  default = {}
+}
+
+variable "rulesets" {
+  type = map(object({
+    bypass_actors = optional(object({
+      repository_roles = optional(list(object({
+        role          = string
+        always_bypass = optional(bool)
+      })))
+      teams = optional(list(object({
+        team          = string
+        always_bypass = optional(bool)
+      })))
+      integrations = optional(list(object({
+        installation_id = number
+        always_bypass   = optional(bool)
+      })))
+      organization_admins = optional(list(object({
+        user          = string
+        always_bypass = optional(bool)
+      })))
+    }))
+    conditions = optional(object({
+      ref_name = object({
+        include = list(string)
+        exclude = list(string)
+      })
+      repository_name = object({
+        include = list(string)
+        exclude = list(string)
+      })
+    }))
+    rules = object({
+      branch_name_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      tag_name_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      commit_author_email_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      commit_message_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      committer_email_pattern = optional(object({
+        operator = string
+        pattern  = string
+        name     = optional(string)
+        negate   = optional(bool)
+      }))
+      creation                = optional(bool)
+      deletion                = optional(bool)
+      update                  = optional(bool)
+      non_fast_forward        = optional(bool)
+      required_linear_history = optional(bool)
+      required_signatures     = optional(bool)
+      pull_request = optional(object({
+        dismiss_stale_reviews_on_push     = optional(bool)
+        require_code_owner_review         = optional(bool)
+        require_last_push_approval        = optional(bool)
+        required_approving_review_count   = optional(number)
+        required_review_thread_resolution = optional(bool)
+      }))
+      required_status_checks = optional(object({
+        required_check = list(object({
+          context        = string
+          integration_id = optional(number)
+        }))
+        strict_required_status_check_policy = optional(bool)
+      }))
+      required_workflows = optional(object({
+        required_workflows = list(object({
+          repository_id = number
+          path          = string
+          ref           = optional(string)
+        }))
+      }))
+    })
+    target      = string
+    enforcement = string
+  }))
+  default = {}
+}
