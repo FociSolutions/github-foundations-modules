@@ -58,6 +58,6 @@ module "private_repositories" {
   environments                = each.value.environments
   template_repository         = each.value.template_repository
   license_template            = each.value.license_template
-  rulesets                    = lookup(local.rulesets_by_public_repository, each.key, {})
+  rulesets                    = lookup(local.rulesets_by_private_repository, each.key, {})
 
 }
