@@ -1,20 +1,17 @@
 locals {
   all_team_bypassers = toset(concat(
-    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.teams, []), []),
     [
       for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.teams, []), [])
     ]...
   ))
 
   all_admin_bypassers = toset(concat(
-    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []), []),
     [
       for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.organization_admins, []), [])
     ]...
   ))
 
   all_repository_roles_bypassers = toset(concat(
-    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []), []),
     [
       for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.repository_roles, []), [])
     ]...
