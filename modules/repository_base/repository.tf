@@ -25,6 +25,7 @@ resource "github_repository" "repository" {
   homepage_url           = var.homepage
   delete_branch_on_merge = var.delete_head_on_merge
   allow_auto_merge       = var.allow_auto_merge
+  web_commit_signoff_required = var.requires_web_commit_signing
   license_template       = var.license_template
 
 

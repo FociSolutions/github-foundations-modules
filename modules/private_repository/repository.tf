@@ -18,6 +18,7 @@ module "repository_base" {
   protected_branches   = var.protected_branches
   delete_head_on_merge = var.delete_head_on_merge
   allow_auto_merge     = var.allow_auto_merge
+  requires_web_commit_signing = var.requires_web_commit_signing
 
   secret_scanning             = true
   secret_scanning_on_push     = true
