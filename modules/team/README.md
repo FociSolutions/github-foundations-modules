@@ -3,13 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 6.1.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.1.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | ~> 6.0 |
 
 ## Modules
 
@@ -19,9 +19,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_team.team](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/team) | resource |
-| [github_team_membership.maintainers](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/team_membership) | resource |
-| [github_team_membership.members](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/team_membership) | resource |
+| [github_team.team](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) | resource |
+| [github_team_membership.maintainers](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
+| [github_team_membership.members](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
 
 ## Inputs
 

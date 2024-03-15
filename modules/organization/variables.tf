@@ -166,7 +166,7 @@ variable "default_branch_protection_rulesets" {
       enforcement = string
     }))
     minimum_approvals = optional(object({
-      enforcement = string
+      enforcement        = string
       approvals_required = number
     }))
     dismiss_stale_reviews = optional(object({

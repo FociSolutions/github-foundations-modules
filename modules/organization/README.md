@@ -3,13 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 6.1.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.1.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | ~> 6.0 |
 
 ## Modules
 
@@ -25,19 +25,19 @@
 
 | Name | Type |
 |------|------|
-| [github_actions_organization_secret.action_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/actions_organization_secret) | resource |
-| [github_codespaces_organization_secret.codespace_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/codespaces_organization_secret) | resource |
-| [github_dependabot_organization_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/dependabot_organization_secret) | resource |
-| [github_membership.membership_for_user](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/membership) | resource |
-| [github_organization_block.blocked_user](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/organization_block) | resource |
-| [github_organization_custom_role.community_manager_role](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/organization_custom_role) | resource |
-| [github_organization_custom_role.contractor_role](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/organization_custom_role) | resource |
-| [github_organization_custom_role.custom_repository_role](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/organization_custom_role) | resource |
-| [github_organization_custom_role.security_engineer_role](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/organization_custom_role) | resource |
-| [github_organization_settings.organization_settings](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/organization_settings) | resource |
-| [github_organization_custom_role.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/organization_custom_role) | data source |
-| [github_team.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/team) | data source |
-| [github_user.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/user) | data source |
+| [github_actions_organization_secret.action_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret) | resource |
+| [github_codespaces_organization_secret.codespace_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/codespaces_organization_secret) | resource |
+| [github_dependabot_organization_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/dependabot_organization_secret) | resource |
+| [github_membership.membership_for_user](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership) | resource |
+| [github_organization_block.blocked_user](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_block) | resource |
+| [github_organization_custom_role.community_manager_role](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_custom_role) | resource |
+| [github_organization_custom_role.contractor_role](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_custom_role) | resource |
+| [github_organization_custom_role.custom_repository_role](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_custom_role) | resource |
+| [github_organization_custom_role.security_engineer_role](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_custom_role) | resource |
+| [github_organization_settings.organization_settings](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_settings) | resource |
+| [github_organization_custom_role.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/organization_custom_role) | data source |
+| [github_team.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/team) | data source |
+| [github_user.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/user) | data source |
 
 ## Inputs
 
@@ -46,7 +46,7 @@
 | <a name="input_actions_secrets"></a> [actions\_secrets](#input\_actions\_secrets) | A map of organization-level GitHub Actions secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. | <pre>map(object({<br>    encrypted_value = string<br>    visibility      = string<br>  }))</pre> | `{}` | no |
 | <a name="input_codespaces_secrets"></a> [codespaces\_secrets](#input\_codespaces\_secrets) | A map of organization-level GitHub Codespaces secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. | <pre>map(object({<br>    encrypted_value = string<br>    visibility      = string<br>  }))</pre> | `{}` | no |
 | <a name="input_custom_repository_roles"></a> [custom\_repository\_roles](#input\_custom\_repository\_roles) | A map of custom repository roles to create. The key is the name of the role and the value is the role configurations. | <pre>map(object({<br>    description = string<br>    base_role   = string<br>    permissions = list(string)<br>  }))</pre> | n/a | yes |
-| <a name="input_default_branch_protection_rulesets"></a> [default\_branch\_protection\_rulesets](#input\_default\_branch\_protection\_rulesets) | n/a | <pre>object({<br>    base_protection = optional(object({<br>      enforcement = string<br>    }))<br>    minimum_approvals = optional(object({<br>      enforcement = string<br>      approvals_required = number<br>    }))<br>    dismiss_stale_reviews = optional(object({<br>      enforcement = string<br>    }))<br>    require_signatures = optional(object({<br>      enforcement = string<br>    }))<br>    bypass_actors = optional(object({<br>      repository_roles = optional(list(object({<br>        role          = string<br>        always_bypass = optional(bool)<br>      })))<br>      teams = optional(list(object({<br>        team          = string<br>        always_bypass = optional(bool)<br>      })))<br>      integrations = optional(list(object({<br>        installation_id = number<br>        always_bypass   = optional(bool)<br>      })))<br>      organization_admins = optional(list(object({<br>        user          = string<br>        always_bypass = optional(bool)<br>      })))<br>    }))<br>  })</pre> | `{}` | no |
+| <a name="input_default_branch_protection_rulesets"></a> [default\_branch\_protection\_rulesets](#input\_default\_branch\_protection\_rulesets) | n/a | <pre>object({<br>    base_protection = optional(object({<br>      enforcement = string<br>    }))<br>    minimum_approvals = optional(object({<br>      enforcement        = string<br>      approvals_required = number<br>    }))<br>    dismiss_stale_reviews = optional(object({<br>      enforcement = string<br>    }))<br>    require_signatures = optional(object({<br>      enforcement = string<br>    }))<br>    bypass_actors = optional(object({<br>      repository_roles = optional(list(object({<br>        role          = string<br>        always_bypass = optional(bool)<br>      })))<br>      teams = optional(list(object({<br>        team          = string<br>        always_bypass = optional(bool)<br>      })))<br>      integrations = optional(list(object({<br>        installation_id = number<br>        always_bypass   = optional(bool)<br>      })))<br>      organization_admins = optional(list(object({<br>        user          = string<br>        always_bypass = optional(bool)<br>      })))<br>    }))<br>  })</pre> | `{}` | no |
 | <a name="input_dependabot_secrets"></a> [dependabot\_secrets](#input\_dependabot\_secrets) | A map of organization-level Dependabot secrets to create. The key is the name of the secret and the value is an object describing how to create the secret. | <pre>map(object({<br>    encrypted_value = string<br>    visibility      = string<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_community_manager_role"></a> [enable\_community\_manager\_role](#input\_enable\_community\_manager\_role) | If `true` will create a custom repository role for community managers. Defaults to `false`. If `true` the maximum number of `custom_repository_roles` that can be defined will be reduced by one. | `bool` | `false` | no |
 | <a name="input_enable_contractor_role"></a> [enable\_contractor\_role](#input\_enable\_contractor\_role) | If `true` will create a custom repository role for contractors. Defaults to `false`. If `true` the maximum number of `custom_repository_roles` that can be defined will be reduced by one. | `bool` | `false` | no |

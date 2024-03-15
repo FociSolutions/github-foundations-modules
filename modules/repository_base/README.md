@@ -3,13 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 6.1.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.1.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | ~> 6.0 |
 
 ## Modules
 
@@ -21,19 +21,19 @@
 
 | Name | Type |
 |------|------|
-| [github_actions_environment_secret.environment_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/actions_environment_secret) | resource |
-| [github_actions_secret.actions_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/actions_secret) | resource |
-| [github_branch_default.default_branch](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/branch_default) | resource |
-| [github_codespaces_secret.codespaces_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/codespaces_secret) | resource |
-| [github_dependabot_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/dependabot_secret) | resource |
-| [github_repository.repository](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository) | resource |
-| [github_repository_collaborators.collaborators](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_collaborators) | resource |
-| [github_repository_dependabot_security_updates.automated_security_fixes](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_dependabot_security_updates) | resource |
-| [github_repository_environment.environment](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_environment) | resource |
-| [github_repository_ruleset.protected_branch_base_rules](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/repository_ruleset) | resource |
-| [github_organization_custom_role.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/organization_custom_role) | data source |
-| [github_team.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/team) | data source |
-| [github_user.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/data-sources/user) | data source |
+| [github_actions_environment_secret.environment_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_environment_secret) | resource |
+| [github_actions_secret.actions_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret) | resource |
+| [github_branch_default.default_branch](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_default) | resource |
+| [github_codespaces_secret.codespaces_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/codespaces_secret) | resource |
+| [github_dependabot_secret.dependabot_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/dependabot_secret) | resource |
+| [github_repository.repository](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
+| [github_repository_collaborators.collaborators](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborators) | resource |
+| [github_repository_dependabot_security_updates.automated_security_fixes](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_dependabot_security_updates) | resource |
+| [github_repository_environment.environment](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_environment) | resource |
+| [github_repository_ruleset.protected_branch_base_rules](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_ruleset) | resource |
+| [github_organization_custom_role.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/organization_custom_role) | data source |
+| [github_team.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/team) | data source |
+| [github_user.branch_ruleset_bypasser](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/user) | data source |
 
 ## Inputs
 

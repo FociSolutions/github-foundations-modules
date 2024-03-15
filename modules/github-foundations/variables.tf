@@ -1,23 +1,3 @@
-variable "enterprise_id" {
-  type        = string
-  description = "The id of the enterprise account to create the organization under."
-}
-
-variable "github_foundations_organization_name" {
-  type        = string
-  description = "The name of the organization to create."
-}
-
-variable "billing_email" {
-  type        = string
-  description = "The email to use for the organizations billing."
-}
-
-variable "admin_logins" {
-  type        = list(string)
-  description = "List of organization owner usernames."
-}
-
 variable "workload_identity_provider_name" {
   type        = string
   description = "The name of the workload identity provider to use for the oidc of the github foundation repositories."
@@ -58,4 +38,22 @@ variable "readme_path" {
   type        = string
   description = "Local Path to the README file in your current codebase. Pushed to the github foundation repository."
   default     = ""
+}
+
+variable "bootstrap_repository_name" {
+  type        = string
+  description = "The name of the bootstrap repository."
+  default     = "bootstrap"
+}
+
+variable "organizations_repository_name" {
+  type        = string
+  description = "The name of the organizations repository."
+  default     = "organizations"
+}
+
+variable "foundation_devs_team_name" {
+  type        = string
+  description = "The name of the foundation developers team."
+  default     = "foundation-devs"
 }
