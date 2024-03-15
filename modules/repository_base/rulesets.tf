@@ -96,6 +96,6 @@ module "ruleset" {
     integrations = try(each.value.bypass_actors.repository_roles, [])
   }
 
-  ref_name_inclusions        = each.value.conditions.ref_name.include
-  ref_name_exclusions        = each.value.conditions.ref_name.exclude
+  ref_name_inclusions = each.value.conditions.ref_name.include
+  ref_name_exclusions = each.value.conditions.ref_name.exclude
 }

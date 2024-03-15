@@ -41,19 +41,19 @@ variable "readme_path" {
 }
 
 variable "bootstrap_repository_name" {
-  type = string
+  type        = string
   description = "The name of the bootstrap repository."
-  default = "bootstrap"
+  default     = "bootstrap"
 }
 
 variable "organizations_repository_name" {
-  type = string
+  type        = string
   description = "The name of the organizations repository."
-  default = "organizations"
+  default     = "organizations"
 }
 
 variable "foundation_devs_team_name" {
-  type = string
+  type        = string
   description = "The name of the foundation developers team."
-  default = "foundation-devs"
+  default     = "foundation-devs"
 }

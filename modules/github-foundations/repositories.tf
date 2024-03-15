@@ -12,6 +12,12 @@ resource "github_repository" "bootstrap_repo" {
   auto_init              = true
   delete_branch_on_merge = true
   vulnerability_alerts   = true
+
+  lifecycle {
+    ignore_changes = [
+      auto_init
+    ]
+  }
 }
 
 resource "github_repository_collaborators" "bootstrap_repo_collaborators" {
@@ -20,26 +26,6 @@ resource "github_repository_collaborators" "bootstrap_repo_collaborators" {
   team {
     permission = "push"
     team_id    = github_team.foundation_devs.id
-  }
-}
-
-resource "github_branch_protection" "protect_bootstrap_main" {
-  repository_id = github_repository.bootstrap_repo.id
-
-  pattern          = "main"
-  enforce_admins   = true
-  allows_deletions = false
-
-  # TODO: Add a required check for the terrafom apply workflow
-  required_status_checks {
-    strict = true
-  }
-
-  required_pull_request_reviews {
-    dismiss_stale_reviews           = true
-    restrict_dismissals             = true
-    required_approving_review_count = 1
-    require_last_push_approval      = true
   }
 }
 
@@ -54,6 +40,12 @@ resource "github_repository" "organizations_repo" {
   delete_branch_on_merge = true
   vulnerability_alerts   = true
   has_issues             = true
+
+  lifecycle {
+    ignore_changes = [
+      auto_init
+    ]
+  }
 }
 
 resource "github_repository_collaborators" "organization_repo_collaborators" {
@@ -62,26 +54,6 @@ resource "github_repository_collaborators" "organization_repo_collaborators" {
   team {
     permission = "push"
     team_id    = github_team.foundation_devs.id
-  }
-}
-
-
-resource "github_branch_protection" "protect_organization_main" {
-  repository_id = github_repository.organizations_repo.id
-
-  pattern          = "main"
-  enforce_admins   = true
-  allows_deletions = false
-
-  required_status_checks {
-    strict = true
-  }
-
-  required_pull_request_reviews {
-    dismiss_stale_reviews           = true
-    restrict_dismissals             = true
-    required_approving_review_count = 1
-    require_last_push_approval      = true
   }
 }
 
@@ -98,5 +70,10 @@ resource "github_issue_labels" "drift_labels" {
   label {
     name  = "Re-Apply"
     color = "0800FF"
+  }
+
+  label {
+    color = "ededed"
+    name  = "Drift"
   }
 }

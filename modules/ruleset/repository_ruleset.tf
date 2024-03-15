@@ -1,5 +1,5 @@
 resource "github_repository_ruleset" "ruleset" {
-  count = var.ruleset_type == "repository" ? 1 : 0
+  count       = var.ruleset_type == "repository" ? 1 : 0
   name        = var.name
   target      = var.target
   enforcement = var.enforcement

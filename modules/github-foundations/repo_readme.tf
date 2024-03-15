@@ -1,5 +1,5 @@
 data "local_file" "main_readme" {
-  count      = var.readme_path != "" ? 1 : 0
+  count    = var.readme_path != "" ? 1 : 0
   filename = var.readme_path
 }
 
