@@ -3,13 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 6.1.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | 6.1.0 |
+| <a name="provider_github"></a> [github](#provider\_github) | ~> 6.0 |
 
 ## Modules
 
@@ -22,9 +22,9 @@
 
 | Name | Type |
 |------|------|
-| [github_actions_organization_secret_repositories.org__action_secret_repo_access](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/actions_organization_secret_repositories) | resource |
-| [github_codespaces_organization_secret_repositories.org__codespace_secret_repo_access](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/codespaces_organization_secret_repositories) | resource |
-| [github_dependabot_organization_secret_repositories.org__dependabot_secret_repo_access](https://registry.terraform.io/providers/integrations/github/6.1.0/docs/resources/dependabot_organization_secret_repositories) | resource |
+| [github_actions_organization_secret_repositories.org__action_secret_repo_access](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret_repositories) | resource |
+| [github_codespaces_organization_secret_repositories.org__codespace_secret_repo_access](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/codespaces_organization_secret_repositories) | resource |
+| [github_dependabot_organization_secret_repositories.org__dependabot_secret_repo_access](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/dependabot_organization_secret_repositories) | resource |
 
 ## Inputs
 
