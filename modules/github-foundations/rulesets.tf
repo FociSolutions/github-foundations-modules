@@ -1,8 +1,5 @@
 module "base_ruleset" {
-  source = "..//ruleset"
-  providers = {
-    github = github
-  }
+  source = "../ruleset"
 
   name         = "Foundation Repositories Base Ruleset"
   enforcement  = "active"
@@ -22,11 +19,8 @@ module "base_ruleset" {
 }
 
 module "terraform_required_workflow_ruleset" {
-  source = "..//ruleset"
-  providers = {
-    github = github
-  }
-  
+  source = "../ruleset"
+
   name         = "Foundation Repositories Terraform Required Workflow Ruleset"
   enforcement  = "active"
   target       = "branch"
