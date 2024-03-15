@@ -50,6 +50,12 @@ variable "allow_auto_merge" {
   default     = true
 }
 
+variable "requires_web_commit_signing" {
+  description = "If set commit signatures are required for commits to the organization. Defaults to `false`."
+  type        = bool
+  default     = false
+}
+
 variable "dependabot_security_updates" {
   description = "Enables dependabot security updates. Only works when `has_vulnerability_alerts` is set because that is required to enable dependabot for the repository."
   type        = bool

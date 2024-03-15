@@ -86,6 +86,12 @@ variable "allow_auto_merge" {
   default     = true
 }
 
+variable "requires_web_commit_signing" {
+  description = "If set commit signatures are required for commits to the organization. Defaults to `false`."
+  type        = bool
+  default     = false
+}
+
 variable "visibility" {
   description = "Sets the visibility property of a repository. Defaults to \"private\""
   type        = string
