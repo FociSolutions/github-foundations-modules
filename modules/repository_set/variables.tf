@@ -43,6 +43,7 @@ variable "public_repositories" {
     delete_head_on_merge                 = bool
     allow_auto_merge                     = bool
     dependabot_security_updates          = bool
+    requires_web_commit_signing          = bool
     organization_action_secrets          = optional(list(string))
     organization_codespace_secrets       = optional(list(string))
     organization_dependabot_secrets      = optional(list(string))
