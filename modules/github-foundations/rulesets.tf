@@ -17,27 +17,3 @@ module "base_ruleset" {
   ref_name_inclusions        = ["~DEFAULT_BRANCH"]
   repository_name_inclusions = [github_repository.bootstrap_repo.name, github_repository.organizations_repo.name]
 }
-
-module "terraform_required_workflow_ruleset" {
-  source = "../ruleset"
-
-  name         = "Foundation Repositories Terraform Required Workflow Ruleset"
-  enforcement  = "active"
-  target       = "branch"
-  ruleset_type = "organization"
-
-  rules = {
-    required_workflows = {
-      required_workflows = [
-        {
-          repository_id = github_repository.organizations_repo.repo_id
-          path          = ".github/workflows/on-pull-and-push.yaml"
-          ref           = "master"
-        }
-      ]
-    }
-  }
-
-  ref_name_inclusions        = ["~DEFAULT_BRANCH"]
-  repository_name_inclusions = [github_repository.organizations_repo.name]
-}
