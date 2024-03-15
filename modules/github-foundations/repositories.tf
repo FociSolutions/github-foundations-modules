@@ -25,7 +25,7 @@ resource "github_repository_collaborators" "bootstrap_repo_collaborators" {
 
   team {
     permission = "push"
-    team_id    = github_team.foundation_devs.id
+    team_id    = github_team.foundation_devs.name
   }
 }
 
@@ -53,7 +53,7 @@ resource "github_repository_collaborators" "organization_repo_collaborators" {
 
   team {
     permission = "push"
-    team_id    = github_team.foundation_devs.id
+    team_id    = github_team.foundation_devs.name
   }
 }
 
