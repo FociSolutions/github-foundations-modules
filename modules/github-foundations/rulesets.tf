@@ -14,7 +14,7 @@ module "base_ruleset" {
     }
   }
 
-  ref_name_inclusions        = ["~DEFAULT"]
+  ref_name_inclusions        = ["~DEFAULT_BRANCH"]
   repository_name_inclusions = [github_repository.bootstrap_repo.name, github_repository.organizations_repo.name]
 }
 
@@ -38,6 +38,6 @@ module "terraform_required_workflow_ruleset" {
     }
   }
 
-  ref_name_inclusions        = ["~DEFAULT"]
+  ref_name_inclusions        = ["~DEFAULT_BRANCH"]
   repository_name_inclusions = [github_repository.organizations_repo.name]
 }
