@@ -1,5 +1,5 @@
 module "gcp_oidc_setup" {
-  source = "../modules/gcp_oidc"
+  source = "../../modules/github-gcloud-oidc"
 
   organization_id                      = "123456789012"
   folder_create                        = false
