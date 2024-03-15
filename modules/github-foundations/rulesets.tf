@@ -32,6 +32,7 @@ module "terraform_required_workflow_ruleset" {
         {
           repository_id = github_repository.organizations_repo.repo_id
           path          = ".github/workflows/on-pull-and-push.yaml"
+          ref           = "master"
         }
       ]
     }
