@@ -33,6 +33,7 @@ module "public_repositories" {
   environments                = each.value.environments
   template_repository         = each.value.template_repository
   license_template            = each.value.license_template
+  requires_web_commit_signing = each.value.requires_web_commit_signing
   rulesets                    = lookup(local.rulesets_by_public_repository, each.key, {})
 }
 
@@ -58,6 +59,7 @@ module "private_repositories" {
   environments                = each.value.environments
   template_repository         = each.value.template_repository
   license_template            = each.value.license_template
+  requires_web_commit_signing = each.value.requires_web_commit_signing
   rulesets                    = lookup(local.rulesets_by_private_repository, each.key, {})
 
 }
