@@ -49,7 +49,7 @@ resource "github_actions_organization_variable" "custom_oidc_organization_variab
 }
 
 resource "github_actions_secret" "repository_secret" {
-  for_each = local.expanded_list_of_repo_secrets
+  for_each = toset(local.expanded_list_of_repo_secrets)
 
   repository      = each.value.repository
   secret_name     = each.value.name
@@ -57,7 +57,7 @@ resource "github_actions_secret" "repository_secret" {
 }
 
 resource "github_actions_variable" "repository_variable" {
-  for_each = local.expanded_list_of_repo_variables
+  for_each = toset(local.expanded_list_of_repo_variables)
 
   repository    = each.value.repository
   variable_name = each.value.name
