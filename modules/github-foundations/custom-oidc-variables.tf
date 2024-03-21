@@ -8,8 +8,8 @@ locals {
           repository      = repo
         }
       }
-    ], [])
-  )
+    ]
+  ), [])
 
   expanded_list_of_repo_variables = try(merge(
     [
@@ -20,8 +20,8 @@ locals {
           repository = repo
         }
       }
-    ], [])
-  )
+    ]
+  ), [])
 }
 
 resource "github_actions_organization_secret" "custom_oidc_organization_secret" {
