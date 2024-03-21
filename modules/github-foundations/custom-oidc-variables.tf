@@ -1,26 +1,26 @@
 locals {
-  expanded_list_of_repo_secrets = merge(
+  expanded_list_of_repo_secrets = try(merge(
     [
-      for repo, secrets in try(var.oidc_configuration.custom.repository_secrets, {}) : {
+      for repo, secrets in var.oidc_configuration.custom.repository_secrets : {
         for name, encrypted_value in secrets : "${repo}_${name}" => {
           name            = name
           encrypted_value = encrypted_value
           repository      = repo
         }
       }
-    ]
+    ], [])
   )
 
-  expanded_list_of_repo_variables = merge(
+  expanded_list_of_repo_variables = try(merge(
     [
-      for repo, variables in try(var.oidc_configuration.custom.repository_variables, {}) : {
+      for repo, variables in var.oidc_configuration.custom.repository_variables : {
         for name, value in variables : "${repo}_${name}" => {
           name       = name
           value      = value
           repository = repo
         }
       }
-    ]
+    ], [])
   )
 }
 
