@@ -1,7 +1,7 @@
 locals {
   expanded_list_of_repo_secrets = merge(
     [
-      for repo, secrets in var.oidc_configuration.custom.repository_secrets : {
+      for repo, secrets in try(var.oidc_configuration.custom.repository_secrets, {}) : {
         for name, encrypted_value in secrets : "${repo}_${name}" => {
           name            = name
           encrypted_value = encrypted_value
@@ -13,7 +13,7 @@ locals {
 
   expanded_list_of_repo_variables = merge(
     [
-      for repo, variables in var.oidc_configuration.custom.repository_variables : {
+      for repo, variables in try(var.oidc_configuration.custom.repository_variables, {}) : {
         for name, value in variables : "${repo}_${name}" => {
           name       = name
           value      = value
@@ -25,7 +25,7 @@ locals {
 }
 
 resource "github_actions_organization_secret" "custom_oidc_organization_secret" {
-  for_each = var.oidc_configuration.custom.organization_secrets
+  for_each = try(var.oidc_configuration.custom.organization_secrets, {})
 
   secret_name     = each.key
   encrypted_value = each.value
@@ -37,7 +37,7 @@ resource "github_actions_organization_secret" "custom_oidc_organization_secret" 
 }
 
 resource "github_actions_organization_variable" "custom_oidc_organization_variable" {
-  for_each = var.oidc_configuration.custom.organization_variables
+  for_each = try(var.oidc_configuration.custom.organization_variables, {})
 
   variable_name = each.key
   value         = each.value
