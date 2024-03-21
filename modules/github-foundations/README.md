@@ -22,12 +22,16 @@
 
 | Name | Type |
 |------|------|
+| [github_actions_organization_secret.custom_oidc_organization_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret) | resource |
 | [github_actions_organization_secret.workload_identity_provider](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret) | resource |
+| [github_actions_organization_variable.custom_oidc_organization_variable](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_variable) | resource |
 | [github_actions_organization_variable.tf_state_bucket_location](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_variable) | resource |
 | [github_actions_organization_variable.tf_state_bucket_name](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_variable) | resource |
 | [github_actions_organization_variable.tf_state_bucket_project_id](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_variable) | resource |
 | [github_actions_secret.organization_workload_identity_sa](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret) | resource |
+| [github_actions_secret.repository_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret) | resource |
 | [github_actions_variable.gcp_secret_manager_project_id](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_variable) | resource |
+| [github_actions_variable.repository_variable](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_variable) | resource |
 | [github_issue_labels.drift_labels](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_labels) | resource |
 | [github_repository.bootstrap_repo](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
 | [github_repository.organizations_repo](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
@@ -42,16 +46,10 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bootstrap_repository_name"></a> [bootstrap\_repository\_name](#input\_bootstrap\_repository\_name) | The name of the bootstrap repository. | `string` | `"bootstrap"` | no |
-| <a name="input_bootstrap_workload_identity_sa"></a> [bootstrap\_workload\_identity\_sa](#input\_bootstrap\_workload\_identity\_sa) | The service account to use for the bootstrap repository oidc. | `string` | n/a | yes |
-| <a name="input_bucket_location"></a> [bucket\_location](#input\_bucket\_location) | The location of the tf state bucket. | `string` | n/a | yes |
-| <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The name of the tf state bucket. | `string` | n/a | yes |
 | <a name="input_foundation_devs_team_name"></a> [foundation\_devs\_team\_name](#input\_foundation\_devs\_team\_name) | The name of the foundation developers team. | `string` | `"foundation-devs"` | no |
-| <a name="input_gcp_project_id"></a> [gcp\_project\_id](#input\_gcp\_project\_id) | The id of the gcp project where secret manager was setup. | `string` | n/a | yes |
-| <a name="input_gcp_tf_state_bucket_project_id"></a> [gcp\_tf\_state\_bucket\_project\_id](#input\_gcp\_tf\_state\_bucket\_project\_id) | The id of the gcp project where the tf state bucket was setup. | `string` | n/a | yes |
-| <a name="input_organization_workload_identity_sa"></a> [organization\_workload\_identity\_sa](#input\_organization\_workload\_identity\_sa) | The service account to use for the organization repository oidc. | `string` | n/a | yes |
+| <a name="input_oidc_configuration"></a> [oidc\_configuration](#input\_oidc\_configuration) | n/a | <pre>object({<br>    gcp = optional(object({<br>      workload_identity_provider_name_secret_name = optional(string)<br>      workload_identity_provider_name = string<br><br>      organization_workload_identity_sa_secret_name = optional(string)<br>      organization_workload_identity_sa = string<br><br>      gcp_secret_manager_project_id_variable_name = optional(string)<br>      gcp_secret_manager_project_id = string<br><br>      gcp_tf_state_bucket_project_id_variable_name = optional(string)<br>      gcp_tf_state_bucket_project_id = string<br><br>      bucket_name_variable_name = optional(string)<br>      bucket_name = string<br><br>      bucket_location_variable_name = optional(string)<br>      bucket_location = string<br>    }))<br>    custom = optional(object({<br>      organization_secrets = map(string)<br>      organization_variables = map(string)<br>      repository_secrets = map(map(string))<br>      repository_variables = map(map(string))<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_organizations_repository_name"></a> [organizations\_repository\_name](#input\_organizations\_repository\_name) | The name of the organizations repository. | `string` | `"organizations"` | no |
 | <a name="input_readme_path"></a> [readme\_path](#input\_readme\_path) | Local Path to the README file in your current codebase. Pushed to the github foundation repository. | `string` | `""` | no |
-| <a name="input_workload_identity_provider_name"></a> [workload\_identity\_provider\_name](#input\_workload\_identity\_provider\_name) | The name of the workload identity provider to use for the oidc of the github foundation repositories. | `string` | n/a | yes |
 
 ## Outputs
 
