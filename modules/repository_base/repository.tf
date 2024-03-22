@@ -69,6 +69,8 @@ resource "github_branch_default" "default_branch" {
 }
 
 resource "github_repository_ruleset" "protected_branch_base_rules" {
+  count = length(toset(local.protected_branches_refs)) > 0 ? 1 : 0 
+
   name        = "protected_branch_base_ruleset"
   repository  = github_repository.repository.name
   target      = "branch"
