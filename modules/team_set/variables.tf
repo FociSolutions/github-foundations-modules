@@ -11,9 +11,8 @@ variable "teams" {
 
 variable "preexisting_teams" {
   type = map(object({
-    bucket      = string
-    prefix      = string
-    output_name = string
+    description = string
+    privacy     = string
     maintainers = list(string)
     members     = list(string)
     parent_id   = string
