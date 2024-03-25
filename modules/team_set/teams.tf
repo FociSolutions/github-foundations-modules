@@ -11,12 +11,17 @@ module "team" {
   team_name        = each.key
 }
 
+import {
+  for_each = var.preexisting_teams
+
+  to = module.prexisting_team[each.key].github_team.team
+  id = each.key
+}
+
 module "prexisting_team" {
   source   = "../team"
   for_each = var.preexisting_teams
 
-  import = true
-  
   team_maintainers = each.value.maintainers
   team_members     = each.value.members
   team_description = each.value.description

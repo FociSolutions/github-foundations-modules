@@ -30,12 +30,6 @@ variable "team_members" {
   default     = []
 }
 
-variable "import" {
-  type        = bool
-  description = "A flag that when set to true will try to import an alredy existing team (optional). Defaults to false"
-  default     = false
-}
-
 variable "parent_id" {
   type        = string
   description = "The ID of the parent team if it exists (optional)."
