@@ -34,23 +34,23 @@ resource "github_repository" "repository" {
     for_each = local.can_configure_security_and_analysis ? [1] : []
     content {
       dynamic "advanced_security" {
-        for_each = var.advance_security != null ? [var.advance_security] : []
+        for_each = var.advance_security ? [var.advance_security] : []
         content {
-          status = var.advance_security ? "enabled" : "disabled"
+          status = "enabled"
         }
       }
 
       dynamic "secret_scanning" {
-        for_each = var.secret_scanning != null ? [var.secret_scanning] : []
+        for_each = var.secret_scanning ? [var.secret_scanning] : []
         content {
-          status = var.secret_scanning ? "enabled" : "disabled"
+          status = "enabled"
         }
       }
 
       dynamic "secret_scanning_push_protection" {
-        for_each = var.secret_scanning_on_push != null ? [var.secret_scanning_on_push] : []
+        for_each = var.secret_scanning_on_push ? [var.secret_scanning_on_push] : []
         content {
-          status = var.secret_scanning_on_push ? "enabled" : "disabled"
+          status = "enabled"
         }
       }
     }
