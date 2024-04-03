@@ -17,7 +17,8 @@ module "public_repositories" {
   for_each = var.public_repositories
 
   name                        = each.key
-  repository_team_permissions = merge(var.default_repository_team_permissions, each.value.repository_team_permissions_override)
+  repository_team_permissions = merge(var.default_repository_team_permissions, coalesce(each.value.repository_team_permissions_override, {}))
+  repository_user_permissions = coalesce(each.value.user_permissions, {})
   description                 = each.value.description
   default_branch              = each.value.default_branch
   protected_branches          = each.value.protected_branches
@@ -43,7 +44,8 @@ module "private_repositories" {
   for_each = var.private_repositories
 
   name                        = each.key
-  repository_team_permissions = merge(var.default_repository_team_permissions, each.value.repository_team_permissions_override)
+  repository_team_permissions = merge(var.default_repository_team_permissions, coalesce(each.value.repository_team_permissions_override, {}))
+  repository_user_permissions = coalesce(each.value.user_permissions, {})
   description                 = each.value.description
   default_branch              = each.value.default_branch
   protected_branches          = each.value.protected_branches

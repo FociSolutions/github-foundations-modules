@@ -13,6 +13,7 @@ module "repository_base" {
   has_discussions = true
 
   repository_team_permissions = var.repository_team_permissions
+  repository_user_permissions = var.repository_user_permissions
 
   default_branch       = var.default_branch
   protected_branches   = var.protected_branches
