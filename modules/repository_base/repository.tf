@@ -36,7 +36,7 @@ resource "github_repository" "repository" {
       dynamic "advanced_security" {
         for_each = var.advance_security != null ? [var.advance_security] : []
         content {
-          status = var.advanced_security ? "enabled" : "disabled"
+          status = var.advance_security ? "enabled" : "disabled"
         }
       }
 
