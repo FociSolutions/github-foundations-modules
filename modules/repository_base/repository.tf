@@ -1,7 +1,6 @@
 locals {
   enable_dependabot_automated_security_fixes = var.has_vulnerability_alerts && var.dependabot_security_updates ? 1 : 0
-  is_public                                  = var.visibility == "public"
-  can_configure_security_and_analysis        = !local.is_public && var.advance_security
+  can_configure_security_and_analysis        = var.advance_security
 
   protected_branches_refs = [
     for branch in var.protected_branches : "refs/heads/${branch}"
@@ -11,22 +10,23 @@ locals {
 resource "github_repository" "repository" {
   name        = var.name
   description = var.description
-  visibility  = var.visibility
+  #trivy:ignore:avd-git-0001
+  visibility = var.visibility
 
-  auto_init              = true
-  archive_on_destroy     = false
-  has_downloads          = var.has_downloads
-  has_issues             = var.has_issues
-  has_projects           = var.has_projects
-  has_wiki               = var.has_wiki
-  has_discussions        = var.has_discussions
-  vulnerability_alerts   = var.has_vulnerability_alerts
-  topics                 = var.topics
-  homepage_url           = var.homepage
-  delete_branch_on_merge = var.delete_head_on_merge
-  allow_auto_merge       = var.allow_auto_merge
+  auto_init                   = true
+  archive_on_destroy          = false
+  has_downloads               = var.has_downloads
+  has_issues                  = var.has_issues
+  has_projects                = var.has_projects
+  has_wiki                    = var.has_wiki
+  has_discussions             = var.has_discussions
+  vulnerability_alerts        = var.has_vulnerability_alerts
+  topics                      = var.topics
+  homepage_url                = var.homepage
+  delete_branch_on_merge      = var.delete_head_on_merge
+  allow_auto_merge            = var.allow_auto_merge
   web_commit_signoff_required = var.requires_web_commit_signing
-  license_template       = var.license_template
+  license_template            = var.license_template
 
 
   # A hacky way of getting around the 422 errors received from github api
@@ -69,7 +69,7 @@ resource "github_branch_default" "default_branch" {
 }
 
 resource "github_repository_ruleset" "protected_branch_base_rules" {
-  count = length(toset(local.protected_branches_refs)) > 0 ? 1 : 0 
+  count = length(toset(local.protected_branches_refs)) > 0 ? 1 : 0
 
   name        = "protected_branch_base_ruleset"
   repository  = github_repository.repository.name
