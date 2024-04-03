@@ -1,6 +1,6 @@
 locals {
   enable_dependabot_automated_security_fixes = var.has_vulnerability_alerts && var.dependabot_security_updates ? 1 : 0
-  can_configure_security_and_analysis        = var.advance_security
+  can_configure_security_and_analysis        = var.advance_security || var.secret_scanning || var.secret_scanning_on_push
 
   protected_branches_refs = [
     for branch in var.protected_branches : "refs/heads/${branch}"
@@ -33,14 +33,25 @@ resource "github_repository" "repository" {
   dynamic "security_and_analysis" {
     for_each = local.can_configure_security_and_analysis ? [1] : []
     content {
-      advanced_security {
-        status = var.advance_security ? "enabled" : "disabled"
+      dynamic "advanced_security" {
+        for_each = var.advance_security != null ? [var.advance_security] : []
+        content {
+          status = var.advanced_security ? "enabled" : "disabled"
+        }
       }
-      secret_scanning {
-        status = var.secret_scanning ? "enabled" : "disabled"
+
+      dynamic "secret_scanning" {
+        for_each = var.secret_scanning != null ? [var.secret_scanning] : []
+        content {
+          status = var.secret_scanning ? "enabled" : "disabled"
+        }
       }
-      secret_scanning_push_protection {
-        status = var.secret_scanning_on_push ? "enabled" : "disabled"
+
+      dynamic "secret_scanning_push_protection" {
+        for_each = var.secret_scanning_on_push != null ? [var.secret_scanning_on_push] : []
+        content {
+          status = var.secret_scanning_on_push ? "enabled" : "disabled"
+        }
       }
     }
   }
