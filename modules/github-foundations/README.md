@@ -4,13 +4,14 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.0 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2.5.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_github"></a> [github](#provider\_github) | ~> 6.0 |
-| <a name="provider_local"></a> [local](#provider\_local) | n/a |
+| <a name="provider_local"></a> [local](#provider\_local) | ~> 2.5.1 |
 
 ## Modules
 
@@ -47,7 +48,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_bootstrap_repository_name"></a> [bootstrap\_repository\_name](#input\_bootstrap\_repository\_name) | The name of the bootstrap repository. | `string` | `"bootstrap"` | no |
 | <a name="input_foundation_devs_team_name"></a> [foundation\_devs\_team\_name](#input\_foundation\_devs\_team\_name) | The name of the foundation developers team. | `string` | `"foundation-devs"` | no |
-| <a name="input_oidc_configuration"></a> [oidc\_configuration](#input\_oidc\_configuration) | n/a | <pre>object({<br>    gcp = optional(object({<br>      workload_identity_provider_name_secret_name = optional(string)<br>      workload_identity_provider_name = string<br><br>      organization_workload_identity_sa_secret_name = optional(string)<br>      organization_workload_identity_sa = string<br><br>      gcp_secret_manager_project_id_variable_name = optional(string)<br>      gcp_secret_manager_project_id = string<br><br>      gcp_tf_state_bucket_project_id_variable_name = optional(string)<br>      gcp_tf_state_bucket_project_id = string<br><br>      bucket_name_variable_name = optional(string)<br>      bucket_name = string<br><br>      bucket_location_variable_name = optional(string)<br>      bucket_location = string<br>    }))<br>    custom = optional(object({<br>      organization_secrets = map(string)<br>      organization_variables = map(string)<br>      repository_secrets = map(map(string))<br>      repository_variables = map(map(string))<br>    }))<br>  })</pre> | n/a | yes |
+| <a name="input_oidc_configuration"></a> [oidc\_configuration](#input\_oidc\_configuration) | n/a | <pre>object({<br>    gcp = optional(object({<br>      workload_identity_provider_name_secret_name = optional(string)<br>      workload_identity_provider_name             = string<br><br>      organization_workload_identity_sa_secret_name = optional(string)<br>      organization_workload_identity_sa             = string<br><br>      gcp_secret_manager_project_id_variable_name = optional(string)<br>      gcp_secret_manager_project_id               = string<br><br>      gcp_tf_state_bucket_project_id_variable_name = optional(string)<br>      gcp_tf_state_bucket_project_id               = string<br><br>      bucket_name_variable_name = optional(string)<br>      bucket_name               = string<br><br>      bucket_location_variable_name = optional(string)<br>      bucket_location               = string<br>    }))<br>    custom = optional(object({<br>      organization_secrets   = map(string)<br>      organization_variables = map(string)<br>      repository_secrets     = map(map(string))<br>      repository_variables   = map(map(string))<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_organizations_repository_name"></a> [organizations\_repository\_name](#input\_organizations\_repository\_name) | The name of the organizations repository. | `string` | `"organizations"` | no |
 | <a name="input_readme_path"></a> [readme\_path](#input\_readme\_path) | Local Path to the README file in your current codebase. Pushed to the github foundation repository. | `string` | `""` | no |
 
