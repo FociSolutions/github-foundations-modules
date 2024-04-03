@@ -2,7 +2,6 @@ variable "private_repositories" {
   type = map(object({
     description                          = string
     default_branch                       = string
-    repository_team_permissions_override = map(string)
     protected_branches                   = list(string)
     advance_security                     = bool
     has_vulnerability_alerts             = bool
@@ -12,6 +11,8 @@ variable "private_repositories" {
     allow_auto_merge                     = bool
     requires_web_commit_signing          = bool
     dependabot_security_updates          = bool
+    repository_team_permissions_override = optional(map(string))
+    user_permissions                     = optional(map(string))
     organization_action_secrets          = optional(list(string))
     organization_codespace_secrets       = optional(list(string))
     organization_dependabot_secrets      = optional(list(string))
@@ -35,7 +36,6 @@ variable "public_repositories" {
   type = map(object({
     description                          = string
     default_branch                       = string
-    repository_team_permissions_override = map(string)
     protected_branches                   = list(string)
     advance_security                     = bool
     topics                               = list(string)
@@ -44,6 +44,8 @@ variable "public_repositories" {
     allow_auto_merge                     = bool
     dependabot_security_updates          = bool
     requires_web_commit_signing          = bool
+    repository_team_permissions_override = optional(map(string))
+    user_permissions                     = optional(map(string))
     organization_action_secrets          = optional(list(string))
     organization_codespace_secrets       = optional(list(string))
     organization_dependabot_secrets      = optional(list(string))
@@ -65,7 +67,8 @@ variable "public_repositories" {
 
 variable "default_repository_team_permissions" {
   type        = map(string)
-  description = "A map where the keys are github team slugs and the value is the permissions the team should have by default for every repository. If an entry exists in `repository_team_permissions_override` for a repository then that will take precedence over this default."
+  description = "A map where the keys are github team slugs and the value is the permissions the team should have by default for every repository. If an entry exists in `repository_team_permissions_override` for a repository then that will take precedence over this default. Defaults to `{}` giving no team access to the repositories."
+  default     = {}
 }
 
 variable "rulesets" {

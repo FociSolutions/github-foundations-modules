@@ -20,6 +20,11 @@ variable "repository_team_permissions" {
   description = "A map where the keys are github team slugs and the value is the permissions the team should have in the repository"
 }
 
+variable "repository_user_permissions" {
+  type        = map(string)
+  description = "A map where the keys are github usernames and the value is the permissions the user should have in the repository"
+}
+
 variable "protected_branches" {
   type        = list(string)
   description = "A list of ref names or patterns that should be protected. Setting to `[]` means no protection. Defaults `[\"~DEFAULT_BRANCH\"]`"

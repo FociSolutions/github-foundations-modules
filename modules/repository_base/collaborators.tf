@@ -8,4 +8,12 @@ resource "github_repository_collaborators" "collaborators" {
       team_id    = team.key
     }
   }
+
+  dynamic "user" {
+    for_each = var.repository_user_permissions
+    content {
+      permission = user.value
+      username   = user.key
+    }
+  }
 }
