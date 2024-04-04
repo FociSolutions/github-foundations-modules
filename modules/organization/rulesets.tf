@@ -84,15 +84,15 @@ module "ruleset" {
 
   bypass_actors = {
     repository_roles = [for bypasser in try(toset(coalesce(each.value.bypass_actors.repository_roles, [])), []) : {
-      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypasser.role}"].id)
+      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser[bypasser.role].id)
       always_bypass = bypasser.always_bypass
     }]
     teams = [for bypasser in try(toset(coalesce(each.value.bypass_actors.teams, [])), []) : {
-      team_id       = data.github_team.branch_ruleset_bypasser["${bypasser.team}"].id
+      team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
     organization_admins = [for bypasser in try(toset(coalesce(each.value.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
+      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
       always_bypass = bypasser.always_bypass
     }]
     integrations = try(each.value.bypass_actors.integrations, [])
@@ -125,15 +125,15 @@ module "base_default_branch_protection" {
 
   bypass_actors = {
     repository_roles = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])), []) : {
-      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypasser.role}"].id)
+      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser[bypasser.role].id)
       always_bypass = bypasser.always_bypass
     }]
     teams = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.teams, [])), []) : {
-      team_id       = data.github_team.branch_ruleset_bypasser["${bypasser.team}"].id
+      team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
     organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
+      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
       always_bypass = bypasser.always_bypass
     }]
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
@@ -162,15 +162,15 @@ module "minimum_approvals" {
 
   bypass_actors = {
     repository_roles = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])), []) : {
-      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypasser.role}"].id)
+      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser[bypasser.role].id)
       always_bypass = bypasser.always_bypass
     }]
     teams = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.teams, [])), []) : {
-      team_id       = data.github_team.branch_ruleset_bypasser["${bypasser.team}"].id
+      team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
     organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
+      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
       always_bypass = bypasser.always_bypass
     }]
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
@@ -199,15 +199,15 @@ module "dismiss_stale_reviews" {
 
   bypass_actors = {
     repository_roles = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])), []) : {
-      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypasser.role}"].id)
+      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser[bypasser.role].id)
       always_bypass = bypasser.always_bypass
     }]
     teams = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.teams, [])), []) : {
-      team_id       = data.github_team.branch_ruleset_bypasser["${bypasser.team}"].id
+      team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
     organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
+      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
       always_bypass = bypasser.always_bypass
     }]
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
@@ -233,15 +233,15 @@ module "require_signatures" {
 
   bypass_actors = {
     repository_roles = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.repository_roles, [])), []) : {
-      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser["${bypasser.role}"].id)
+      role_id       = lookup(local.github_base_role_ids, bypasser.role, data.github_organization_custom_role.branch_ruleset_bypasser[bypasser.role].id)
       always_bypass = bypasser.always_bypass
     }]
     teams = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.teams, [])), []) : {
-      team_id       = data.github_team.branch_ruleset_bypasser["${bypasser.team}"].id
+      team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
     organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser["${bypasser.user}"].id
+      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
       always_bypass = bypasser.always_bypass
     }]
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])

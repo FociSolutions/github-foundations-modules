@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.3"
+  required_version = ">= 1.6"
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -8,6 +8,10 @@ terraform {
     google-beta = {
       source  = "hashicorp/google-beta"
       version = ">= 3.77" # tftest
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.6" # tftest
     }
   }
 }

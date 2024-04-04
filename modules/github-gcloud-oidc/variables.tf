@@ -1,9 +1,3 @@
-#Organization Variables
-variable "organization_id" {
-  description = "The organization id."
-  type        = string
-}
-
 #Folder Variables
 variable "folder_create" {
   description = "Create folder. When set to false, uses id to reference an existing folder."
