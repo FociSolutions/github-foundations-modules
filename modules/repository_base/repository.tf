@@ -50,7 +50,7 @@ resource "github_repository" "repository" {
     for_each = var.template_repository == null ? [] : [1]
     content {
       owner                = var.template_repository.owner
-      repository           = var.template_repository.name
+      repository           = var.template_repository.repository
       include_all_branches = var.template_repository.include_all_branches
     }
   }
