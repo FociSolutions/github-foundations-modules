@@ -26,32 +26,32 @@ variable "oidc_configuration" {
   type = object({
     gcp = optional(object({
       workload_identity_provider_name_secret_name = optional(string)
-      workload_identity_provider_name = string
+      workload_identity_provider_name             = string
 
       organization_workload_identity_sa_secret_name = optional(string)
-      organization_workload_identity_sa = string
+      organization_workload_identity_sa             = string
 
       gcp_secret_manager_project_id_variable_name = optional(string)
-      gcp_secret_manager_project_id = string
+      gcp_secret_manager_project_id               = string
 
       gcp_tf_state_bucket_project_id_variable_name = optional(string)
-      gcp_tf_state_bucket_project_id = string
+      gcp_tf_state_bucket_project_id               = string
 
       bucket_name_variable_name = optional(string)
-      bucket_name = string
+      bucket_name               = string
 
       bucket_location_variable_name = optional(string)
-      bucket_location = string
+      bucket_location               = string
     }))
     custom = optional(object({
-      organization_secrets = map(string)
+      organization_secrets   = map(string)
       organization_variables = map(string)
-      repository_secrets = map(map(string))
-      repository_variables = map(map(string))
+      repository_secrets     = map(map(string))
+      repository_variables   = map(map(string))
     }))
   })
   validation {
-    condition = var.oidc_configuration.gcp != null || var.oidc_configuration.custom != null
+    condition     = var.oidc_configuration.gcp != null || var.oidc_configuration.custom != null
     error_message = "At least one oidc_configuration must be set."
   }
 }

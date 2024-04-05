@@ -40,7 +40,7 @@ resource "github_dependabot_secret" "dependabot_secret" {
 resource "github_actions_environment_secret" "environment_secret" {
   for_each        = local.environment_action_secrets_map
   repository      = var.name
-  environment     = github_repository_environment.environment["${each.value.environment}"].environment
+  environment     = github_repository_environment.environment[each.value.environment].environment
   encrypted_value = each.value.encrypted_value
   secret_name     = each.value.name
 }

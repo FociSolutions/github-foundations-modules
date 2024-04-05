@@ -68,7 +68,7 @@ variable "dependabot_security_updates" {
 }
 
 variable "advance_security" {
-  description = "Enables advance security for the repository. If repository is public `advance_security` is enabled by default and cannot be changed."
+  description = "Enables advance security for the repository."
   type        = bool
   default     = true
 }

@@ -2,7 +2,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.0 |
 
 ## Providers
@@ -24,7 +24,7 @@ No resources.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_action_secrets"></a> [action\_secrets](#input\_action\_secrets) | An (Optional) map of GitHub Actions secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `map(string)` | `{}` | no |
-| <a name="input_advance_security"></a> [advance\_security](#input\_advance\_security) | Enables advance security for the repository. If repository is public `advance_security` is enabled by default and cannot be changed. | `bool` | `true` | no |
+| <a name="input_advance_security"></a> [advance\_security](#input\_advance\_security) | Enables advance security for the repository. | `bool` | `true` | no |
 | <a name="input_allow_auto_merge"></a> [allow\_auto\_merge](#input\_allow\_auto\_merge) | Allow auto-merging pull requests on the repository | `bool` | `true` | no |
 | <a name="input_codespace_secrets"></a> [codespace\_secrets](#input\_codespace\_secrets) | An (Optional) map of Github Codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `map(string)` | `{}` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | The branch to set as the default branch for this repository. Defaults to "main" | `string` | `"main"` | no |

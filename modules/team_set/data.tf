@@ -16,7 +16,7 @@ locals {
 
 data "terraform_remote_state" "state" {
   for_each = {
-    for i, state in local.distinct_states : "${i}" => state
+    for i, state in local.distinct_states : i => state
   }
   backend = "gcs"
   config = {

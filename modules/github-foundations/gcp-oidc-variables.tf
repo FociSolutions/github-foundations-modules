@@ -1,5 +1,5 @@
 resource "github_actions_secret" "organization_workload_identity_sa" {
-  count           = var.oidc_configuration.gcp != null ? 1 : 0
+  count = var.oidc_configuration.gcp != null ? 1 : 0
 
   repository      = github_repository.organizations_repo.name
   secret_name     = coalesce(var.oidc_configuration.gcp.organization_workload_identity_sa_secret_name, "GCP_SERVICE_ACCOUNT")

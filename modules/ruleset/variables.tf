@@ -142,9 +142,3 @@ variable "enforcement" {
     error_message = "The enforcement level must be either `active`, `evaluate` or `disabled`."
   }
 }
-
-variable "repository" {
-  type        = string
-  description = "The repository to create the ruleset under. Only applicable if `ruleset_type` is set to `repository`. Defaults to \"\""
-  default     = ""
-}

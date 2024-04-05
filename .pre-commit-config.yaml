@@ -12,7 +12,6 @@ repos:
     -   id: end-of-file-fixer
     -   id: check-added-large-files
     -   id: detect-private-key
-    exclude: .*/\.terraform/.*
 -   repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.88.1
     hooks:

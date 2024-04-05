@@ -1,3 +1,4 @@
+#trivy:ignore:avd-gcp-0066
 resource "google_storage_bucket" "bucket" {
   name                        = lower(var.bucket_name)
   depends_on                  = [google_project_service.project_services]

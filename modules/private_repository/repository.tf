@@ -15,10 +15,10 @@ module "repository_base" {
   repository_team_permissions = var.repository_team_permissions
   repository_user_permissions = var.repository_user_permissions
 
-  default_branch       = var.default_branch
-  protected_branches   = var.protected_branches
-  delete_head_on_merge = var.delete_head_on_merge
-  allow_auto_merge     = var.allow_auto_merge
+  default_branch              = var.default_branch
+  protected_branches          = var.protected_branches
+  delete_head_on_merge        = var.delete_head_on_merge
+  allow_auto_merge            = var.allow_auto_merge
   requires_web_commit_signing = var.requires_web_commit_signing
 
   secret_scanning             = true

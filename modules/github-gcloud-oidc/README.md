@@ -2,22 +2,23 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.77 |
 | <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | >= 3.77 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_google"></a> [google](#provider\_google) | >= 3.77 |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.6 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_oidc"></a> [oidc](#module\_oidc) | terraform-google-modules/github-actions-runners/google//modules/gh-oidc | n/a |
+| <a name="module_oidc"></a> [oidc](#module\_oidc) | terraform-google-modules/github-actions-runners/google//modules/gh-oidc | 3.1.2 |
 
 ## Resources
 
@@ -57,7 +58,6 @@
 | <a name="input_lifecycle_rules"></a> [lifecycle\_rules](#input\_lifecycle\_rules) | Bucket lifecycle rule. | <pre>map(object({<br>    action = object({<br>      type          = string<br>      storage_class = optional(string)<br>    })<br>    condition = object({<br>      age                        = optional(number)<br>      created_before             = optional(string)<br>      custom_time_before         = optional(string)<br>      days_since_custom_time     = optional(number)<br>      days_since_noncurrent_time = optional(number)<br>      matches_prefix             = optional(list(string))<br>      matches_storage_class      = optional(list(string)) # STANDARD, MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, ARCHIVE, DURABLE_REDUCED_AVAILABILITY<br>      matches_suffix             = optional(list(string))<br>      noncurrent_time_before     = optional(string)<br>      num_newer_versions         = optional(number)<br>      with_state                 = optional(string) # "LIVE", "ARCHIVED", "ANY"<br>    })<br>  }))</pre> | `{}` | no |
 | <a name="input_location"></a> [location](#input\_location) | Bucket location. | `string` | n/a | yes |
 | <a name="input_logging_config"></a> [logging\_config](#input\_logging\_config) | Bucket logging configuration. | <pre>object({<br>    log_bucket        = string<br>    log_object_prefix = optional(string)<br>  })</pre> | `null` | no |
-| <a name="input_organization_id"></a> [organization\_id](#input\_organization\_id) | The organization id. | `string` | n/a | yes |
 | <a name="input_parent"></a> [parent](#input\_parent) | Parent in folders/folder\_id or organizations/org\_id format. | `string` | `null` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Optional prefix used to generate project id and name. | `string` | `null` | no |
 | <a name="input_project_create"></a> [project\_create](#input\_project\_create) | Create project. When set to false, uses a data source to reference existing project. | `bool` | `true` | no |

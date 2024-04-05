@@ -4,7 +4,6 @@ locals {
 
   bootstrap_repo_name     = "bootstrap"
   organizations_repo_name = "organizations"
-  projects_repo_name      = "projects"
 
   state_file_access_roles = tolist(["roles/storage.objectAdmin", "roles/storage.admin"])
 
@@ -53,6 +52,7 @@ resource "google_project_iam_member" "organizations_member" {
 */
 module "oidc" {
   source      = "terraform-google-modules/github-actions-runners/google//modules/gh-oidc"
+  version     = "3.1.2"
   depends_on  = [google_project_service.project_services, google_service_account.bootstrap_sa, google_service_account.organizations_sa]
   project_id  = google_project.project[0].project_id
   pool_id     = local.pool_id
