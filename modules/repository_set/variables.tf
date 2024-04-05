@@ -4,6 +4,7 @@ variable "private_repositories" {
     default_branch                       = string
     protected_branches                   = list(string)
     advance_security                     = bool
+    has_ghas_license                     = bool
     has_vulnerability_alerts             = bool
     topics                               = list(string)
     homepage                             = string

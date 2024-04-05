@@ -50,6 +50,7 @@ module "private_repositories" {
   default_branch              = each.value.default_branch
   protected_branches          = each.value.protected_branches
   advance_security            = each.value.advance_security
+  has_ghas_license            = each.value.has_ghas_license
   topics                      = each.value.topics
   homepage                    = each.value.homepage
   delete_head_on_merge        = each.value.delete_head_on_merge
