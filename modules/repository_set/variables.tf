@@ -4,7 +4,6 @@ variable "private_repositories" {
     default_branch                       = string
     protected_branches                   = list(string)
     advance_security                     = bool
-    has_ghas_license                     = bool
     has_vulnerability_alerts             = bool
     topics                               = list(string)
     homepage                             = string
@@ -64,6 +63,12 @@ variable "public_repositories" {
     license_template = optional(string)
   }))
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
+}
+
+variable "has_ghas_license" {
+  type        = bool
+  description = "If the organization owning the repositories has a GitHub Advanced Security license or not. Defaults to false."
+  default     = false
 }
 
 variable "default_repository_team_permissions" {
