@@ -33,6 +33,7 @@ No resources.
 | <a name="input_dependabot_security_updates"></a> [dependabot\_security\_updates](#input\_dependabot\_security\_updates) | Enables dependabot security updates. Only works when `has_vulnerability_alerts` is set because that is required to enable dependabot for the repository. | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | The description to give to the repository. Defaults to `""` | `string` | `""` | no |
 | <a name="input_environments"></a> [environments](#input\_environments) | Environments to create for the repository. | <pre>map(object({<br>    action_secrets = optional(map(string))<br>  }))</pre> | `{}` | no |
+| <a name="input_has_ghas_license"></a> [has\_ghas\_license](#input\_has\_ghas\_license) | If the organization owning the repository has a GitHub Advanced Security license or not. Defaults to false. | `bool` | `false` | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | The homepage for the repository | `string` | `""` | no |
 | <a name="input_license_template"></a> [license\_template](#input\_license\_template) | The (Optional) license template to use for the repository | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the repository to create/import. | `string` | n/a | yes |

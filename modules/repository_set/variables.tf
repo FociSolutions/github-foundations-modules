@@ -65,6 +65,12 @@ variable "public_repositories" {
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
 
+variable "has_ghas_license" {
+  type        = bool
+  description = "If the organization owning the repositories has a GitHub Advanced Security license or not. Defaults to false."
+  default     = false
+}
+
 variable "default_repository_team_permissions" {
   type        = map(string)
   description = "A map where the keys are github team slugs and the value is the permissions the team should have by default for every repository. If an entry exists in `repository_team_permissions_override` for a repository then that will take precedence over this default. Defaults to `{}` giving no team access to the repositories."
