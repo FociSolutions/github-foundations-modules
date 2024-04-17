@@ -169,6 +169,81 @@ variable "license_template" {
   default     = null
 }
 
+variable "pages" {
+  description = "The (Optional) configuration for GitHub Pages for the repository"
+  type = optional(object({
+    source = optional(object({
+      branch = string
+      path   = optional(string)
+    }))
+    build_type = optional(string)
+    cname      = optional(string)
+  }))
+  default = null
+}
+
+variable "allow_squash_merge" {
+  description = "(Optional) Set to `false` to disable squash merges on the repository."
+  type        = bool
+  default     = true
+}
+
+variable "allow_rebase_merge" {
+  description = "(Optional) Set to `false` to disable rebase merges on the repository."
+  type        = bool
+  default     = true
+}
+
+variable "allow_merge_commit" {
+  description = " (Optional) Set to `false` to disable merge commits on the repository."
+  type        = bool
+  default     = true
+}
+
+variable "squash_merge_commit_title " {
+  description = " (Optional) Can be `PR_TITLE` or `COMMIT_OR_PR_TITLE` for a default squash merge commit title. Applicable only if allow_squash_merge is `true`."
+  type        = string
+  default     = "PR_TITLE"
+
+  validation {
+    condition     = var.squash_merge_commit_title == "PR_TITLE" || var.squash_merge_commit_title == "COMMIT_OR_PR_TITLE"
+    error_message = "Must be `PR_TITLE` or `COMMIT_OR_PR_TITLE` for a default squash merge merge commit title"
+  }
+}
+
+variable "squash_merge_commit_message" {
+  description = "(Optional) Can be `PR_BODY`, `COMMIT_MESSAGES`, or `BLANK` for a default squash merge commit message. Applicable only if allow_squash_merge is `true`."
+  type        = string
+  default     = "PR_BODY"
+
+  validation {
+    condition     = var.squash_merge_commit_message == "PR_BODY" || var.squash_merge_commit_message == "COMMIT_MESSAGES" || var.squash_merge_commit_message == "BLANK"
+    error_message = "Must be `PR_BODY`, `COMMIT_MESSAGES`, or `BLANK` for a default squash merge commit message"
+  }
+}
+
+variable "merge_commit_title" {
+  description = "(Optional) Can be `PR_TITLE` or `MERGE_MESSAGE` for a default merge commit title. Applicable only if allow_merge_commit is `true`."
+  type        = string
+  default     = "MERGE_MESSAGE"
+
+  validation {
+    condition     = var.merge_commit_title == "PR_TITLE" || var.merge_commit_title == "MERGE_MESSAGE"
+    error_message = "Must be `PR_TITLE` or `MERGE_MESSAGE` for a default merge commit title"
+  }
+}
+
+variable "merge_commit_message" {
+  description = "(Optional) Can be `PR_BODY`, `PR_TITLE`, or `BLANK` for a default merge commit message. Applicable only if allow_merge_commit is `true`."
+  type        = string
+  default     = "PR_TITLE"
+
+  validation {
+    condition     = var.merge_commit_message == "PR_BODY" || var.merge_commit_message == "PR_TITLE" || var.merge_commit_message == "BLANK"
+    error_message = "Must be `PR_BODY`, `PR_TITLE`, or `BLANK` for a default merge commit message"
+  }
+}
+
 variable "rulesets" {
   type = map(object({
     bypass_actors = optional(object({

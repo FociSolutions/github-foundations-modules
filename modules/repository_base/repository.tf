@@ -25,6 +25,9 @@ resource "github_repository" "repository" {
   homepage_url                = var.homepage
   delete_branch_on_merge      = var.delete_head_on_merge
   allow_auto_merge            = var.allow_auto_merge
+  allow_squash_merge          = var.allow_squash_merge
+  allow_merge_commit          = var.allow_merge_commit
+  allow_rebase_merge          = var.allow_rebase_merge
   web_commit_signoff_required = var.requires_web_commit_signing
   license_template            = var.license_template
 
@@ -66,6 +69,20 @@ resource "github_repository" "repository" {
     }
   }
 
+  dynamic "pages" {
+    for_each = var.pages == null ? [] : [1]
+    content {
+      dynamic "source" {
+        for_each = var.pages.source == null ? [] : [1]
+        content {
+          branch = var.pages.source.branch
+          path   = var.pages.source.path
+        }
+      }
+      build_type = var.pages.build_type
+      cname      = var.pages.cname
+    }
+  }
 }
 
 resource "github_repository_dependabot_security_updates" "automated_security_fixes" {

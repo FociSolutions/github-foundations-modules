@@ -115,6 +115,61 @@ variable "template_repository" {
   default = null
 }
 
+variable "pages" {
+  description = "The (Optional) configuration for GitHub Pages for the repository"
+  type = optional(object({
+    source = optional(object({
+      branch = string
+      path   = optional(string)
+    }))
+    build_type = optional(string)
+    cname      = optional(string)
+  }))
+  default = null
+}
+
+variable "allow_squash_merge" {
+  description = "(Optional) Set to `false` to disable squash merges on the repository."
+  type        = bool
+  default     = true
+}
+
+variable "allow_rebase_merge" {
+  description = "(Optional) Set to `false` to disable rebase merges on the repository."
+  type        = bool
+  default     = true
+}
+
+variable "allow_merge_commit" {
+  description = " (Optional) Set to `false` to disable merge commits on the repository."
+  type        = bool
+  default     = true
+}
+
+variable "squash_merge_commit_title " {
+  description = " (Optional) Can be `PR_TITLE` or `COMMIT_OR_PR_TITLE` for a default squash merge commit title. Applicable only if allow_squash_merge is `true`."
+  type        = string
+  default     = "PR_TITLE"
+}
+
+variable "squash_merge_commit_message" {
+  description = "(Optional) Can be `PR_BODY`, `COMMIT_MESSAGES`, or `BLANK` for a default squash merge commit message. Applicable only if allow_squash_merge is `true`."
+  type        = string
+  default     = "PR_BODY"
+}
+
+variable "merge_commit_title" {
+  description = "(Optional) Can be `PR_TITLE` or `MERGE_MESSAGE` for a default merge commit title. Applicable only if allow_merge_commit is `true`."
+  type        = string
+  default     = "MERGE_MESSAGE"
+}
+
+variable "merge_commit_message" {
+  description = "(Optional) Can be `PR_BODY`, `PR_TITLE`, or `BLANK` for a default merge commit message. Applicable only if allow_merge_commit is `true`."
+  type        = string
+  default     = "PR_TITLE"
+}
+
 variable "license_template" {
   description = "The (Optional) license template to use for the repository"
   type        = string
