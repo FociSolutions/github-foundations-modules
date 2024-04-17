@@ -171,14 +171,14 @@ variable "license_template" {
 
 variable "pages" {
   description = "The (Optional) configuration for GitHub Pages for the repository"
-  type = optional(object({
+  type = object({
     source = optional(object({
       branch = string
       path   = optional(string)
     }))
     build_type = optional(string)
     cname      = optional(string)
-  }))
+  })
   default = null
 }
 
@@ -200,7 +200,7 @@ variable "allow_merge_commit" {
   default     = true
 }
 
-variable "squash_merge_commit_title " {
+variable "squash_merge_commit_title" {
   description = " (Optional) Can be `PR_TITLE` or `COMMIT_OR_PR_TITLE` for a default squash merge commit title. Applicable only if allow_squash_merge is `true`."
   type        = string
   default     = "PR_TITLE"
