@@ -228,7 +228,7 @@ variable "merge_commit_title" {
   default     = "MERGE_MESSAGE"
 
   validation {
-    condition     = var.squash_merge_commit_message == null || var.merge_commit_title == "PR_TITLE" || var.merge_commit_title == "MERGE_MESSAGE"
+    condition     = var.merge_commit_title == null || var.merge_commit_title == "PR_TITLE" || var.merge_commit_title == "MERGE_MESSAGE"
     error_message = "Must be `PR_TITLE` or `MERGE_MESSAGE` for a default merge commit title"
   }
 }
@@ -239,7 +239,7 @@ variable "merge_commit_message" {
   default     = "PR_TITLE"
 
   validation {
-    condition     = var.squash_merge_commit_message == null || var.merge_commit_message == "PR_BODY" || var.merge_commit_message == "PR_TITLE" || var.merge_commit_message == "BLANK"
+    condition     = var.merge_commit_message == null || var.merge_commit_message == "PR_BODY" || var.merge_commit_message == "PR_TITLE" || var.merge_commit_message == "BLANK"
     error_message = "Must be `PR_BODY`, `PR_TITLE`, or `BLANK` for a default merge commit message"
   }
 }
