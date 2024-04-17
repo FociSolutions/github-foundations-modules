@@ -27,6 +27,13 @@ module "public_repositories" {
   homepage                    = each.value.homepage
   delete_head_on_merge        = each.value.delete_head_on_merge
   allow_auto_merge            = each.value.allow_auto_merge
+  allow_merge_commit          = each.value.allow_merge_commit
+  allow_rebase_merge          = each.value.allow_rebase_merge
+  allow_squash_merge          = each.value.allow_squash_merge
+  merge_commit_title          = each.value.merge_commit_title
+  merge_commit_message        = each.value.merge_commit_message
+  squash_merge_commit_title   = each.value.squash_merge_commit_title
+  squash_merge_commit_message = each.value.squash_merge_commit_message
   dependabot_security_updates = each.value.dependabot_security_updates
   action_secrets              = each.value.action_secrets
   codespace_secrets           = each.value.codespace_secrets
@@ -36,6 +43,7 @@ module "public_repositories" {
   license_template            = each.value.license_template
   requires_web_commit_signing = each.value.requires_web_commit_signing
   rulesets                    = lookup(local.rulesets_by_public_repository, each.key, {})
+  pages                       = each.value.pages
 }
 
 module "private_repositories" {
@@ -55,6 +63,13 @@ module "private_repositories" {
   homepage                    = each.value.homepage
   delete_head_on_merge        = each.value.delete_head_on_merge
   allow_auto_merge            = each.value.allow_auto_merge
+  allow_merge_commit          = each.value.allow_merge_commit
+  allow_rebase_merge          = each.value.allow_rebase_merge
+  allow_squash_merge          = each.value.allow_squash_merge
+  merge_commit_title          = each.value.merge_commit_title
+  merge_commit_message        = each.value.merge_commit_message
+  squash_merge_commit_title   = each.value.squash_merge_commit_title
+  squash_merge_commit_message = each.value.squash_merge_commit_message
   dependabot_security_updates = each.value.dependabot_security_updates
   action_secrets              = each.value.action_secrets
   codespace_secrets           = each.value.codespace_secrets
@@ -64,5 +79,5 @@ module "private_repositories" {
   license_template            = each.value.license_template
   requires_web_commit_signing = each.value.requires_web_commit_signing
   rulesets                    = lookup(local.rulesets_by_private_repository, each.key, {})
-
+  pages                       = each.value.pages
 }

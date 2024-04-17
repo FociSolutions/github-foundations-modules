@@ -19,7 +19,15 @@ module "repository_base" {
   protected_branches          = var.protected_branches
   delete_head_on_merge        = var.delete_head_on_merge
   allow_auto_merge            = var.allow_auto_merge
+  allow_merge_commit          = var.allow_merge_commit
+  allow_rebase_merge          = var.allow_rebase_merge
+  allow_squash_merge          = var.allow_squash_merge
+  squash_merge_commit_message = var.squash_merge_commit_message
+  squash_merge_commit_title   = var.squash_merge_commit_title
+  merge_commit_message        = var.merge_commit_message
+  merge_commit_title          = var.merge_commit_title
   requires_web_commit_signing = var.requires_web_commit_signing
+  pages                       = var.pages
 
   secret_scanning             = true
   secret_scanning_on_push     = true

@@ -8,9 +8,16 @@ variable "private_repositories" {
     topics                               = list(string)
     homepage                             = string
     delete_head_on_merge                 = bool
-    allow_auto_merge                     = bool
     requires_web_commit_signing          = bool
     dependabot_security_updates          = bool
+    allow_auto_merge                     = optional(bool)
+    allow_squash_merge                   = optional(bool)
+    allow_rebase_merge                   = optional(bool)
+    allow_merge_commit                   = optional(bool)
+    squash_merge_commit_title            = optional(string)
+    squash_merge_commit_message          = optional(string)
+    merge_commit_title                   = optional(string)
+    merge_commit_message                 = optional(string)
     repository_team_permissions_override = optional(map(string))
     user_permissions                     = optional(map(string))
     organization_action_secrets          = optional(list(string))
@@ -28,6 +35,14 @@ variable "private_repositories" {
       include_all_branches = bool
     }))
     license_template = optional(string)
+    pages = optional(object({
+      source = optional(object({
+        branch = string
+        path   = optional(string)
+      }))
+      build_type = optional(string)
+      cname      = optional(string)
+    }))
   }))
   description = "A map of private repositories where the key is the repository name and the value is the configuration"
 }
@@ -41,9 +56,16 @@ variable "public_repositories" {
     topics                               = list(string)
     homepage                             = string
     delete_head_on_merge                 = bool
-    allow_auto_merge                     = bool
     dependabot_security_updates          = bool
     requires_web_commit_signing          = bool
+    allow_auto_merge                     = optional(bool)
+    allow_squash_merge                   = optional(bool)
+    allow_rebase_merge                   = optional(bool)
+    allow_merge_commit                   = optional(bool)
+    squash_merge_commit_title            = optional(string)
+    squash_merge_commit_message          = optional(string)
+    merge_commit_title                   = optional(string)
+    merge_commit_message                 = optional(string)
     repository_team_permissions_override = optional(map(string))
     user_permissions                     = optional(map(string))
     organization_action_secrets          = optional(list(string))
@@ -61,6 +83,14 @@ variable "public_repositories" {
       include_all_branches = bool
     }))
     license_template = optional(string)
+    pages = optional(object({
+      source = optional(object({
+        branch = string
+        path   = optional(string)
+      }))
+      build_type = optional(string)
+      cname      = optional(string)
+    }))
   }))
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
