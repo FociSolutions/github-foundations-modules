@@ -26,7 +26,11 @@ resource "github_repository" "repository" {
   delete_branch_on_merge      = var.delete_head_on_merge
   allow_auto_merge            = var.allow_auto_merge
   allow_squash_merge          = var.allow_squash_merge
+  squash_merge_commit_message = var.squash_merge_commit_message
+  squash_merge_commit_title   = var.squash_merge_commit_title
   allow_merge_commit          = var.allow_merge_commit
+  merge_commit_message        = var.merge_commit_message
+  merge_commit_title          = var.merge_commit_title
   allow_rebase_merge          = var.allow_rebase_merge
   web_commit_signoff_required = var.requires_web_commit_signing
   license_template            = var.license_template
