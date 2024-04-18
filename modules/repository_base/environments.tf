@@ -1,6 +1,7 @@
 locals {
+  coalesced_environments = coalesce(var.environments, {})
   env_deployment_branch_patterns = {
-    for env_name, env in var.environments : env_name => env.deployment_branch_policy.branch_patterns if env.deployment_branch_policy != null
+    for env_name, env in local.coalesced_environments : env_name => env.deployment_branch_policy.branch_patterns if env.deployment_branch_policy != null
   }
 
   deployment_policy_configurations = merge([
@@ -14,7 +15,7 @@ locals {
 }
 
 resource "github_repository_environment" "environment" {
-  for_each            = var.environments
+  for_each            = local.coalesced_environments
   repository          = github_repository.repository.name
   environment         = each.key
   wait_timer          = each.value.wait_timer
