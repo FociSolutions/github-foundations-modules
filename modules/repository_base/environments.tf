@@ -1,6 +1,6 @@
 locals {
   env_deployment_branch_patterns = {
-    for env_name, env in coalesce(var.environments, {}) : env_name => env.deployment_branch_policy.branch_patterns if env.deployment_branch_policy != null
+    for env_name, env in var.environments : env_name => env.deployment_branch_policy.branch_patterns if env.deployment_branch_policy != null
   }
 
   deployment_policy_configurations = merge([
@@ -14,9 +14,9 @@ locals {
 }
 
 resource "github_repository_environment" "environment" {
-  for_each            = toset(keys(coalesce(var.environments, {})))
+  for_each            = var.environments
   repository          = github_repository.repository.name
-  environment         = each.value
+  environment         = each.key
   wait_timer          = each.value.wait_timer
   can_admins_bypass   = each.value.can_admins_bypass
   prevent_self_review = each.value.prevent_self_review
