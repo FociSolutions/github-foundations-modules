@@ -148,7 +148,19 @@ variable "dependabot_secrets" {
 variable "environments" {
   description = "An (Optional) map of environments to create for the repository. The key is the name of the environment and the value is the environment configuration."
   type = map(object({
-    action_secrets = optional(map(string))
+    wait_timer          = optional(number)
+    can_admins_bypass   = optional(bool)
+    prevent_self_review = optional(bool)
+    action_secrets      = optional(map(string))
+    reviewers = optional(object({
+      teams = optional(list(string))
+      users = optional(list(string))
+    }))
+    deployment_branch_policy = optional(object({
+      protected_branches     = bool
+      custom_branch_policies = bool
+      branch_patterns        = list(string)
+    }))
   }))
   default = {}
 }
