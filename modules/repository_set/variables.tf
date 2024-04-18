@@ -27,7 +27,19 @@ variable "private_repositories" {
     codespace_secrets                    = optional(map(string))
     dependabot_secrets                   = optional(map(string))
     environments = optional(map(object({
-      action_secrets = optional(map(string))
+      wait_timer          = optional(number)
+      can_admins_bypass   = optional(bool)
+      prevent_self_review = optional(bool)
+      action_secrets      = optional(map(string))
+      reviewers = optional(object({
+        teams = optional(list(string))
+        users = optional(list(string))
+      }))
+      deployment_branch_policy = optional(object({
+        protected_branches     = bool
+        custom_branch_policies = bool
+        branch_patterns        = list(string)
+      }))
     })))
     template_repository = optional(object({
       owner                = string
@@ -75,7 +87,19 @@ variable "public_repositories" {
     codespace_secrets                    = optional(map(string))
     dependabot_secrets                   = optional(map(string))
     environments = optional(map(object({
-      action_secrets = optional(map(string))
+      wait_timer          = optional(number)
+      can_admins_bypass   = optional(bool)
+      prevent_self_review = optional(bool)
+      action_secrets      = optional(map(string))
+      reviewers = optional(object({
+        teams = optional(list(string))
+        users = optional(list(string))
+      }))
+      deployment_branch_policy = optional(object({
+        protected_branches     = bool
+        custom_branch_policies = bool
+        branch_patterns        = list(string)
+      }))
     })))
     template_repository = optional(object({
       owner                = string
