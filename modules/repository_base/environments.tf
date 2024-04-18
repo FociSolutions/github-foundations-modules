@@ -7,7 +7,7 @@ locals {
     for env_name, branch_patterns in local.env_deployment_branch_patterns : {
       for pattern in branch_patterns : "${env_name}:${pattern}" => {
         pattern     = pattern,
-        environment = environemnt
+        environment = env_name
       }
     }
   ]...)
