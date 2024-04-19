@@ -55,3 +55,13 @@ variable "oidc_configuration" {
     error_message = "At least one oidc_configuration must be set."
   }
 }
+
+variable "account_type" {
+  type        = string
+  description = "The type of GitHub account being used. Should be one of either `Personal`, `Organization`, or `Enterprise`."
+
+  validation {
+    condition     = contains(["Personal", "Organization", "Enterprise"], var.account_type)
+    error_message = "The account type must be either `Personal`, `Organization`, or `Enterprise`."
+  }
+}
