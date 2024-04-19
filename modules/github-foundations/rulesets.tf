@@ -1,5 +1,6 @@
 module "base_ruleset" {
   source = "../ruleset"
+  count  = var.account_type == "Enterprise" ? 1 : 0
 
   name         = "Foundation Repositories Base Ruleset"
   enforcement  = "active"
