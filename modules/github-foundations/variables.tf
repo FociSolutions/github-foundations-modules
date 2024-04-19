@@ -59,7 +59,6 @@ variable "oidc_configuration" {
 variable "account_type" {
   type        = string
   description = "The type of GitHub account being used. Should be one of either `Personal`, `Organization`, or `Enterprise`."
-  default     = "Organization"
 
   validation {
     condition     = contains(["Personal", "Organization", "Enterprise"], var.account_type)
