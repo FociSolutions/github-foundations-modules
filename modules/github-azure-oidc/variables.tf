@@ -62,7 +62,7 @@ variable "tf_state_container_default_encryption_scope" {
     storage_account_id = ""
   }
   validation {
-    condition     = var.tf_state_container_default_encryption_scope.source == "Microsoft.KeyVault" && var.tf_state_container_default_encryption_scope.key_vault_key_id == null
+    condition     = var.name == "" || var.tf_state_container_default_encryption_scope.source != "Microsoft.KeyVault" || (var.tf_state_container_default_encryption_scope.source == "Microsoft.KeyVault" && var.tf_state_container_default_encryption_scope.key_vault_key_id == null)
     error_message = "Key vault key id must be set when source is \"Microsoft.KeyVault\"."
   }
 }
