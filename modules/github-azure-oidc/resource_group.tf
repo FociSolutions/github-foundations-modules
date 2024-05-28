@@ -7,11 +7,11 @@ locals {
 }
 
 data "azurerm_resource_group" "github_foundations_rg" {
-  count  = var.rg_create ? 0 : 1
-  name = var.rg_name
+  count = var.rg_create ? 0 : 1
+  name  = var.rg_name
 }
 resource "azurerm_resource_group" "github_foundations_rg" {
-  count = var.rg_create ? 1 : 0
+  count    = var.rg_create ? 1 : 0
   name     = var.rg_name
   location = var.rg_location
 }
