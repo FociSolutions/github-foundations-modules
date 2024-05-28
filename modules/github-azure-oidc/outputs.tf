@@ -25,7 +25,7 @@ output "subscription_id" {
 
 output "sa_name" {
   description = "Terraform state container storage account name."
-  value       = azurerm_storage_account.azurerm_storage_account.name
+  value       = azurerm_storage_account.github_foundations_sa.name
 }
 
 output "container_name" {
