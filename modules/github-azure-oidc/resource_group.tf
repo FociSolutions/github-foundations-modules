@@ -15,8 +15,3 @@ resource "azurerm_resource_group" "github_foundations_rg" {
   name     = var.rg_name
   location = var.rg_location
 }
-
-#tf state req
-#gcp foldrs and projects -> az subscription and resource groups
-#gcp storage bucket -> az storage account and container
-#gcp sa -> az managed identity
