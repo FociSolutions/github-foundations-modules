@@ -15,7 +15,7 @@ locals {
   organizations_project_roles = concat(
     local.state_file_access_roles,
     tolist([{
-      scope                = "${azurerm_key_vault.key_vault.id}"
+      scope                = "${data.azurerm_key_vault.key_vault.id}"
       role_definition_name = "Key Vault Secrets User"
     }])
     # tolist([
