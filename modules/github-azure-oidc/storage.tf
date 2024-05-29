@@ -1,5 +1,6 @@
 locals {
   default_encryption_scope = var.tf_state_container_default_encryption_scope.name != "" ? azurerm_storage_encryption_scope.encryption_scope[0].name : null
+  tf_state_container = local.default_encryption_scope == null ? azurerm_storage_container.github_foundations_tf_state_container[0] : azurerm_storage_container.github_foundations_tf_state_encrypted_container[0]
 }
 
 resource "azurerm_storage_account" "github_foundations_sa" {
@@ -19,6 +20,14 @@ resource "azurerm_storage_encryption_scope" "encryption_scope" {
 }
 
 resource "azurerm_storage_container" "github_foundations_tf_state_container" {
+  count = local.default_encryption_scope == null ? 1 : 0 
+  name                              = var.tf_state_container
+  storage_account_name              = azurerm_storage_account.github_foundations_sa.name
+  container_access_type             = var.tf_state_container_anonymous_access_level
+}
+
+resource "azurerm_storage_container" "github_foundations_tf_state_encrypted_container" {
+  count = local.default_encryption_scope != null ? 1 : 0
   name                              = var.tf_state_container
   storage_account_name              = azurerm_storage_account.github_foundations_sa.name
   container_access_type             = var.tf_state_container_anonymous_access_level

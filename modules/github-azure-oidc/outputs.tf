@@ -30,5 +30,5 @@ output "sa_name" {
 
 output "container_name" {
   description = "Terraform state container name."
-  value       = azurerm_storage_container.github_foundations_tf_state_container.name
+  value       = local.tf_state_container.name
 }

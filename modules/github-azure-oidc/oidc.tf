@@ -6,7 +6,7 @@ locals {
   organizations_repo_name = "organizations"
 
   state_file_access_roles = tolist([{
-    scope                = "${azurerm_storage_container.github_foundations_tf_state_container.resource_manager_id}"
+    scope                = "${local.tf_state_container.resource_manager_id}"
     role_definition_name = "Storage Blob Data Contributor"
   }])
 
