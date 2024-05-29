@@ -18,11 +18,6 @@ locals {
       scope                = "${data.azurerm_key_vault.key_vault.id}"
       role_definition_name = "Key Vault Secrets User"
     }])
-    # tolist([
-    #   "roles/secretmanager.viewer",
-    #   "roles/secretmanager.secretAccessor",
-    #   "roles/iam.workloadIdentityUser"
-    # ])
   )
 }
 
@@ -44,7 +39,7 @@ resource "azurerm_user_assigned_identity" "bootstrap_identity" {
 }
 
 resource "azurerm_role_assignment" "bootstrap_role_assignment" {
-  for_each             = toset(local.bootstrap_project_roles)
+  for_each             = local.bootstrap_project_roles
   scope                = each.value.scope
   role_definition_name = each.value.role_definition_name
   principal_id         = azurerm_user_assigned_identity.bootstrap_identity.principal_id
@@ -57,7 +52,7 @@ resource "azurerm_user_assigned_identity" "organization_identity" {
 }
 
 resource "azurerm_role_assignment" "organization_role_assignment" {
-  for_each             = toset(local.organizations_project_roles)
+  for_each             = local.organizations_project_roles
   scope                = each.value.scope
   role_definition_name = each.value.role_definition_name
   principal_id         = azurerm_user_assigned_identity.organization_identity.principal_id
