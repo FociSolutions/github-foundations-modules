@@ -5,19 +5,23 @@ locals {
   bootstrap_repo_name     = "bootstrap"
   organizations_repo_name = "organizations"
 
-  state_file_access_roles = tolist([{
-    scope                = "${local.tf_state_container.resource_manager_id}"
-    role_definition_name = "Storage Blob Data Contributor"
-  }])
+  state_file_access_roles = {
+    "${local.tf_state_container.name}-write" = {
+      scope                = "${local.tf_state_container.resource_manager_id}"
+      role_definition_name = "Storage Blob Data Contributor"
+    }
+  }
 
   bootstrap_project_roles = local.state_file_access_roles
 
-  organizations_project_roles = concat(
+  organizations_project_roles = merge(
     local.state_file_access_roles,
-    tolist([{
-      scope                = "${data.azurerm_key_vault.key_vault.id}"
-      role_definition_name = "Key Vault Secrets User"
-    }])
+    {
+      "${data.azurerm_key_vault.key_vault.id}-read" = {
+        scope                = "${data.azurerm_key_vault.key_vault.id}"
+        role_definition_name = "Key Vault Secrets User"
+      }
+    }
   )
 }
 
