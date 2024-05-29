@@ -22,5 +22,4 @@ resource "azurerm_storage_container" "github_foundations_tf_state_container" {
   name                              = var.tf_state_container
   storage_account_name              = azurerm_storage_account.github_foundations_sa.name
   container_access_type             = var.tf_state_container_anonymous_access_level
-  encryption_scope_override_enabled = var.tf_state_container_encryption_scope_override_enabled
 }
