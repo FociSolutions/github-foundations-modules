@@ -6,7 +6,7 @@ locals {
   organizations_repo_name = "organizations"
 
   state_file_access_roles = {
-    "${local.tf_state_container.name}-write" = {
+    "container-${local.tf_state_container.name}-write" = {
       scope                = "${local.tf_state_container.resource_manager_id}"
       role_definition_name = "Storage Blob Data Contributor"
     }
@@ -17,7 +17,7 @@ locals {
   organizations_project_roles = merge(
     local.state_file_access_roles,
     {
-      "${data.azurerm_key_vault.key_vault.id}-read" = {
+      "keyvault-${data.azurerm_key_vault.key_vault.name}-read" = {
         scope                = "${data.azurerm_key_vault.key_vault.id}"
         role_definition_name = "Key Vault Secrets User"
       }
