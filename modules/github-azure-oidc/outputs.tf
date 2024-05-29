@@ -1,6 +1,6 @@
 output "resource_group" {
   description = "Resource group name."
-  value       = local.github_foundations_rg
+  value       = local.github_foundations_rg.name
 }
 
 output "bootstrap_client_id" {
