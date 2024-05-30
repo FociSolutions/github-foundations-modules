@@ -26,11 +26,11 @@ resource "github_actions_organization_secret" "tenant_id" {
   ]
 }
 
-resource "github_actions_organization_secret" "subscription_id" {
+resource "github_actions_organization_variable" "subscription_id" {
   count = var.oidc_configuration.azure != null ? 1 : 0
 
-  secret_name     = coalesce(var.oidc_configuration.azure.subscription_id_variable_name, "AZURE_SUBSCRIPTION_ID")
-  plaintext_value = var.oidc_configuration.azure.subscription_id
+  variable_name     = coalesce(var.oidc_configuration.azure.subscription_id_variable_name, "AZURE_SUBSCRIPTION_ID")
+  value = var.oidc_configuration.azure.subscription_id
   visibility      = "selected"
   selected_repository_ids = [
     github_repository.bootstrap_repo.repo_id,
@@ -38,11 +38,11 @@ resource "github_actions_organization_secret" "subscription_id" {
   ]
 }
 
-resource "github_actions_organization_secret" "resource_group_name" {
+resource "github_actions_organization_variable" "resource_group_name" {
   count = var.oidc_configuration.azure != null ? 1 : 0
 
-  secret_name     = coalesce(var.oidc_configuration.azure.resource_group_name_variable_name, "AZURE_RESOURCE_GROUP_NAME")
-  plaintext_value = var.oidc_configuration.azure.resource_group_name
+  variable_name     = coalesce(var.oidc_configuration.azure.resource_group_name_variable_name, "AZURE_RESOURCE_GROUP_NAME")
+  value = var.oidc_configuration.azure.resource_group_name
   visibility      = "selected"
   selected_repository_ids = [
     github_repository.bootstrap_repo.repo_id,
@@ -50,11 +50,11 @@ resource "github_actions_organization_secret" "resource_group_name" {
   ]
 }
 
-resource "github_actions_organization_secret" "storage_account_name" {
+resource "github_actions_organization_variable" "storage_account_name" {
   count = var.oidc_configuration.azure != null ? 1 : 0
 
-  secret_name     = coalesce(var.oidc_configuration.azure.storage_account_name_variable_name, "AZURE_STORAGE_ACCOUNT_NAME")
-  plaintext_value = var.oidc_configuration.azure.storage_account_name
+  variable_name     = coalesce(var.oidc_configuration.azure.storage_account_name_variable_name, "AZURE_STORAGE_ACCOUNT_NAME")
+  value = var.oidc_configuration.azure.storage_account_name
   visibility      = "selected"
   selected_repository_ids = [
     github_repository.bootstrap_repo.repo_id,
@@ -62,11 +62,11 @@ resource "github_actions_organization_secret" "storage_account_name" {
   ]
 }
 
-resource "github_actions_organization_secret" "container_name" {
+resource "github_actions_organization_variable" "container_name" {
   count = var.oidc_configuration.azure != null ? 1 : 0
 
-  secret_name     = coalesce(var.oidc_configuration.azure.container_name_variable_name, "AZURE_CONTAINER_NAME")
-  plaintext_value = var.oidc_configuration.azure.container_name
+  variable_name     = coalesce(var.oidc_configuration.azure.container_name_variable_name, "AZURE_CONTAINER_NAME")
+  value = var.oidc_configuration.azure.container_name
   visibility      = "selected"
   selected_repository_ids = [
     github_repository.bootstrap_repo.repo_id,
