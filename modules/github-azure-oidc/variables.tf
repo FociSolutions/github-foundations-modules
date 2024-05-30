@@ -70,7 +70,8 @@ variable "tf_state_container_default_encryption_scope" {
 #Key Vault Variables
 variable "kv_name" {
   type        = string
-  description = "The name of the key vault to use for github foundation secrets."
+  description = "The name of the key vault to use for github foundation secrets. If storing secrets to authenticate against github in a different way then this does not need to be set. (Optional)"
+  default     = ""
 }
 
 variable "kv_resource_group" {

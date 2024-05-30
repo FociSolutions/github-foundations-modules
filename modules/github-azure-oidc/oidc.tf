@@ -20,24 +20,25 @@ locals {
 
   organizations_project_roles = merge(
     local.state_file_access_roles,
-    {
+    var.kv_name != "" ? {
       "keyvault-${data.azurerm_key_vault.key_vault.name}-secret-read" = {
         scope                = "${data.azurerm_key_vault.key_vault.id}"
         role_definition_name = "Key Vault Secrets User"
       }
-    },
-    {
+    }: {},
+    var.kv_name != "" ? {
       "keyvault-${data.azurerm_key_vault.key_vault.name}-vault-read" = {
         scope                = "${data.azurerm_key_vault.key_vault.id}"
         role_definition_name = "Key Vault Reader"
       }
-    }
+    }: {}
   )
 }
 
 data "azurerm_client_config" "current" {}
 
 data "azurerm_key_vault" "key_vault" {
+  count =  var.kv_name != "" ? 1 : 0
   name                = var.kv_name
   resource_group_name = var.kv_resource_group != "" ? var.kv_resource_group : local.github_foundations_rg.name
 }
