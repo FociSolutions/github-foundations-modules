@@ -17,9 +17,15 @@ locals {
   organizations_project_roles = merge(
     local.state_file_access_roles,
     {
-      "keyvault-${data.azurerm_key_vault.key_vault.name}-read" = {
+      "keyvault-${data.azurerm_key_vault.key_vault.name}-secret-read" = {
         scope                = "${data.azurerm_key_vault.key_vault.id}"
         role_definition_name = "Key Vault Secrets User"
+      }
+    },
+    {
+      "keyvault-${data.azurerm_key_vault.key_vault.name}-vault-read" = {
+        scope                = "${data.azurerm_key_vault.key_vault.id}"
+        role_definition_name = "Key Vault Reader"
       }
     }
   )
