@@ -21,14 +21,14 @@ locals {
   organizations_project_roles = merge(
     local.state_file_access_roles,
     var.kv_name != "" ? {
-      "keyvault-${data.azurerm_key_vault.key_vault.name}-secret-read" = {
-        scope                = "${data.azurerm_key_vault.key_vault.id}"
+      "keyvault-${data.azurerm_key_vault.key_vault[0].name}-secret-read" = {
+        scope                = "${data.azurerm_key_vault.key_vault[0].id}"
         role_definition_name = "Key Vault Secrets User"
       }
     }: {},
     var.kv_name != "" ? {
-      "keyvault-${data.azurerm_key_vault.key_vault.name}-vault-read" = {
-        scope                = "${data.azurerm_key_vault.key_vault.id}"
+      "keyvault-${data.azurerm_key_vault.key_vault[0].name}-vault-read" = {
+        scope                = "${data.azurerm_key_vault.key_vault[0].id}"
         role_definition_name = "Key Vault Reader"
       }
     }: {}
