@@ -8,7 +8,7 @@ locals {
   state_file_access_roles = {
     "container-${local.tf_state_container.name}-write" = {
       scope                = "${local.tf_state_container.resource_manager_id}"
-      role_definition_name = "Storage Blob Data Contributor"
+      role_definition_name = "Storage Blob Data Owner"
     }
   }
 
