@@ -1,4 +1,4 @@
-#Resource Group Variables
+# Resource Group Variables
 variable "rg_create" {
   description = "Create resource group. When set to false, uses id to reference an existing resource group."
   type        = bool
