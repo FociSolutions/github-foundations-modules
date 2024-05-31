@@ -43,6 +43,28 @@ variable "oidc_configuration" {
       bucket_location_variable_name = optional(string)
       bucket_location               = string
     }))
+    azure = optional(object({
+      bootstrap_client_id_variable_name = optional(string)
+      bootstrap_client_id               = string
+
+      organization_client_id_variable_name = optional(string)
+      organization_client_id               = string
+
+      tenant_id_variable_name = optional(string)
+      tenant_id               = string
+
+      subscription_id_variable_name = optional(string)
+      subscription_id               = string
+
+      resource_group_name_variable_name = optional(string)
+      resource_group_name               = string
+
+      storage_account_name_variable_name = optional(string)
+      storage_account_name               = string
+
+      container_name_variable_name = optional(string)
+      container_name               = string
+    }))
     custom = optional(object({
       organization_secrets   = map(string)
       organization_variables = map(string)
@@ -51,7 +73,7 @@ variable "oidc_configuration" {
     }))
   })
   validation {
-    condition     = var.oidc_configuration.gcp != null || var.oidc_configuration.custom != null
+    condition     = var.oidc_configuration.gcp != null || var.oidc_configuration.custom != null || var.oidc_configuration.azure != null
     error_message = "At least one oidc_configuration must be set."
   }
 }
