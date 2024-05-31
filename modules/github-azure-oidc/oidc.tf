@@ -46,7 +46,6 @@ data "azurerm_key_vault" "key_vault" {
 /**
 * User assigned identities and roles for github state bucket and federated identity setup
 */
-
 resource "azurerm_user_assigned_identity" "bootstrap_identity" {
   location            = local.github_foundations_rg.location
   resource_group_name = local.github_foundations_rg.name
