@@ -1,6 +1,6 @@
 # Resource Group Variables
 variable "rg_create" {
-  description = "Create resource group. When set to false, uses id to reference an existing resource group."
+  description = "Create the resource group. When set to false it uses the `rg_name` input to reference an existing resource group. Defaults to true."
   type        = bool
   default     = true
 }
@@ -23,12 +23,14 @@ variable "sa_name" {
 
 variable "sa_tier" {
   type        = string
-  description = "The tier of the storage account for github foundations. Valid options are Standard and Premium."
+  description = "The tier of the storage account for github foundations. Valid options are Standard and Premium. Defaults to Standard."
+  default = "Standard"
 }
 
 variable "sa_replication_type" {
   type        = string
-  description = "The replication type of the storage account for github foundations. Valid options are LRS, GRS, RAGRS, ZRS, GZRS, and RA_GZRS."
+  description = "The replication type of the storage account for github foundations. Valid options are LRS, GRS, RAGRS, ZRS, GZRS, and RA_GZRS. Defaults to GRS."
+  default = "GRS"
 }
 
 variable "tf_state_container" {
