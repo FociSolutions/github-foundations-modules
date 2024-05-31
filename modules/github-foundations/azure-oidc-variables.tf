@@ -54,8 +54,8 @@ resource "github_actions_organization_variable" "storage_account_name" {
   count = var.oidc_configuration.azure != null ? 1 : 0
 
   variable_name     = coalesce(var.oidc_configuration.azure.storage_account_name_variable_name, "AZURE_STORAGE_ACCOUNT_NAME")
-  value = var.oidc_configuration.azure.storage_account_name
-  visibility      = "selected"
+  value             = var.oidc_configuration.azure.storage_account_name
+  visibility        = "selected"
   selected_repository_ids = [
     github_repository.bootstrap_repo.repo_id,
     github_repository.organizations_repo.repo_id
