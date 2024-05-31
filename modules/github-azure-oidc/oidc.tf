@@ -38,7 +38,7 @@ locals {
 data "azurerm_client_config" "current" {}
 
 data "azurerm_key_vault" "key_vault" {
-  count =  var.kv_name != "" ? 1 : 0
+  count                =  var.kv_name != "" ? 1 : 0
   name                = var.kv_name
   resource_group_name = var.kv_resource_group != "" ? var.kv_resource_group : local.github_foundations_rg.name
 }
