@@ -73,3 +73,15 @@ resource "github_actions_organization_variable" "container_name" {
     github_repository.organizations_repo.repo_id
   ]
 }
+
+resource "github_actions_organization_variable" "key_vault_id" {
+  count = var.oidc_configuration.azure != null ? 1 : 0
+
+  variable_name     = coalesce(var.oidc_configuration.azure.key_vault_id_variable_name, "AZURE_KEY_VAULT_ID")
+  value             = var.oidc_configuration.azure.key_vault_id
+  visibility        = "selected"
+  selected_repository_ids = [
+    github_repository.bootstrap_repo.repo_id,
+    github_repository.organizations_repo.repo_id
+  ]
+}

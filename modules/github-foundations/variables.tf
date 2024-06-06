@@ -64,6 +64,9 @@ variable "oidc_configuration" {
 
       container_name_variable_name = optional(string)
       container_name               = string
+
+      key_vault_id_variable_name = optional(string)
+      key_vault_id               = string
     }))
     custom = optional(object({
       organization_secrets   = map(string)
