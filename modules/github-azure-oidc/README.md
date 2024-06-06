@@ -63,6 +63,7 @@ No modules.
 |------|-------------|
 | <a name="output_bootstrap_client_id"></a> [bootstrap\_client\_id](#output\_bootstrap\_client\_id) | Bootstrap repository client id for authenticating with oidc. |
 | <a name="output_container_name"></a> [container\_name](#output\_container\_name) | Terraform state container name. |
+| <a name="output_key_vault_id"></a> [key\_vault\_id](#output\_key\_vault\_id) | Azure key vault id for github foundation secrets. |
 | <a name="output_organization_client_id"></a> [organization\_client\_id](#output\_organization\_client\_id) | Organizations repository client id for authenticating with oidc. |
 | <a name="output_resource_group"></a> [resource\_group](#output\_resource\_group) | Resource group name. |
 | <a name="output_sa_name"></a> [sa\_name](#output\_sa\_name) | Terraform state container storage account name. |
