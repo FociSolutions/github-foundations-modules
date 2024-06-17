@@ -52,13 +52,15 @@ resource "aws_iam_role_policy" "organizations_role_policy" {
                     "s3:*"
                 ]
                 Effect = "Allow"
-                Resource = [aws_s3_bucket.state_bucket.arn]
+                Resource = [
+                    aws_s3_bucket.state_bucket.arn,
+                    "${aws_s3_bucket.sate_bucket.arn}/*"    
+                ]
             },
             {
                 Sid = "StateBucketDeleteDeny"
                 Action = [
-                    "s3:DeleteBucket",
-                    "s3:CopyObject"
+                    "s3:DeleteBucket"
                 ]
                 Effect = "Deny"
                 Resource = [aws_s3_bucket.state_bucket.arn]
