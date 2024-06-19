@@ -92,3 +92,15 @@ variable "drift_detection_branch_name" {
   type        = string
   description = "The name of the branch to use for drift detection."
 }
+
+variable "organizations_repo_name" {
+  type = string
+  description = "The name of the github foundations organizations repository. Defaults to `organizations`"
+  default = "organizations"
+}
+
+variable "bootstrap_repo_name" {
+  type = string
+  description = "The name of the github foundations bootstrap repository. Defaults to `bootstrap`"
+  default = "bootstrap"
+}

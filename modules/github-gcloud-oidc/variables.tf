@@ -272,3 +272,15 @@ variable "github_foundations_organization_name" {
   type        = string
   description = "The name of the organization that the github foundation repos will be under."
 }
+
+variable "organizations_repo_name" {
+  type = string
+  description = "The name of the github foundations organizations repository. Defaults to `organizations`"
+  default = "organizations"
+}
+
+variable "bootstrap_repo_name" {
+  type = string
+  description = "The name of the github foundations bootstrap repository. Defaults to `bootstrap`"
+  default = "bootstrap"
+}

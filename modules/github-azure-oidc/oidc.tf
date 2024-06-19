@@ -2,9 +2,6 @@ locals {
   default_audience_name = "api://AzureADTokenExchange"
   github_issuer_url     = "https://token.actions.githubusercontent.com"
 
-  bootstrap_repo_name     = "bootstrap"
-  organizations_repo_name = "organizations"
-
   state_file_access_roles = {
     "container-${local.tf_state_container.name}-write" = {
       scope                = "${local.tf_state_container.resource_manager_id}"
@@ -49,7 +46,7 @@ data "azurerm_key_vault" "key_vault" {
 resource "azurerm_user_assigned_identity" "bootstrap_identity" {
   location            = local.github_foundations_rg.location
   resource_group_name = local.github_foundations_rg.name
-  name                = "${local.bootstrap_repo_name}-identity"
+  name                = "${var.bootstrap_repo_name}-identity"
 }
 
 resource "azurerm_role_assignment" "bootstrap_role_assignment" {
@@ -62,7 +59,7 @@ resource "azurerm_role_assignment" "bootstrap_role_assignment" {
 resource "azurerm_user_assigned_identity" "organization_identity" {
   location            = local.github_foundations_rg.location
   resource_group_name = local.github_foundations_rg.name
-  name                = "${local.organizations_repo_name}-identity"
+  name                = "${var.organizations_repo_name}-identity"
 }
 
 resource "azurerm_role_assignment" "organization_role_assignment" {
@@ -73,37 +70,37 @@ resource "azurerm_role_assignment" "organization_role_assignment" {
 }
 
 resource "azurerm_federated_identity_credential" "bootstrap_pull_request_credentials" {
-  name                = "${var.github_foundations_organization_name}-${local.bootstrap_repo_name}-pr-credentials"
+  name                = "${var.github_foundations_organization_name}-${var.bootstrap_repo_name}-pr-credentials"
   resource_group_name = local.github_foundations_rg.name
   audience            = [local.default_audience_name]
   issuer              = local.github_issuer_url
   parent_id           = azurerm_user_assigned_identity.bootstrap_identity.id
-  subject             = "repo:${var.github_foundations_organization_name}/${local.bootstrap_repo_name}:pull_request"
+  subject             = "repo:${var.github_foundations_organization_name}/${var.bootstrap_repo_name}:pull_request"
 }
 
 resource "azurerm_federated_identity_credential" "bootstrap_drift_credentials" {
-  name                = "${var.github_foundations_organization_name}-${local.bootstrap_repo_name}-drift-credentials"
+  name                = "${var.github_foundations_organization_name}-${var.bootstrap_repo_name}-drift-credentials"
   resource_group_name = local.github_foundations_rg.name
   audience            = [local.default_audience_name]
   issuer              = local.github_issuer_url
   parent_id           = azurerm_user_assigned_identity.bootstrap_identity.id
-  subject             = "repo:${var.github_foundations_organization_name}/${local.bootstrap_repo_name}:ref:refs/heads/${var.drift_detection_branch_name}"
+  subject             = "repo:${var.github_foundations_organization_name}/${var.bootstrap_repo_name}:ref:refs/heads/${var.drift_detection_branch_name}"
 }
 
 resource "azurerm_federated_identity_credential" "organization_pull_request_credentials" {
-  name                = "${var.github_foundations_organization_name}-${local.organizations_repo_name}-pr-credentials"
+  name                = "${var.github_foundations_organization_name}-${var.organizations_repo_name}-pr-credentials"
   resource_group_name = local.github_foundations_rg.name
   audience            = [local.default_audience_name]
   issuer              = local.github_issuer_url
   parent_id           = azurerm_user_assigned_identity.organization_identity.id
-  subject             = "repo:${var.github_foundations_organization_name}/${local.organizations_repo_name}:pull_request"
+  subject             = "repo:${var.github_foundations_organization_name}/${var.organizations_repo_name}:pull_request"
 }
 
 resource "azurerm_federated_identity_credential" "organization_drift_credentials" {
-  name                = "${var.github_foundations_organization_name}-${local.organizations_repo_name}-drift-credentials"
+  name                = "${var.github_foundations_organization_name}-${var.organizations_repo_name}-drift-credentials"
   resource_group_name = local.github_foundations_rg.name
   audience            = [local.default_audience_name]
   issuer              = local.github_issuer_url
   parent_id           = azurerm_user_assigned_identity.organization_identity.id
-  subject             = "repo:${var.github_foundations_organization_name}/${local.organizations_repo_name}:ref:refs/heads/${var.drift_detection_branch_name}"
+  subject             = "repo:${var.github_foundations_organization_name}/${var.organizations_repo_name}:ref:refs/heads/${var.drift_detection_branch_name}"
 }
