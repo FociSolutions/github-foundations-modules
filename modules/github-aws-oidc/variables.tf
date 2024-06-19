@@ -54,7 +54,7 @@ variable "organizations_role_name" {
   default = "GhFoundationsOrganizationsAction"
 }
 
-variable "github_repo_owner" {
+variable "github_foundations_organization_name" {
   type = string
   description = "The owner of the github foundations organizations repository. This value should be whatever github account you plan to make the repository under."
 }
