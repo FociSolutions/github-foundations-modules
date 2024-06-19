@@ -1,6 +1,8 @@
 resource "aws_kms_key" "encryption_key" {
   description             = "This key is used to encrypt state bucket objects"
   deletion_window_in_days = 10
+  
+  tags = local.rg_tags
 }
 
 resource "aws_s3_bucket" "state_bucket" {
