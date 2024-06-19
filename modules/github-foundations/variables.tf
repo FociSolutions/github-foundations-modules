@@ -68,6 +68,19 @@ variable "oidc_configuration" {
       key_vault_id_variable_name = optional(string)
       key_vault_id               = string
     }))
+    aws = optional(object({
+      s3_bucket_variable_name = optional(string)
+      s3_bucket               = string
+
+      region_variable_name = optional(string)
+      region               = string
+
+      organizations_role_variable_name = optional(string)
+      organizations_role               = string
+
+      dynamodb_table_variable_name = optional(string)
+      dynamodb_table               = string
+    }))
     custom = optional(object({
       organization_secrets   = map(string)
       organization_variables = map(string)
