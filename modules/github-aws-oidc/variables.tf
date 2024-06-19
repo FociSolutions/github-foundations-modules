@@ -28,6 +28,7 @@ variable "tflock_db_read_capacity" {
 variable "tflock_db_write_capacity" {
   type = number
   description = "The write capacity to set for the dynamodb table storing lock file ids. Only required if billing mode is `PROVISIONED`. Defaults to 20."
+  default = 20
 }
 
 variable "tflock_db_billing_mode" {
