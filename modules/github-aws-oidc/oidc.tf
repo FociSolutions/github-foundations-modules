@@ -28,7 +28,7 @@ resource "aws_iam_role" "organizations_role" {
                 },
                 "StringLike" = {
                     "token.actions.githubusercontent.com:sub": [
-                        "repo:${var.github_repo_owner}/${var.organizations_repo_name}:*"
+                        "repo:${var.github_foundations_organization_name}/${var.organizations_repo_name}:*"
                     ]
                 }
             }

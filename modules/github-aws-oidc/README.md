@@ -35,7 +35,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The name of the s3 bucket that will store terraform state. | `string` | `"GithubFoundationState"` | no |
-| <a name="input_github_repo_owner"></a> [github\_repo\_owner](#input\_github\_repo\_owner) | The owner of the github foundations organizations repository. This value should be whatever github account you plan to make the repository under. | `string` | n/a | yes |
+| <a name="input_github_foundations_organization_name"></a> [github\_foundations\_organization\_name](#input\_github\_foundations\_organization\_name) | The owner of the github foundations organizations repository. This value should be whatever github account you plan to make the repository under. | `string` | n/a | yes |
 | <a name="input_github_thumbprints"></a> [github\_thumbprints](#input\_github\_thumbprints) | A list of top intermediate certifact authority thumbprints to use for setting up an openid connect provider with github. Info on how to obtain thumbprints here: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html | `list(string)` | n/a | yes |
 | <a name="input_organizations_repo_name"></a> [organizations\_repo\_name](#input\_organizations\_repo\_name) | The name of the github foundations organizations repository. Defaults to `organizations` | `string` | `"organizations"` | no |
 | <a name="input_organizations_role_name"></a> [organizations\_role\_name](#input\_organizations\_role\_name) | The name of the role that will be assummed by the github runner for the organizations repository. | `string` | `"GhFoundationsOrganizationsAction"` | no |
@@ -43,7 +43,7 @@ No modules.
 | <a name="input_tflock_db_billing_mode"></a> [tflock\_db\_billing\_mode](#input\_tflock\_db\_billing\_mode) | The billing mode to use for the dynamodb table storing lock file ids. Defaults to `PROVISIONED`. | `string` | `"PROVISIONED"` | no |
 | <a name="input_tflock_db_name"></a> [tflock\_db\_name](#input\_tflock\_db\_name) | The name of the dynamodb table that will store lock file ids. | `string` | `"TFLockIds"` | no |
 | <a name="input_tflock_db_read_capacity"></a> [tflock\_db\_read\_capacity](#input\_tflock\_db\_read\_capacity) | The read capacity to set for the dynamodb table storing lock file ids. Only required if billing mode is `PROVISIONED`. Defaults to 20. | `number` | `20` | no |
-| <a name="input_tflock_db_write_capacity"></a> [tflock\_db\_write\_capacity](#input\_tflock\_db\_write\_capacity) | The write capacity to set for the dynamodb table storing lock file ids. Only required if billing mode is `PROVISIONED`. Defaults to 20. | `number` | n/a | yes |
+| <a name="input_tflock_db_write_capacity"></a> [tflock\_db\_write\_capacity](#input\_tflock\_db\_write\_capacity) | The write capacity to set for the dynamodb table storing lock file ids. Only required if billing mode is `PROVISIONED`. Defaults to 20. | `number` | `20` | no |
 
 ## Outputs
 

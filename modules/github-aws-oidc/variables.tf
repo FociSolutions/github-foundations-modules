@@ -28,6 +28,7 @@ variable "tflock_db_read_capacity" {
 variable "tflock_db_write_capacity" {
   type = number
   description = "The write capacity to set for the dynamodb table storing lock file ids. Only required if billing mode is `PROVISIONED`. Defaults to 20."
+  default = 20
 }
 
 variable "tflock_db_billing_mode" {
@@ -53,7 +54,7 @@ variable "organizations_role_name" {
   default = "GhFoundationsOrganizationsAction"
 }
 
-variable "github_repo_owner" {
+variable "github_foundations_organization_name" {
   type = string
   description = "The owner of the github foundations organizations repository. This value should be whatever github account you plan to make the repository under."
 }

@@ -41,10 +41,12 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_bootstrap_repo_name"></a> [bootstrap\_repo\_name](#input\_bootstrap\_repo\_name) | The name of the github foundations bootstrap repository. Defaults to `bootstrap` | `string` | `"bootstrap"` | no |
 | <a name="input_drift_detection_branch_name"></a> [drift\_detection\_branch\_name](#input\_drift\_detection\_branch\_name) | The name of the branch to use for drift detection. | `string` | n/a | yes |
 | <a name="input_github_foundations_organization_name"></a> [github\_foundations\_organization\_name](#input\_github\_foundations\_organization\_name) | The name of the organization that the github foundation repos will be under. | `string` | n/a | yes |
 | <a name="input_kv_name"></a> [kv\_name](#input\_kv\_name) | The name of the key vault to use for github foundation secrets. If storing secrets to authenticate against github in a different way then this does not need to be set. (Optional) | `string` | `""` | no |
 | <a name="input_kv_resource_group"></a> [kv\_resource\_group](#input\_kv\_resource\_group) | The name of the resource group that the key vault is in. If empty it will default to the github foundations resource group. | `string` | n/a | yes |
+| <a name="input_organizations_repo_name"></a> [organizations\_repo\_name](#input\_organizations\_repo\_name) | The name of the github foundations organizations repository. Defaults to `organizations` | `string` | `"organizations"` | no |
 | <a name="input_rg_create"></a> [rg\_create](#input\_rg\_create) | Create the resource group. When set to false it uses the `rg_name` input to reference an existing resource group. Defaults to true. | `bool` | `true` | no |
 | <a name="input_rg_location"></a> [rg\_location](#input\_rg\_location) | The location of the resource group to create the github foundation azure resources in. | `string` | n/a | yes |
 | <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | The name of the resource group to create the github foundation azure resources in. | `string` | n/a | yes |
