@@ -24,13 +24,13 @@ variable "sa_name" {
 variable "sa_tier" {
   type        = string
   description = "The tier of the storage account for github foundations. Valid options are Standard and Premium. Defaults to Standard."
-  default = "Standard"
+  default     = "Standard"
 }
 
 variable "sa_replication_type" {
   type        = string
   description = "The replication type of the storage account for github foundations. Valid options are LRS, GRS, RAGRS, ZRS, GZRS, and RA_GZRS. Defaults to GRS."
-  default = "GRS"
+  default     = "GRS"
 }
 
 variable "tf_state_container" {
@@ -94,13 +94,13 @@ variable "drift_detection_branch_name" {
 }
 
 variable "organizations_repo_name" {
-  type = string
+  type        = string
   description = "The name of the github foundations organizations repository. Defaults to `organizations`"
-  default = "organizations"
+  default     = "organizations"
 }
 
 variable "bootstrap_repo_name" {
-  type = string
+  type        = string
   description = "The name of the github foundations bootstrap repository. Defaults to `bootstrap`"
-  default = "bootstrap"
+  default     = "bootstrap"
 }
