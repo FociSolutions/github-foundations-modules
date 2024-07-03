@@ -35,5 +35,5 @@ output "container_name" {
 
 output "key_vault_id" {
   description = "Azure key vault id for github foundation secrets."
-  value = var.kv_name != "" ? data.azurerm_key_vault.key_vault[0].id : ""
+  value       = var.kv_name != "" ? data.azurerm_key_vault.key_vault[0].id : ""
 }

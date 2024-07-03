@@ -89,7 +89,7 @@ variable "oidc_configuration" {
     }))
   })
   validation {
-    condition     = var.oidc_configuration.gcp != null || var.oidc_configuration.custom != null || var.oidc_configuration.azure != null
+    condition     = var.oidc_configuration.gcp != null || var.oidc_configuration.custom != null || var.oidc_configuration.azure != null || var.oidc_configuration.aws != null
     error_message = "At least one oidc_configuration must be set."
   }
 }

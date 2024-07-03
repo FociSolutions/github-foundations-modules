@@ -4,18 +4,18 @@ locals {
   }
 }
 
-resource  "aws_resourcegroups_group" "github_foundations_rg" {
+resource "aws_resourcegroups_group" "github_foundations_rg" {
   name = var.rg_name
 
   resource_query {
     query = jsonencode({
-        "ResourceTypeFilters" = [ "AWS::AllSupported" ]
-        "TagFilters" = [
-            {
-                "Key"="Purpose"
-                "Values"=[ local.rg_tags.Purpose ]
-            }
-        ]
+      "ResourceTypeFilters" = ["AWS::AllSupported"]
+      "TagFilters" = [
+        {
+          "Key"    = "Purpose"
+          "Values" = [local.rg_tags.Purpose]
+        }
+      ]
     })
   }
 }
