@@ -42,6 +42,6 @@ resource "github_repository_environment" "environment" {
 resource "github_repository_environment_deployment_policy" "deployment_policy" {
   for_each       = local.deployment_policy_configurations
   repository     = github_repository.repository.name
-  environment    = github_repository_environment.environment["${each.value.environment}"].environment
+  environment    = github_repository_environment.environment[each.value.environment].environment
   branch_pattern = each.value.pattern
 }
