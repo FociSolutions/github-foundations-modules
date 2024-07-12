@@ -6,4 +6,3 @@ resource "github_enterprise_organization" "organization" {
   billing_email = var.billing_email
   admin_logins  = var.admin_logins
 }
-

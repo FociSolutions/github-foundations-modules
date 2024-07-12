@@ -14,4 +14,4 @@ resource "github_team_membership" "members" {
   team_id  = local.team_id
   username = each.value
   role     = "member"
-} 
+}
