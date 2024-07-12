@@ -2,7 +2,7 @@ name: "Pull Request Jobs"
 
 on:
   pull_request:
-    
+
 
 env:
   tf_version: 1.7.1
@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-          
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
