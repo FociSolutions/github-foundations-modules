@@ -45,5 +45,4 @@ module "github_repo_ruleset" {
   target       = "branch"
   ruleset_type = "repository"
   enforcement  = "active"
-  repository   = "my-target-repo"
 }
