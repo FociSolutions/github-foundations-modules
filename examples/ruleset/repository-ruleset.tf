@@ -35,14 +35,9 @@ module "github_repo_ruleset" {
     }
   }
   ref_name_inclusions        = ["release/*", "main"]
+  ref_name_exclusions        = []
   repository_name_inclusions = ["my-target-repo"] # This field is ignored in repository-specific rulesets but included for clarity.
-  conditions = {
-    ref_name = {
-      include = ["release/*", "main"],
-      exclude = []
-    }
-  }
-  target       = "branch"
-  ruleset_type = "repository"
-  enforcement  = "active"
+  target                     = "branch"
+  ruleset_type               = "repository"
+  enforcement                = "active"
 }

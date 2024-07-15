@@ -1,8 +1,3 @@
-variable "github_organization_id" {
-  type        = string
-  description = "The ID of the organization to manage."
-}
-
 variable "github_organization_billing_email" {
   type        = string
   description = "The billing email to set for the organization."

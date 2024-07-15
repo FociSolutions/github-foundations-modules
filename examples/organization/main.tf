@@ -1,7 +1,6 @@
 module "organization" {
   source = "../../modules/organization"
 
-  github_organization_id            = "FociSolutions"
   github_organization_billing_email = "org-billing@focisolutions.com"
   github_organization_email         = "info@focisolutions.com"
   github_organization_blog          = "https://www.focisolutions.com/articles/"
