@@ -3,11 +3,6 @@ locals {
   members_can_create_repositories = var.github_organization_repository_settings.members_can_create_public || var.github_organization_repository_settings.members_can_create_internal || var.github_organization_repository_settings.members_can_create_private
 }
 
-import {
-  to = github_organization_settings.organization_settings
-  id = var.github_organization_id
-}
-
 resource "github_organization_settings" "organization_settings" {
   billing_email               = var.github_organization_billing_email
   email                       = var.github_organization_email

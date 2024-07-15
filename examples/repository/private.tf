@@ -10,6 +10,7 @@ module "github_repository_example" {
     "devs" = "push",
     "ops"  = "admin"
   }
+  repository_user_permissions = {}
 
   default_branch       = "main"
   protected_branches   = ["main", "develop"]

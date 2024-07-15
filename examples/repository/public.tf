@@ -8,6 +8,7 @@ module "public_github_repository" {
     "dev-team" = "push",
     "ops-team" = "admin"
   }
+  repository_user_permissions = {}
   protected_branches          = ["main"]
   topics                      = ["terraform", "public", "example"]
   homepage                    = "https://example.com"
