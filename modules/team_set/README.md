@@ -28,8 +28,8 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_preexisting_teams"></a> [preexisting\_teams](#input\_preexisting\_teams) | A map of existing teams where the key is the team name and the value is the configuration. If the team does not have a parent team, the parent\_id should be an empty string. | <pre>map(object({<br>    bucket      = string<br>    prefix      = string<br>    output_name = string<br>    maintainers = list(string)<br>    members     = list(string)<br>    parent_id   = string<br>  }))</pre> | `{}` | no |
-| <a name="input_teams"></a> [teams](#input\_teams) | A map of teams to create where the key is the team name and the value is the configuration. If the team does not have a parent team, the parent\_id should be an empty string. | <pre>map(object({<br>    description = string<br>    privacy     = string<br>    maintainers = list(string)<br>    members     = list(string)<br>    parent_id   = string<br>  }))</pre> | n/a | yes |
+| <a name="input_preexisting_teams"></a> [preexisting\_teams](#input\_preexisting\_teams) | A map of existing teams where the key is the team name and the value is the configuration. If the team does not have a parent team, the parent\_id should be an empty string. | <pre>map(object({<br/>    bucket      = string<br/>    prefix      = string<br/>    output_name = string<br/>    maintainers = list(string)<br/>    members     = list(string)<br/>    parent_id   = string<br/>  }))</pre> | `{}` | no |
+| <a name="input_teams"></a> [teams](#input\_teams) | A map of teams to create where the key is the team name and the value is the configuration. If the team does not have a parent team, the parent\_id should be an empty string. | <pre>map(object({<br/>    description = string<br/>    privacy     = string<br/>    maintainers = list(string)<br/>    members     = list(string)<br/>    parent_id   = string<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 

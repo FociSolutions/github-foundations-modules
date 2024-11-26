@@ -3,14 +3,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >=3.0.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >=4.7.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >=3.0.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >=4.7.0 |
 
 ## Modules
 
@@ -55,7 +55,7 @@ No modules.
 | <a name="input_sa_tier"></a> [sa\_tier](#input\_sa\_tier) | The tier of the storage account for github foundations. Valid options are Standard and Premium. Defaults to Standard. | `string` | `"Standard"` | no |
 | <a name="input_tf_state_container"></a> [tf\_state\_container](#input\_tf\_state\_container) | The name of the container to store the terraform state file(s) in. | `string` | `"tfstate"` | no |
 | <a name="input_tf_state_container_anonymous_access_level"></a> [tf\_state\_container\_anonymous\_access\_level](#input\_tf\_state\_container\_anonymous\_access\_level) | The anonymous access level of the container to store the terraform state file(s) in. | `string` | `"private"` | no |
-| <a name="input_tf_state_container_default_encryption_scope"></a> [tf\_state\_container\_default\_encryption\_scope](#input\_tf\_state\_container\_default\_encryption\_scope) | The default encryption scope of the container to store the terraform state file(s) in. | <pre>object({<br>    name             = string<br>    source           = string<br>    key_vault_key_id = optional(string)<br>  })</pre> | <pre>{<br>  "name": "",<br>  "source": "",<br>  "storage_account_id": ""<br>}</pre> | no |
+| <a name="input_tf_state_container_default_encryption_scope"></a> [tf\_state\_container\_default\_encryption\_scope](#input\_tf\_state\_container\_default\_encryption\_scope) | The default encryption scope of the container to store the terraform state file(s) in. | <pre>object({<br/>    name             = string<br/>    source           = string<br/>    key_vault_key_id = optional(string)<br/>  })</pre> | <pre>{<br/>  "name": "",<br/>  "source": "",<br/>  "storage_account_id": ""<br/>}</pre> | no |
 | <a name="input_tf_state_container_encryption_scope_override_enabled"></a> [tf\_state\_container\_encryption\_scope\_override\_enabled](#input\_tf\_state\_container\_encryption\_scope\_override\_enabled) | Whether or not the encryption scope override is enabled for the container to store the terraform state file(s) in. Defaults to false | `bool` | `false` | no |
 
 ## Outputs
