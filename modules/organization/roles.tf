@@ -8,7 +8,7 @@ resource "github_organization_custom_role" "custom_repository_role" {
   lifecycle {
     precondition {
       condition     = length(var.custom_repository_roles) <= 5 - (var.enable_security_engineer_role ? 1 : 0) - (var.enable_contractor_role ? 1 : 0) - (var.enable_community_manager_role ? 1 : 0)
-      error_message = "To many custom repository roles defined, an orrganization's maximum is 5. This limit is reduced by one for each of the following variables that are set to true: `enable_security_engineer_role`, `enable_contractor_role`, `enable_community_manager_role`."
+      error_message = "To many custom repository roles defined, an organization's maximum is 5. This limit is reduced by one for each of the following variables that are set to true: `enable_security_engineer_role`, `enable_contractor_role`, `enable_community_manager_role`."
     }
   }
 }

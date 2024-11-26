@@ -25,7 +25,7 @@ resource "github_organization_settings" "organization_settings" {
   members_can_create_public_pages  = var.github_organization_pages_settings.members_can_create_public
   members_can_create_private_pages = var.github_organization_pages_settings.members_can_create_private
 
-  #Oranization Repository settings
+  #Organization Repository settings
   members_can_create_repositories          = local.members_can_create_repositories
   members_can_create_public_repositories   = var.github_organization_repository_settings.members_can_create_public
   members_can_create_internal_repositories = var.github_organization_repository_settings.members_can_create_internal
