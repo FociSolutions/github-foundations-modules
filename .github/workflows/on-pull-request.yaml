@@ -2,19 +2,19 @@ name: "Pull Request Jobs"
 
 on:
   pull_request:
-
+  workflow_dispatch:
 
 env:
-  tf_version: 1.7.1
+  tf_version: 1.9.8
   working_dir: .
 
 jobs:
   terraform-doc-generation:
     permissions:
-      contents: 'write'
-      id-token: 'write'
-      pull-requests: 'write'
-      issues: 'write'
+      contents: "write"
+      id-token: "write"
+      pull-requests: "write"
+      issues: "write"
     name: "Terraform Documentation Generation"
     runs-on: ubuntu-latest
     defaults:
@@ -37,7 +37,7 @@ jobs:
         run: terraform fmt -check
 
       - name: Generate TF docs
-        uses: terraform-docs/gh-actions@v1.0.0
+        uses: terraform-docs/gh-actions@v1.3.0
         with:
           find-dir: modules/
           recursive: true
@@ -45,3 +45,15 @@ jobs:
           git-push: true
           output-method: replace
           template: "{{ .Content }}"
+
+      # recurse every directory in the ./modules directory
+      # and run the terraform test command
+      - name: Run Terraform Unit Tests
+        run: |
+          for dir in $(find ${{env.working_dir}}/modules -type d); do
+            echo "Running tests in $dir"
+            cd $dir
+            terraform init
+            terraform test
+            cd -
+          done
