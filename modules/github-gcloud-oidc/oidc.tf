@@ -47,13 +47,15 @@ resource "google_project_iam_member" "organizations_member" {
 /*
 * oidc setup
 */
+#trivy:ignore:avd-gcp-0068
 module "oidc" {
   source      = "terraform-google-modules/github-actions-runners/google//modules/gh-oidc"
-  version     = "3.1.2"
+  version     = "4.0.0"
   depends_on  = [google_project_service.project_services, google_service_account.bootstrap_sa, google_service_account.organizations_sa]
   project_id  = google_project.project[0].project_id
   pool_id     = local.pool_id
   provider_id = local.provider_id
+
   sa_mapping = {
     (google_service_account.bootstrap_sa.account_id) = {
       sa_name   = google_service_account.bootstrap_sa.name
