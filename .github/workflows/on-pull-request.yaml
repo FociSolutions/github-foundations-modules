@@ -50,7 +50,7 @@ jobs:
       # and run the terraform test command
       - name: Run Terraform Unit Tests
         run: |
-          for dir in $(find ${{env.working_dir}}/modules -type d); do
+          for dir in $(find ${{env.working_dir}}/modules -type d -not -path '*/\.terraform/*'); do
             echo "Running tests in $dir"
             cd $dir
             terraform init
