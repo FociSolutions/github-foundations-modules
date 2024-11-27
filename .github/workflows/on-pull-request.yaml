@@ -15,7 +15,7 @@ jobs:
       id-token: "write"
       pull-requests: "write"
       issues: "write"
-    name: "Terraform Documentation Generation"
+    name: "Terraform doc generation and tests"
     runs-on: ubuntu-latest
     defaults:
       run:
