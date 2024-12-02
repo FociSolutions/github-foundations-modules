@@ -76,12 +76,6 @@ variable "labels" {
   default     = {}
 }
 
-variable "skip_delete" {
-  description = "Allows the underlying resources to be destroyed without destroying the project itself."
-  type        = bool
-  default     = false
-}
-
 variable "services" {
   description = "Service APIs to enable."
   type        = list(string)

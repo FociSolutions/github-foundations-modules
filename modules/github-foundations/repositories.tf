@@ -73,7 +73,7 @@ resource "github_issue_labels" "drift_labels" {
   }
 
   label {
-    color = "ededed"
     name  = "Drift"
+    color = "ededed"
   }
 }
