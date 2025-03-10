@@ -1,40 +1,47 @@
 locals {
   coalesced_public_repositories  = coalesce(var.public_repositories, {})
   coalesced_private_repositories = coalesce(var.private_repositories, {})
+  coalesced_internal_repositories = coalesce(var.internal_repositories, {})
 
   organization_action_secrets = distinct(flatten(concat(
     [for _, repo in local.coalesced_public_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null],
-    [for _, repo in local.coalesced_private_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null]
+    [for _, repo in local.coalesced_private_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null],
+    [for _, repo in local.coalesced_internal_repositories : repo.organization_action_secrets if repo.organization_action_secrets != null]
   )))
 
   organization_action_secrets_repository_id_list = {
     for secret in local.organization_action_secrets : secret => toset(distinct(concat(
       [for repo_name, repo in local.coalesced_public_repositories : module.public_repositories[repo_name].id if contains(coalesce(repo.organization_action_secrets, []), secret)],
-      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories[repo_name].id if contains(coalesce(repo.organization_action_secrets, []), secret)]
+      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories[repo_name].id if contains(coalesce(repo.organization_action_secrets, []), secret)],
+      [for repo_name, repo in local.coalesced_internal_repositories : module.internal_repositories[repo_name].id if contains(coalesce(repo.organization_action_secrets, []), secret)]
     )))
   }
 
   codespace_secrets = distinct(flatten(concat(
     [for _, repo in local.coalesced_public_repositories : repo.organization_codespace_secrets if repo.organization_codespace_secrets != null],
-    [for _, repo in local.coalesced_private_repositories : repo.organization_codespace_secrets if repo.organization_codespace_secrets != null]
+    [for _, repo in local.coalesced_private_repositories : repo.organization_codespace_secrets if repo.organization_codespace_secrets != null],
+    [for _, repo in local.coalesced_internal_repositories : repo.organization_codespace_secrets if repo.organization_codespace_secrets != null]
   )))
 
   codespace_secrets_repository_id_list = {
     for secret in local.codespace_secrets : secret => toset(distinct(concat(
       [for repo_name, repo in local.coalesced_public_repositories : module.public_repositories[repo_name].id if contains(coalesce(repo.organization_codespace_secrets, []), secret)],
-      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories[repo_name].id if contains(coalesce(repo.organization_codespace_secrets, []), secret)]
+      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories[repo_name].id if contains(coalesce(repo.organization_codespace_secrets, []), secret)],
+      [for repo_name, repo in local.coalesced_internal_repositories : module.internal_repositories[repo_name].id if contains(coalesce(repo.organization_codespace_secrets, []), secret)]
     )))
   }
 
   dependabot_secrets = distinct(flatten(concat(
     [for _, repo in local.coalesced_public_repositories : repo.organization_dependabot_secrets if repo.organization_dependabot_secrets != null],
-    [for _, repo in local.coalesced_private_repositories : repo.organization_dependabot_secrets if repo.organization_dependabot_secrets != null]
+    [for _, repo in local.coalesced_private_repositories : repo.organization_dependabot_secrets if repo.organization_dependabot_secrets != null],
+    [for _, repo in local.coalesced_internal_repositories : repo.organization_dependabot_secrets if repo.organization_dependabot_secrets != null]
   )))
 
   dependabot_secrets_id_list = {
     for secret in local.dependabot_secrets : secret => toset(distinct(concat(
       [for repo_name, repo in local.coalesced_public_repositories : module.public_repositories[repo_name].id if contains(coalesce(repo.organization_dependabot_secrets, []), secret)],
-      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories[repo_name].id if contains(coalesce(repo.organization_dependabot_secrets, []), secret)]
+      [for repo_name, repo in local.coalesced_private_repositories : module.private_repositories[repo_name].id if contains(coalesce(repo.organization_dependabot_secrets, []), secret)],
+      [for repo_name, repo in local.coalesced_internal_repositories : module.internal_repositories[repo_name].id if contains(coalesce(repo.organization_dependabot_secrets, []), secret)]
     )))
   }
 }
