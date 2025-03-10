@@ -177,6 +177,7 @@ variable "internal_repositories" {
     }))
   }))
   description = "A map of internal repositories where the key is the repository name and the value is the configuration"
+  default = {}
 }
 
 variable "has_ghas_license" {
