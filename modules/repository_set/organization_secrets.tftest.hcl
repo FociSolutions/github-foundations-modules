@@ -25,6 +25,7 @@ variables {
   }
 
   private_repositories = {}
+
 }
 
 run "organization_actions_secrets_test" {

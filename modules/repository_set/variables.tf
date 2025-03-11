@@ -119,6 +119,67 @@ variable "public_repositories" {
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
 
+variable "internal_repositories" {
+  type = map(object({
+    description                          = string
+    default_branch                       = string
+    protected_branches                   = list(string)
+    advance_security                     = bool
+    topics                               = list(string)
+    homepage                             = string
+    delete_head_on_merge                 = bool
+    dependabot_security_updates          = bool
+    requires_web_commit_signing          = bool
+    allow_auto_merge                     = optional(bool)
+    allow_squash_merge                   = optional(bool)
+    allow_rebase_merge                   = optional(bool)
+    allow_merge_commit                   = optional(bool)
+    squash_merge_commit_title            = optional(string)
+    squash_merge_commit_message          = optional(string)
+    merge_commit_title                   = optional(string)
+    merge_commit_message                 = optional(string)
+    repository_team_permissions_override = optional(map(string))
+    user_permissions                     = optional(map(string))
+    organization_action_secrets          = optional(list(string))
+    organization_codespace_secrets       = optional(list(string))
+    organization_dependabot_secrets      = optional(list(string))
+    action_secrets                       = optional(map(string))
+    codespace_secrets                    = optional(map(string))
+    dependabot_secrets                   = optional(map(string))
+    environments = optional(map(object({
+      wait_timer          = optional(number)
+      can_admins_bypass   = optional(bool)
+      prevent_self_review = optional(bool)
+      action_secrets      = optional(map(string))
+      reviewers = optional(object({
+        teams = optional(list(string))
+        users = optional(list(string))
+      }))
+      deployment_branch_policy = optional(object({
+        protected_branches     = bool
+        custom_branch_policies = bool
+        branch_patterns        = list(string)
+      }))
+    })))
+    template_repository = optional(object({
+      owner                = string
+      repository           = string
+      include_all_branches = bool
+    }))
+    license_template = optional(string)
+    pages = optional(object({
+      source = optional(object({
+        branch = string
+        path   = optional(string)
+      }))
+      build_type = optional(string)
+      cname      = optional(string)
+    }))
+  }))
+  description = "A map of internal repositories where the key is the repository name and the value is the configuration"
+  default = {}
+}
+
 variable "has_ghas_license" {
   type        = bool
   description = "If the organization owning the repositories has a GitHub Advanced Security license or not. Defaults to false."
@@ -217,3 +278,4 @@ variable "rulesets" {
   }))
   default = {}
 }
+
