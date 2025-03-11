@@ -1,3 +1,7 @@
+locals {
+  enable_secret_scanning = var.has_ghas_license
+}
+
 module "repository_base" {
   source = "../repository_base"
 
@@ -29,8 +33,8 @@ module "repository_base" {
   requires_web_commit_signing = var.requires_web_commit_signing
   pages                       = var.pages
 
-  secret_scanning             = true
-  secret_scanning_on_push     = true
+  secret_scanning             = local.enable_secret_scanning
+  secret_scanning_on_push     = local.enable_secret_scanning
   has_vulnerability_alerts    = true
   advance_security            = var.advance_security
   dependabot_security_updates = var.dependabot_security_updates

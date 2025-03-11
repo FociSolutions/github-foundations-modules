@@ -73,6 +73,12 @@ variable "advance_security" {
   default     = true
 }
 
+variable "has_ghas_license" {
+  description = "If the organization owning the repository has a GitHub Advanced Security license or not. Defaults to false."
+  type        = bool
+  default     = false
+}
+
 variable "action_secrets" {
   description = "An (Optional) map of GitHub Actions secrets to create for this repository. The key is the name of the secret and the value is the encrypted value."
   type        = map(string)
