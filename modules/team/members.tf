@@ -2,9 +2,10 @@ locals {
   team_id = local.create_team ? github_team.team[0].id : var.team_id
   
   # Combine team_maintainers and team_members into a single map with respective roles
+  # If a user appears in both lists, `maintainer` role takes precedence
   memberships = merge(
-    { for username in var.team_maintainers : username => "maintainer" },
-    { for username in var.team_members : username => "member" }
+    { for username in var.team_members : username => "member" },
+    { for username in var.team_maintainers : username => "maintainer" }
   )
 }
 
