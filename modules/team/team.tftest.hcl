@@ -16,31 +16,31 @@ run "team_test" {
   command = apply
 
   assert {
-    condition     = github_team_membership.maintainers[var.team_maintainers[0]].team_id == var.team_id
-    error_message = "The maintainer's team id is incorrect. Expected: ${var.team_id}, Actual: ${github_team_membership.maintainers[var.team_maintainers[0]].team_id}"
+    condition     = github_team_membership.memberships[var.team_maintainers[0]].team_id == var.team_id
+    error_message = "The maintainer's team id is incorrect. Expected: ${var.team_id}, Actual: ${github_team_membership.memberships[var.team_maintainers[0]].team_id}"
   }
   assert {
-    condition     = github_team_membership.maintainers[var.team_maintainers[0]].username == var.team_maintainers[0]
-    error_message = "The maintainer's username is incorrect. Expected: ${var.team_maintainers[0]}, Actual: ${github_team_membership.maintainers[var.team_maintainers[0]].username}"
+    condition     = github_team_membership.memberships[var.team_maintainers[0]].username == var.team_maintainers[0]
+    error_message = "The maintainer's username is incorrect. Expected: ${var.team_maintainers[0]}, Actual: ${github_team_membership.memberships[var.team_maintainers[0]].username}"
   }
   assert {
-    condition     = github_team_membership.maintainers[var.team_maintainers[0]].role == "maintainer"
-    error_message = "The maintainer's role is incorrect. Expected: maintainer, Actual: ${github_team_membership.maintainers[var.team_maintainers[0]].role}"
+    condition     = github_team_membership.memberships[var.team_maintainers[0]].role == "maintainer"
+    error_message = "The maintainer's role is incorrect. Expected: maintainer, Actual: ${github_team_membership.memberships[var.team_maintainers[0]].role}"
   }
 }
 
 run "team_member_test" {
   assert {
-    condition     = github_team_membership.members[var.team_members[0]].team_id == var.team_id
-    error_message = "The member's team id is incorrect. Expected: ${var.team_id}, Actual: ${github_team_membership.members[var.team_members[0]].team_id}"
+    condition     = github_team_membership.memberships[var.team_members[0]].team_id == var.team_id
+    error_message = "The member's team id is incorrect. Expected: ${var.team_id}, Actual: ${github_team_membership.memberships[var.team_members[0]].team_id}"
   }
   assert {
-    condition     = github_team_membership.members[var.team_members[0]].username == var.team_members[0]
-    error_message = "The member's username is incorrect. Expected: ${var.team_members[0]}, Actual: ${github_team_membership.members[var.team_members[0]].username}"
+    condition     = github_team_membership.memberships[var.team_members[0]].username == var.team_members[0]
+    error_message = "The member's username is incorrect. Expected: ${var.team_members[0]}, Actual: ${github_team_membership.memberships[var.team_members[0]].username}"
   }
   assert {
-    condition     = github_team_membership.members[var.team_members[0]].role == "member"
-    error_message = "The member's role is incorrect. Expected: member, Actual: ${github_team_membership.members[var.team_members[0]].role}"
+    condition     = github_team_membership.memberships[var.team_members[0]].role == "member"
+    error_message = "The member's role is incorrect. Expected: member, Actual: ${github_team_membership.memberships[var.team_members[0]].role}"
   }
 
 }
