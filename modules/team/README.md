@@ -20,8 +20,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [github_team.team](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) | resource |
-| [github_team_membership.maintainers](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
-| [github_team_membership.members](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
+| [github_team_membership.memberships](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
 
 ## Inputs
 
