@@ -161,12 +161,13 @@ resource "github_organization_ruleset" "ruleset" {
   }
 
   dynamic "bypass_actors" {
-    for_each = var.bypass_actors != null && var.bypass_actors.organization_admins != null ? [1] : []
+    for_each = var.bypass_actors != null && var.bypass_actors.organization_admin != null ? [1] : []
 
     content {
-      actor_id    = var.bypass_actors.organization_admins.user_id
+      # Docs suggest the ID can be fixed to 1 - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_ruleset#OrganizationAdmin-2
+      actor_id    = 1
       actor_type  = "OrganizationAdmin"
-      bypass_mode = coalesce(var.bypass_actors.organization_admins.always_bypass, false) ? "always" : "pull_request"
+      bypass_mode = coalesce(var.bypass_actors.organization_admin.always_bypass, false) ? "always" : "pull_request"
     }
   }
 }

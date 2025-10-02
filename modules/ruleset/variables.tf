@@ -17,8 +17,7 @@ variable "bypass_actors" {
       installation_id = number
       always_bypass   = optional(bool)
     })))
-    organization_admins = optional(object({
-      user_id       = number
+    organization_admin = optional(object({
       always_bypass = optional(bool)
     }))
   })
