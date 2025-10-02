@@ -93,7 +93,7 @@ module "ruleset" {
       user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
       always_bypass = bypasser.always_bypass
     }]
-    integrations = try(each.value.bypass_actors.repository_roles, [])
+    integrations = try(each.value.bypass_actors.integrations, [])
   }
 
   ref_name_inclusions = each.value.conditions.ref_name.include
