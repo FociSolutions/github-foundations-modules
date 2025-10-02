@@ -183,10 +183,9 @@ variable "default_branch_protection_rulesets" {
         installation_id = number
         always_bypass   = optional(bool)
       })))
-      organization_admins = optional(list(object({
-        user          = string
+      organization_admin = optional(object({
         always_bypass = optional(bool)
-      })))
+      }))
     }))
   })
   default = {}
@@ -207,10 +206,9 @@ variable "rulesets" {
         installation_id = number
         always_bypass   = optional(bool)
       })))
-      organization_admins = optional(list(object({
-        user          = string
+      organization_admin = optional(object({
         always_bypass = optional(bool)
-      })))
+      }))
     }))
     conditions = optional(object({
       ref_name = object({
