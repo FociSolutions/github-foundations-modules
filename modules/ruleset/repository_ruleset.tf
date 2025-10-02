@@ -146,12 +146,12 @@ resource "github_repository_ruleset" "ruleset" {
   }
 
   dynamic "bypass_actors" {
-    for_each = var.bypass_actors != null ? toset(coalesce(var.bypass_actors.organization_admins, [])) : []
+    for_each = var.bypass_actors != null && var.bypass_actors.organization_admins != null ? [1] : []
 
     content {
-      actor_id    = bypass_actors.value.user_id
+      actor_id    = var.bypass_actors.organization_admins.user_id
       actor_type  = "OrganizationAdmin"
-      bypass_mode = coalesce(bypass_actors.value.always_bypass, false) ? "always" : "pull_request"
+      bypass_mode = coalesce(var.bypass_actors.organization_admins.always_bypass, false) ? "always" : "pull_request"
     }
   }
 }

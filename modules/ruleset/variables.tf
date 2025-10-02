@@ -17,10 +17,10 @@ variable "bypass_actors" {
       installation_id = number
       always_bypass   = optional(bool)
     })))
-    organization_admins = optional(list(object({
-      user_id       = string
+    organization_admins = optional(object({
+      user_id       = number
       always_bypass = optional(bool)
-    })))
+    }))
   })
   default     = {}
   description = "An object containing fields for role, team, organization admin, and integration bypass actors. Defaults to `{}`"

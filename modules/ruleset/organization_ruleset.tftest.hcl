@@ -100,12 +100,10 @@ variables {
         always_bypass   = false
       }
     ]
-    organization_admins = [
-      {
-        user_id       = 444444
-        always_bypass = true
-      }
-    ]
+    organization_admins = {
+      user_id       = 444444
+      always_bypass = true
+    }
   }
 }
 
@@ -346,7 +344,7 @@ run "bypass_actor_integrations_test" {
 # Test the Organization Admin bypass actors
 run "bypass_actor_organization_admins_test" {
   assert {
-    condition     = github_organization_ruleset.ruleset[0].bypass_actors[3].actor_id == tonumber(var.bypass_actors.organization_admins[0].user_id)
+    condition     = github_organization_ruleset.ruleset[0].bypass_actors[3].actor_id == tonumber(var.bypass_actors.organization_admins.user_id)
     error_message = "The bypass actor organization admin id is incorrect."
   }
   assert {
