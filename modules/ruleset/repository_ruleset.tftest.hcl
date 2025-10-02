@@ -329,7 +329,7 @@ run "bypass_actor_integrations_test" {
 }
 
 # Test the Organization Admin bypass actors
-run "bypass_actor_organization_admins_test" {
+run "bypass_actor_organization_admin_test" {
   assert {
     condition     = github_repository_ruleset.ruleset[0].bypass_actors[3].actor_id == 1
     error_message = "The bypass actor organization admin id is incorrect."
