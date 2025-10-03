@@ -1,7 +1,8 @@
 module "github_repo_ruleset" {
   source = "../../modules/ruleset"
 
-  name = "repo-specific-ruleset"
+  name       = "repo-specific-ruleset"
+  repository = "my-target-repo"
   bypass_actors = {
     repository_roles = [
       { role_id = "maintainer_id", always_bypass = true }
