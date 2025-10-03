@@ -3,9 +3,9 @@ module "github_org_ruleset" {
 
   name = "org-wide-main-pr-rules"
   bypass_actors = {
-    organization_admins = [
-      { user_id = "admin_id", always_bypass = true }
-    ]
+    organization_admin = {
+      always_bypass = true
+    }
   }
   rules = {
     branch_name_pattern = {

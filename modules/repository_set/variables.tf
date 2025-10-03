@@ -177,7 +177,7 @@ variable "internal_repositories" {
     }))
   }))
   description = "A map of internal repositories where the key is the repository name and the value is the configuration"
-  default = {}
+  default     = {}
 }
 
 variable "has_ghas_license" {
@@ -207,10 +207,9 @@ variable "rulesets" {
         installation_id = number
         always_bypass   = optional(bool)
       })))
-      organization_admins = optional(list(object({
-        user          = string
+      organization_admin = optional(object({
         always_bypass = optional(bool)
-      })))
+      }))
     }))
     conditions = optional(object({
       ref_name = object({
@@ -278,4 +277,3 @@ variable "rulesets" {
   }))
   default = {}
 }
-

@@ -6,13 +6,6 @@ locals {
     ]...
   ))
 
-  all_admin_bypassers = toset(concat(
-    coalesce(try(var.default_branch_protection_rulesets.bypass_actors.organization_admins, []), []),
-    [
-      for _, ruleset_config in var.rulesets : coalesce(try(ruleset_config.bypass_actors.organization_admins, []), [])
-    ]...
-  ))
-
   all_repository_roles_bypassers = toset(concat(
     coalesce(try(var.default_branch_protection_rulesets.bypass_actors.repository_roles, []), []),
     [
@@ -35,14 +28,6 @@ data "github_team" "branch_ruleset_bypasser" {
 
   slug         = each.value
   summary_only = true
-}
-
-data "github_user" "branch_ruleset_bypasser" {
-  for_each = {
-    for bypasser in local.all_admin_bypassers : bypasser.user => bypasser.user
-  }
-
-  username = each.value
 }
 
 data "github_organization_custom_role" "branch_ruleset_bypasser" {
@@ -91,10 +76,7 @@ module "ruleset" {
       team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
-    organization_admins = [for bypasser in try(toset(coalesce(each.value.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
-      always_bypass = bypasser.always_bypass
-    }]
+    organization_admin = try(each.value.bypass_actors.organization_admin, null)
     integrations = try(each.value.bypass_actors.integrations, [])
   }
 
@@ -132,10 +114,7 @@ module "base_default_branch_protection" {
       team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
-    organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
-      always_bypass = bypasser.always_bypass
-    }]
+    organization_admin = try(var.default_branch_protection_rulesets.bypass_actors.organization_admin, null)
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }
@@ -169,10 +148,7 @@ module "minimum_approvals" {
       team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
-    organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
-      always_bypass = bypasser.always_bypass
-    }]
+    organization_admin = try(var.default_branch_protection_rulesets.bypass_actors.organization_admin, null)
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }
@@ -206,10 +182,7 @@ module "dismiss_stale_reviews" {
       team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
-    organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
-      always_bypass = bypasser.always_bypass
-    }]
+    organization_admin = try(var.default_branch_protection_rulesets.bypass_actors.organization_admin, null)
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }
@@ -240,10 +213,7 @@ module "require_signatures" {
       team_id       = data.github_team.branch_ruleset_bypasser[bypasser.team].id
       always_bypass = bypasser.always_bypass
     }]
-    organization_admins = [for bypasser in try(toset(coalesce(var.default_branch_protection_rulesets.bypass_actors.organization_admins, [])), []) : {
-      user_id       = data.github_user.branch_ruleset_bypasser[bypasser.user].id
-      always_bypass = bypasser.always_bypass
-    }]
+    organization_admin = try(var.default_branch_protection_rulesets.bypass_actors.organization_admin, null)
     integrations = try(var.default_branch_protection_rulesets.bypass_actors.integrations, [])
   }
 }

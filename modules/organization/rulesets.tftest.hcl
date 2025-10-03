@@ -8,13 +8,6 @@ override_data {
   }
 }
 
-override_data {
-  target = data.github_user.branch_ruleset_bypasser["user5"]
-  values = {
-    id = 5
-  }
-}
-
 variables {
   github_organization_billing_email = "org_billing_email@focisolutions.com"
 
@@ -59,12 +52,9 @@ variables {
           always_bypass   = false
         }
       ]
-      organization_admins = [
-        {
-          user          = "user5"
-          always_bypass = true
-        }
-      ]
+      organization_admin = {
+        always_bypass = true
+      }
     }
   }
 
@@ -92,12 +82,10 @@ variables {
             always_bypass   = false
           }
         ]
-        organization_admins = [
-          {
-            user          = "user5"
-            always_bypass = true
-          }
-        ]
+        organization_admin = {
+          always_bypass = true
+        }
+
       }
       conditions = {
         ref_name = {
