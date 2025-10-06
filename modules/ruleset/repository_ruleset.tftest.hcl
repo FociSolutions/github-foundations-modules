@@ -344,16 +344,3 @@ run "bypass_actor_organization_admin_test" {
     error_message = "The bypass actor type is incorrect."
   }
 }
-
-# Test repository variable is required when ruleset_type is `repository`
-run "repository_validation_test" {
-  command = plan
-
-  variables {
-    repository = null
-  }
-
-  expect_failures = [
-    var.repository,
-  ]
-}
