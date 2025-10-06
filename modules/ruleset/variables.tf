@@ -3,16 +3,6 @@ variable "name" {
   description = "The name of the ruleset."
 }
 
-variable "repository" {
-  type        = string
-  default     = null
-  description = "The name of the repository to apply the ruleset to. Only used when ruleset_type is 'repository'."
-  validation {
-    condition     = var.ruleset_type != "repository" || var.repository != null
-    error_message = "The repository variable must be provided when ruleset_type is 'repository'."
-  }
-}
-
 variable "bypass_actors" {
   type = object({
     repository_roles = optional(list(object({
