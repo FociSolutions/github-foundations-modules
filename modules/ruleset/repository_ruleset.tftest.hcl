@@ -5,6 +5,7 @@ variables {
 
   name         = "ruleset_name"
   ruleset_type = "repository"
+  repository   = "repository_name"
   target       = "tag"
   enforcement  = "disabled"
 

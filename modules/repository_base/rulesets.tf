@@ -41,6 +41,7 @@ module "ruleset" {
 
   for_each = var.rulesets
 
+  repository  = github_repository.repository.name
   name        = each.key
   target      = each.value.target
   enforcement = each.value.enforcement
