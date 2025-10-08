@@ -164,8 +164,8 @@ resource "github_organization_ruleset" "ruleset" {
     for_each = var.bypass_actors.organization_admin != null ? [1] : []
 
     content {
-      # Docs suggest the ID can be fixed to 1 - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_ruleset#OrganizationAdmin-2
-      actor_id    = 1
+      # Although provider docs suggest the ID can be fixed to 1, it has been recently changed to 0 - https://github.com/integrations/terraform-provider-github/issues/2536
+      actor_id    = 0
       actor_type  = "OrganizationAdmin"
       bypass_mode = coalesce(var.bypass_actors.organization_admin.always_bypass, false) ? "always" : "pull_request"
     }
