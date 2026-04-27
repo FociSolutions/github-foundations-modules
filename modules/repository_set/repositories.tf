@@ -50,6 +50,7 @@ module "public_repositories" {
   rulesets                    = lookup(local.rulesets_by_public_repository, each.key, {})
   pages                       = each.value.pages
   archived                    = each.value.archived
+  github_repository_vulnerability_alerts = each.value.github_repository_vulnerability_alerts
 }
 
 module "private_repositories" {
@@ -87,6 +88,7 @@ module "private_repositories" {
   rulesets                    = lookup(local.rulesets_by_private_repository, each.key, {})
   pages                       = each.value.pages
   archived                    = each.value.archived
+  github_repository_vulnerability_alerts = each.value.github_repository_vulnerability_alerts
 }
 
 module "internal_repositories" {
@@ -123,4 +125,5 @@ module "internal_repositories" {
   rulesets                    = lookup(local.rulesets_by_internal_repository, each.key, {})
   pages                       = each.value.pages
   archived                    = each.value.archived
+  github_repository_vulnerability_alerts = each.value.github_repository_vulnerability_alerts
 }

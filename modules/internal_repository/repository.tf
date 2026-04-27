@@ -40,6 +40,8 @@ module "repository_base" {
   dependabot_security_updates = var.dependabot_security_updates
   archived                    = var.archived
 
+  github_repository_vulnerability_alerts = var.github_repository_vulnerability_alerts
+
   codespace_secrets  = var.codespace_secrets
   dependabot_secrets = var.dependabot_secrets
   action_secrets     = var.action_secrets

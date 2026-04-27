@@ -97,7 +97,7 @@ resource "github_repository_dependabot_security_updates" "automated_security_fix
 }
 
 resource "github_repository_vulnerability_alerts" "vulnerability_alerts" {
-  count      = var.has_vulnerability_alerts ? 1 : 0
+  count      = var.github_repository_vulnerability_alerts ? 1 : 0
   repository = github_repository.repository.name
 }
 

@@ -67,6 +67,12 @@ variable "dependabot_security_updates" {
   default     = true
 }
 
+variable "github_repository_vulnerability_alerts" {
+  description = "Enables the github_repository_vulnerability_alerts resource which explicitly manages Dependabot vulnerability alert enablement for the repository. Defaults to false."
+  type        = bool
+  default     = false
+}
+
 variable "archived" {
   description = "Specifies if the repository should be archived. Defaults to false."
   type        = bool
