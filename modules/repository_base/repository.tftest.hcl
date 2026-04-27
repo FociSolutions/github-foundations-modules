@@ -10,7 +10,6 @@ variables {
   has_wiki                    = true
   has_discussions             = true
   has_vulnerability_alerts    = true
-  github_repository_vulnerability_alerts = true
   topics                      = ["terraform", "github", "foundations"]
   homepage                    = "myhomepage"
   delete_head_on_merge        = false

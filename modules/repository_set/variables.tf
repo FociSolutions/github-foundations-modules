@@ -56,7 +56,6 @@ variable "private_repositories" {
       cname      = optional(string)
     }))
     archived = optional(bool)
-    github_repository_vulnerability_alerts = optional(bool)
   }))
   description = "A map of private repositories where the key is the repository name and the value is the configuration"
 }
@@ -118,7 +117,6 @@ variable "public_repositories" {
       cname      = optional(string)
     }))
     archived = optional(bool)
-    github_repository_vulnerability_alerts = optional(bool)
   }))
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
@@ -180,7 +178,6 @@ variable "internal_repositories" {
       cname      = optional(string)
     }))
     archived = optional(bool)
-    github_repository_vulnerability_alerts = optional(bool)
   }))
   description = "A map of internal repositories where the key is the repository name and the value is the configuration"
   default     = {}
