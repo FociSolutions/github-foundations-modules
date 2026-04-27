@@ -34,6 +34,7 @@ module "repository_base" {
   has_vulnerability_alerts    = true
   advance_security            = var.advance_security
   dependabot_security_updates = var.dependabot_security_updates
+  archived                    = var.archived
 
   codespace_secrets  = var.codespace_secrets
   dependabot_secrets = var.dependabot_secrets

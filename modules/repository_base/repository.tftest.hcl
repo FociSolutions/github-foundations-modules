@@ -77,6 +77,10 @@ run "repository_test" {
     error_message = "Repository archive_on_destroy does not match. Expected: false, Actual: ${github_repository.repository.archive_on_destroy}"
   }
   assert {
+    condition     = github_repository.repository.archived == var.archived
+    error_message = "Repository archived does not match. Expected: ${var.archived}, Actual: ${github_repository.repository.archived}"
+  }
+  assert {
     condition     = github_repository.repository.has_downloads == var.has_downloads
     error_message = "Repository has_downloads does not match. Expected: ${var.has_downloads}, Actual: ${github_repository.repository.has_downloads}"
   }
@@ -202,6 +206,17 @@ run "automated_security_fixes_test" {
   assert {
     condition     = github_repository_dependabot_security_updates.automated_security_fixes[0].enabled == var.dependabot_security_updates
     error_message = "Repository automated_security_fixes enabled does not match. Expected: ${var.dependabot_security_updates}, Actual: ${github_repository_dependabot_security_updates.automated_security_fixes[0].enabled}"
+  }
+}
+
+run "vulnerability_alerts_test" {
+  assert {
+    condition     = length(github_repository_vulnerability_alerts.vulnerability_alerts) == 1
+    error_message = "Repository vulnerability_alerts count does not match. Expected: 1, Actual: ${length(github_repository_vulnerability_alerts.vulnerability_alerts)}"
+  }
+  assert {
+    condition     = github_repository_vulnerability_alerts.vulnerability_alerts[0].repository == var.name
+    error_message = "Repository vulnerability_alerts repository does not match. Expected: ${var.name}, Actual: ${github_repository_vulnerability_alerts.vulnerability_alerts[0].repository}"
   }
 }
 
