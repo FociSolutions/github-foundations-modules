@@ -58,7 +58,7 @@
 | <a name="input_has_downloads"></a> [has\_downloads](#input\_has\_downloads) | Enables downloads for the repository | `bool` | `false` | no |
 | <a name="input_has_issues"></a> [has\_issues](#input\_has\_issues) | Enables Github Issues for the repository | `bool` | `true` | no |
 | <a name="input_has_projects"></a> [has\_projects](#input\_has\_projects) | Enables Github Projects for the repository | `bool` | `true` | no |
-| <a name="input_has_vulnerability_alerts"></a> [has\_vulnerability\_alerts](#input\_has\_vulnerability\_alerts) | Enables security alerts for vulnerable dependencies for the repository | `bool` | `true` | no |
+| <a name="input_has_vulnerability_alerts"></a> [has\_vulnerability\_alerts](#input\_has\_vulnerability\_alerts) | Enables security alerts for vulnerable dependencies for the repository | `bool` | `false` | no |
 | <a name="input_has_wiki"></a> [has\_wiki](#input\_has\_wiki) | Enables Github Wiki for the repository | `bool` | `true` | no |
 | <a name="input_homepage"></a> [homepage](#input\_homepage) | The homepage for the repository | `string` | `""` | no |
 | <a name="input_license_template"></a> [license\_template](#input\_license\_template) | The (Optional) license template to use for the repository | `string` | `null` | no |

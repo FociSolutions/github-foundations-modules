@@ -66,6 +66,7 @@ variable "public_repositories" {
     default_branch                       = string
     protected_branches                   = list(string)
     advance_security                     = bool
+    has_vulnerability_alerts             = optional(bool, false)
     topics                               = list(string)
     homepage                             = string
     delete_head_on_merge                 = bool
@@ -127,6 +128,7 @@ variable "internal_repositories" {
     default_branch                       = string
     protected_branches                   = list(string)
     advance_security                     = bool
+    has_vulnerability_alerts             = optional(bool, false)
     topics                               = list(string)
     homepage                             = string
     delete_head_on_merge                 = bool

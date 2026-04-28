@@ -28,6 +28,7 @@ module "public_repositories" {
   default_branch              = each.value.default_branch
   protected_branches          = each.value.protected_branches
   advance_security            = each.value.advance_security
+  has_vulnerability_alerts    = each.value.has_vulnerability_alerts
   topics                      = each.value.topics
   homepage                    = each.value.homepage
   delete_head_on_merge        = each.value.delete_head_on_merge
@@ -65,6 +66,7 @@ module "private_repositories" {
   protected_branches          = each.value.protected_branches
   advance_security            = each.value.advance_security
   has_ghas_license            = var.has_ghas_license
+  has_vulnerability_alerts    = each.value.has_vulnerability_alerts
   topics                      = each.value.topics
   homepage                    = each.value.homepage
   delete_head_on_merge        = each.value.delete_head_on_merge
@@ -101,6 +103,7 @@ module "internal_repositories" {
   default_branch              = each.value.default_branch
   protected_branches          = each.value.protected_branches
   advance_security            = each.value.advance_security
+  has_vulnerability_alerts    = each.value.has_vulnerability_alerts
   topics                      = each.value.topics
   homepage                    = each.value.homepage
   delete_head_on_merge        = each.value.delete_head_on_merge
