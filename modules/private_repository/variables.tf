@@ -67,6 +67,12 @@ variable "dependabot_security_updates" {
   default     = true
 }
 
+variable "archived" {
+  description = "Specifies if the repository should be archived. Defaults to false."
+  type        = bool
+  default     = false
+}
+
 variable "advance_security" {
   description = "Enables advance security for the repository."
   type        = bool

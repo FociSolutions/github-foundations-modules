@@ -49,6 +49,7 @@ module "public_repositories" {
   requires_web_commit_signing = each.value.requires_web_commit_signing
   rulesets                    = lookup(local.rulesets_by_public_repository, each.key, {})
   pages                       = each.value.pages
+  archived                    = each.value.archived
 }
 
 module "private_repositories" {
@@ -85,6 +86,7 @@ module "private_repositories" {
   requires_web_commit_signing = each.value.requires_web_commit_signing
   rulesets                    = lookup(local.rulesets_by_private_repository, each.key, {})
   pages                       = each.value.pages
+  archived                    = each.value.archived
 }
 
 module "internal_repositories" {
@@ -120,4 +122,5 @@ module "internal_repositories" {
   requires_web_commit_signing = each.value.requires_web_commit_signing
   rulesets                    = lookup(local.rulesets_by_internal_repository, each.key, {})
   pages                       = each.value.pages
+  archived                    = each.value.archived
 }

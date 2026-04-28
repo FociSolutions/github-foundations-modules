@@ -55,6 +55,7 @@ variable "private_repositories" {
       build_type = optional(string)
       cname      = optional(string)
     }))
+    archived = optional(bool)
   }))
   description = "A map of private repositories where the key is the repository name and the value is the configuration"
 }
@@ -115,6 +116,7 @@ variable "public_repositories" {
       build_type = optional(string)
       cname      = optional(string)
     }))
+    archived = optional(bool)
   }))
   description = "A map of public repositories where the key is the repository name and the value is the configuration"
 }
@@ -175,6 +177,7 @@ variable "internal_repositories" {
       build_type = optional(string)
       cname      = optional(string)
     }))
+    archived = optional(bool)
   }))
   description = "A map of internal repositories where the key is the repository name and the value is the configuration"
   default     = {}

@@ -67,6 +67,12 @@ variable "has_vulnerability_alerts" {
   default     = true
 }
 
+variable "archived" {
+  description = "Specifies if the repository should be archived. Defaults to false."
+  type        = bool
+  default     = false
+}
+
 variable "topics" {
   description = "The topics to apply to the repository"
   type        = list(string)

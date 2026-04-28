@@ -15,6 +15,7 @@ resource "github_repository" "repository" {
 
   auto_init                   = true
   archive_on_destroy          = false
+  archived                    = var.archived
   has_downloads               = var.has_downloads
   has_issues                  = var.has_issues
   has_projects                = var.has_projects
@@ -93,6 +94,11 @@ resource "github_repository_dependabot_security_updates" "automated_security_fix
   count      = local.enable_dependabot_automated_security_fixes
   repository = github_repository.repository.name
   enabled    = true
+}
+
+resource "github_repository_vulnerability_alerts" "vulnerability_alerts" {
+  count      = var.has_vulnerability_alerts ? 1 : 0
+  repository = github_repository.repository.name
 }
 
 resource "github_branch_default" "default_branch" {

@@ -29,6 +29,7 @@ No resources.
 | <a name="input_allow_merge_commit"></a> [allow\_merge\_commit](#input\_allow\_merge\_commit) | (Optional) Set to `false` to disable merge commits on the repository. | `bool` | `true` | no |
 | <a name="input_allow_rebase_merge"></a> [allow\_rebase\_merge](#input\_allow\_rebase\_merge) | (Optional) Set to `false` to disable rebase merges on the repository. | `bool` | `true` | no |
 | <a name="input_allow_squash_merge"></a> [allow\_squash\_merge](#input\_allow\_squash\_merge) | (Optional) Set to `false` to disable squash merges on the repository. | `bool` | `true` | no |
+| <a name="input_archived"></a> [archived](#input\_archived) | Specifies if the repository should be archived. Defaults to false. | `bool` | `false` | no |
 | <a name="input_codespace_secrets"></a> [codespace\_secrets](#input\_codespace\_secrets) | An (Optional) map of Github Codespace secrets to create for this repository. The key is the name of the secret and the value is the encrypted value. | `map(string)` | `{}` | no |
 | <a name="input_default_branch"></a> [default\_branch](#input\_default\_branch) | The branch to set as the default branch for this repository. Defaults to "main" | `string` | `"main"` | no |
 | <a name="input_delete_head_on_merge"></a> [delete\_head\_on\_merge](#input\_delete\_head\_on\_merge) | Sets the delete head on merge option for the repository. If true it will delete pull request branches automatically on merge. Defaults to true | `bool` | `true` | no |
