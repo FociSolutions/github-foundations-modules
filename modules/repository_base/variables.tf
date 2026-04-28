@@ -64,7 +64,7 @@ variable "has_wiki" {
 variable "has_vulnerability_alerts" {
   description = "Enables security alerts for vulnerable dependencies for the repository"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "archived" {

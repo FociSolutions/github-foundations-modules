@@ -61,6 +61,12 @@ variable "requires_web_commit_signing" {
   default     = false
 }
 
+variable "has_vulnerability_alerts" {
+  description = "Enables security alerts for vulnerable dependencies for the repository"
+  type        = bool
+  default     = false
+}
+
 variable "dependabot_security_updates" {
   description = "Enables dependabot security updates. Only works when `has_vulnerability_alerts` is set because that is required to enable dependabot for the repository."
   type        = bool

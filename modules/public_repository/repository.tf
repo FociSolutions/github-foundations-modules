@@ -31,7 +31,7 @@ module "repository_base" {
 
   secret_scanning             = true
   secret_scanning_on_push     = true
-  has_vulnerability_alerts    = true
+  has_vulnerability_alerts    = var.has_vulnerability_alerts
   advance_security            = var.advance_security
   dependabot_security_updates = var.dependabot_security_updates
   archived                    = var.archived
